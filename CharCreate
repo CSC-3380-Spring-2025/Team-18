@@ -1,0 +1,39 @@
+using System;
+
+class PlayerData
+{
+public string Name { get; set; }
+public string Class { get; set; }
+public int Strength { get; set; }
+public int Dexterity { get; set; }
+public int Intelligence { get; set; }
+public int Constitution { get; set; }
+public int Wisdom { get; set; }
+public int Charisma { get; set; }
+
+public PlayerData(string name, string characterClass)
+{
+Name = name;
+Class = characterClass;
+Random rand = new Random();
+Strength = rand.Next(1, 21);
+Dexterity = rand.Next(1, 21);
+Intelligence = rand.Next(1, 21);
+Constitution = rand.Next(1, 21);
+Wisdom = rand.Next(1, 21);
+Charisma = rand.Next(1, 21);
+}
+
+public void DisplayCharacter()
+{
+Console.WriteLine("\nCharacter Created!");
+Console.WriteLine($"Name: {Name}");
+Console.WriteLine($"Class: {Class}");
+Console.WriteLine($"Strength: {Strength}");
+Console.WriteLine($"Dexterity: {Dexterity}");
+Console.WriteLine($"Intelligence: {Intelligence}");
+Console.WriteLine($"Constitution: {Constitution}");
+Console.WriteLine($"Wisdom: {Wisdom}");
+Console.WriteLine($"Charisma: {Charisma}");
+}
+}
