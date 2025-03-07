@@ -39,7 +39,7 @@ public partial class MainMenu : CanvasLayer
 		// Load elements if it is the first load and they are loadable
 		if (_isFirstLoad)
 		{
-			foreach (var child in gameSceneNode.GetChildren())
+			foreach (var child in GetParent().GetChildren())
 			{
 				if (child is Loadable loadable)
 				{
