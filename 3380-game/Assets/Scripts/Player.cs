@@ -19,7 +19,6 @@ public partial class Player : Area2D, Loadable, Savable
     public override void _Ready() //called on start
     {
         ScreenSize = GetViewportRect().Size;
-        Load();
     }
 
     public override void _Process(double delta) //called in real time
@@ -95,16 +94,6 @@ public partial class Player : Area2D, Loadable, Savable
             }
         } 
         //end of delta
-    }
-
-    // Handle quit requests so that data is saved before the quit occurs
-    public override void _Notification(int what)
-    {
-        if (what == NotificationWMCloseRequest)
-        {
-            Save();
-            GetTree().Quit();
-        }
     }
 
     //end of code
