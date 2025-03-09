@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://drq6dqwicq7rh"
-path="res://.godot/imported/3380 player_h3_p1_sw2.png-670b724d7edd6f8246d41aac535c89e9.ctex"
+uid="uid://c20xbke5jkgw7"
+path="res://.godot/imported/3380 player_h3_l_2_p1.png-9d646e61f673ff1d048ebe661e156338.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/head3_togruta/3380 player_h3_p1_sw2.png"
-dest_files=["res://.godot/imported/3380 player_h3_p1_sw2.png-670b724d7edd6f8246d41aac535c89e9.ctex"]
+source_file="res://Assets/Sprites/patterns/h3/3380 player_h3_l_2_p1.png"
+dest_files=["res://.godot/imported/3380 player_h3_l_2_p1.png-9d646e61f673ff1d048ebe661e156338.ctex"]
 
 [params]
 
