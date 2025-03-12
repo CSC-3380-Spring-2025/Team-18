@@ -6,8 +6,9 @@ using Game.Assets.Scripts.Saving;
 public partial class MainMenu : CanvasLayer
 {
 	private bool _isFirstLoad = true;
+	private PauseScreen pauseScreen;
 	// Called when the node enters the scene tree for the first time.
-	///Makes it so the play and exit button both function as intended when esc is pressed or game is 'paused'.
+	///Makes it so the play and exit button both function as intended when esc 	is pressed or game is 'paused'.
 	public override void _Ready(){
 		ProcessMode = ProcessModeEnum.Always;
 	}
@@ -16,10 +17,27 @@ public partial class MainMenu : CanvasLayer
 	///set the visibility of the main menu screen to true, as well as call the GetTree.Paused to pause the game when 'esc' is pressed.
 	public override void _Process(double delta){
 		if(Input.IsActionJustPressed("ui_cancel")){
-			Visible = true; 
-			GetTree().Paused = true;
+			TogglePauseScreen();
+			//Visible = true; 
+			//GetTree().Paused = true;
 		}
 	}
+	private void TogglePauseScreen(){
+		if(pauseScreen == null){
+			PackedScene pauseScene = GD.Load<PackedScene>("res://Scenes//pauseScreen.tscn");
+		if(pauseScene != null){
+			pauseScreen = (PauseScreen)pauseScene.Instantiate();
+			GetParent().AddChild(pauseScreen);
+		} 
+		else{ 
+			GD.PrintErr("Failed to load PauseScreen");
+			return;
+		}
+		}
+		pauseScreen.Visible = !pauseScreen.Visible;
+		GetTree().Paused = pauseScreen.Visible;
+	}
+	
 	///Creates the functionality of the Play button when pressed
 	public void OnPlayPressed(){
 		Visible = false;
