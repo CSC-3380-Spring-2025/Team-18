@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 class PlayerData
 {
@@ -46,6 +48,40 @@ class PlayerData
         {
             Feature = "Unknown";
         }
+    }
+    
+    /// <summary>
+    /// Randomizes the stats for a character given a minimum amount of points per stat and a number of points to distribute
+    /// </summary>
+    /// <param name="minimumPerStat">The minimum number of points each stat should start with</param>
+    /// <param name="points">The total number of points that should be randomly distributed</param>
+    public void RandomizeStats(int minimumPerStat, int points)
+    {
+        var statDictionary = new Dictionary<string, int>
+        {
+            {"strength", minimumPerStat},
+            {"dexterity", minimumPerStat},
+            {"intelligence", minimumPerStat},
+            {"constitution", minimumPerStat},
+            {"wisdom", minimumPerStat},
+            {"charisma", minimumPerStat},
+        };
+        var random = new Random();
+        while (points > 0)
+        {
+            var statChoice = statDictionary.ElementAt(random.Next(0, statDictionary.Count));
+            if (statChoice.Value < 21)
+            {
+                statDictionary[statChoice.Key] = statChoice.Value + 1;
+                points--;
+            }
+        }
+        Strength = statDictionary["strength"];
+        Dexterity = statDictionary["dexterity"];
+        Intelligence = statDictionary["intelligence"];
+        Constitution = statDictionary["constitution"];
+        Wisdom = statDictionary["wisdom"];
+        Charisma = statDictionary["charisma"];
     }
     
     public void DisplayCharacter()
@@ -98,6 +134,7 @@ class Program
         }
 
         PlayerData player = new PlayerData(name, characterClass, race, eyeColor, hairColor, facialMarkings);
+        player.RandomizeStats();
         player.DisplayCharacter();
     }
 }
