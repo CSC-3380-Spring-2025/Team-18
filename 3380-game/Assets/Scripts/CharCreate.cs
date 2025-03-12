@@ -47,7 +47,7 @@ class PlayerData
             Feature = "Unknown";
         }
     }
-
+    
     public void DisplayCharacter()
     {
         Console.WriteLine("\nCharacter Created!");
