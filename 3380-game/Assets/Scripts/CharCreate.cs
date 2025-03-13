@@ -134,7 +134,7 @@ class Program
         }
 
         PlayerData player = new PlayerData(name, characterClass, race, eyeColor, hairColor, facialMarkings);
-        player.RandomizeStats();
+        player.RandomizeStats(3, 20);
         player.DisplayCharacter();
     }
 }
