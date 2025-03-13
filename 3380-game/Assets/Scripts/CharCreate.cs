@@ -69,10 +69,10 @@ class PlayerData
         var random = new Random();
         while (points > 0)
         {
-            var statChoice = statDictionary.ElementAt(random.Next(0, statDictionary.Count));
-            if (statChoice.Value < 21)
+            var statKey = statDictionary.Keys.ElementAt(random.Next(0, statDictionary.Count));
+            if (statDictionary[statKey] < 21)
             {
-                statDictionary[statChoice.Key] = statChoice.Value + 1;
+                statDictionary[statKey]++;
                 points--;
             }
         }
