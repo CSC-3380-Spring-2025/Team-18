@@ -12,9 +12,9 @@ public partial class Player : Area2D
 	
 	public Vector2 ScreenSize;
 	
-	public string species = "Human";
+	public string species = "Twilek";
 	public string bodyType = "1";
-	public string pChoice = "1", eChoice = "3", hChoice = "4";
+	public string pChoice = "1", eChoice = "3", hChoice = "12";
 	
 public override void _Ready() //called on start
 {
@@ -29,7 +29,6 @@ public override void _Process(double delta) //called in real time
 	if (Input.IsActionPressed("move_right")){velocity.X += 1;}
 	if (Input.IsActionPressed("move_left")){velocity.X -= 1;}
 	if (Input.IsActionPressed("move_down")){velocity.Y += 1;}
-	
 	if (Input.IsActionPressed("move_up")){velocity.Y -= 1;}
 
 //animation variables
@@ -54,29 +53,27 @@ if (velocity.Length() > 0){
 	//check to make sure only the ones with patterns have the node active
 	if(species == "Human" || species == "Pureblood"){
 		pattern.Hide();
-		
 		if(StringExtensions.ToInt(hChoice) > 10){
-			AnimationTurn(hairBack, velocity, hChoice, "Hair_long");
-			AnimationTurn(hair, velocity, hChoice, "Hair_long");
+			AnimationTurn(hairBack, velocity, hChoice, "hair");
+			AnimationTurn(hair, velocity, hChoice, "hair");
 			hairBack.Show();
-		} else {AnimationTurn(hair, velocity, hChoice, "Hair");}
+		} else {
+			AnimationTurn(hair, velocity, hChoice, "hair");
+			hairBack.Hide();
+			}
 		hair.Show();
-		
-	} else {
+	}else {
 		pattern.Show();
+		hair.Hide();
+		hairBack.Hide();
 		AnimationTurn(pattern, velocity, pChoice);
 		pattern.Play();
-		} else {
-			whites.Hide();
-			}
 		}
-	}
-	else{
-		body.Stop();
-		head.Stop();
-		pattern.Stop();
-		whites.Stop();
-	}
+} else {
+	body.Stop();
+	head.Stop();
+	pattern.Stop();
+}
 	
 	//actual thing that makes movement work
 	Position += velocity * (float)delta;
@@ -95,7 +92,6 @@ choice deals with which ever enumerated choice of whichever thing. so like, for 
 type is where you pass in body, eye, hair,species, etc. 
 */
 public void AnimationTurn(AnimatedSprite2D node, Vector2 velocity, string choice = "", string type = ""){
-	
 	if(choice != ""){
 		choice = ("_"+choice);
 	}
@@ -108,7 +104,6 @@ public void AnimationTurn(AnimatedSprite2D node, Vector2 velocity, string choice
 		node.FlipH = velocity.X < 0;
 		
 		if(type == "eye"){ node.Show(); }
-		
 	} else if(velocity.Y < 0){
 		if(type == "eye"){
 			node.Hide();
