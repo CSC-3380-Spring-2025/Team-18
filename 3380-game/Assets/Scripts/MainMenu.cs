@@ -67,7 +67,6 @@ public partial class MainMenu : CanvasLayer
 
 			_isFirstLoad = false;
 		}
-		
 	}
 	///Functionality for the exit button
 	public void OnExitPressed(){

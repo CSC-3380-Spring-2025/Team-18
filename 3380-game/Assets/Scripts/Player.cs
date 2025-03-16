@@ -10,7 +10,7 @@ public partial class Player : Area2D
 	//[Signal]
 	//public delegate void HitEventHandler();
 	
-	public Vector2 ScreenSize;
+	public Vector2 screenSize;
 	
 	public string species = "Togruta";
 	public string bodyType = "1";
