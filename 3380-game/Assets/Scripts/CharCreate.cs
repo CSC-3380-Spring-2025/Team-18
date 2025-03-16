@@ -5,7 +5,7 @@ using System.Linq;
 class PlayerData
 {
 	public string Name { get; set; }
-	public string CharacterClass { get; set; }
+	public string Class { get; set; }
 	public string Race { get; set; }
 	public string Feature { get; set; }
 	public string EyeColor { get; set; }

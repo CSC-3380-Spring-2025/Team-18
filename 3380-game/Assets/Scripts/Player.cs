@@ -18,7 +18,7 @@ public partial class Player : Area2D
 	
 public override void _Ready() //called on start
 {
-	ScreenSize = GetViewportRect().Size;
+	screenSize = GetViewportRect().Size;
 	 Load();
 }
 
@@ -76,8 +76,8 @@ if (velocity.Length() > 0){
 	//actual thing that makes movement work
 	Position += velocity * (float)delta;
 	Position = new Vector2(
-	x: Mathf.Clamp(Position.X, 0, ScreenSize.X),
-	y: Mathf.Clamp(Position.Y, 0, ScreenSize.Y)
+	x: Mathf.Clamp(Position.X, 0, screenSize.X),
+	y: Mathf.Clamp(Position.Y, 0, screenSize.Y)
 	);
 //end of delta
 }
