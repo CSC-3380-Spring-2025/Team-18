@@ -1,6 +1,15 @@
 [gd_scene load_steps=73 format=3 uid="uid://meh74a6p1vvp"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/Player.cs" id="1_ovr1q"]
+ CharacterUpdate_Hair
+[ext_resource type="Texture2D" uid="uid://csfvk8qgsmxty" path="res://Assets/Sprites/3380 player_hair_long.png" id="2_em26k"]
+[ext_resource type="Texture2D" uid="uid://cr1jnakw4drkq" path="res://Assets/Sprites/3380 player_b1.png" id="4_0ap8a"]
+[ext_resource type="Texture2D" uid="uid://5xikl7jaonoc" path="res://Assets/Sprites/3380 player_h1-4.png" id="5_om6ds"]
+[ext_resource type="Texture2D" uid="uid://db5qxmgkllyy4" path="res://Assets/Sprites/3380 player_h3_patterns.png" id="6_d5rui"]
+[ext_resource type="Texture2D" uid="uid://bj8ug52kjbqa0" path="res://Assets/Sprites/3380 player_h2_patterns.png" id="7_pl6dk"]
+[ext_resource type="Shader" path="res://Assets/Shaders/KeepWhite.gdshader" id="8_ondsv"]
+[ext_resource type="Texture2D" uid="uid://d3vchr8r04l1p" path="res://Assets/Sprites/3380 player_hair_short.png" id="11_me3qc"]
+
 [ext_resource type="Texture2D" uid="uid://40w2mv5pnp4c" path="res://Assets/Sprites/body1/3380 player_b1_l2.png" id="2_eqnix"]
 [ext_resource type="Texture2D" uid="uid://c70o2vcagoc4a" path="res://Assets/Sprites/body1/3380 player_b1_f3.png" id="2_umjfj"]
 [ext_resource type="Texture2D" uid="uid://dcfx81wi6l3vu" path="res://Assets/Sprites/body1/3380 player_b1_l1.png" id="3_nss05"]
@@ -34,10 +43,125 @@
 [ext_resource type="Texture2D" uid="uid://bcgxklbe5ydt1" path="res://Assets/Sprites/patterns/h2/3380 player_h2_1_p1.png" id="30_asi4m"]
 [ext_resource type="Texture2D" uid="uid://fvyonavv1qc" path="res://Assets/Sprites/patterns/h2/3380 player_h2_2_p1.png" id="31_cbsic"]
 [ext_resource type="Texture2D" uid="uid://01hshj42nc2r" path="res://Assets/Sprites/patterns/h2/3380 player_h2_l_p1.png" id="32_mimwv"]
+ Dev
 [ext_resource type="Texture2D" uid="uid://b3iv5fcqo2qf2" path="res://Assets/Sprites/eyes/3380 player_e1.png" id="35_wpo1r"]
 [ext_resource type="Texture2D" uid="uid://5gmwynkts6qe" path="res://Assets/Sprites/eyes/3380 player_e2.png" id="36_pqity"]
 [ext_resource type="Texture2D" uid="uid://diyyi0w7gc3eq" path="res://Assets/Sprites/eyes/3380 player_e3.png" id="47_v5fqo"]
 [ext_resource type="Texture2D" uid="uid://bsfdmg6vryfk6" path="res://Assets/Sprites/eyes/3380 player_e4.png" id="51_lejyy"]
+ CharacterUpdate_Hair
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0foxm"]
+atlas = ExtResource("2_em26k")
+region = Rect2(420, 0, 140, 140)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_64tm7"]
+atlas = ExtResource("2_em26k")
+region = Rect2(420, 0, 140, 140)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_04bpp"]
+atlas = ExtResource("2_em26k")
+region = Rect2(280, 0, 140, 140)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ffgx6"]
+atlas = ExtResource("2_em26k")
+region = Rect2(420, 140, 140, 140)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h7dn1"]
+atlas = ExtResource("2_em26k")
+region = Rect2(420, 140, 140, 140)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mjrwx"]
+atlas = ExtResource("2_em26k")
+region = Rect2(140, 140, 140, 140)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wpo1r"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0foxm")
+}],
+"loop": true,
+"name": &"hair_11_back",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_64tm7")
+}],
+"loop": true,
+"name": &"hair_11_front",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_04bpp")
+}],
+"loop": true,
+"name": &"hair_11_side",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ffgx6")
+}],
+"loop": true,
+"name": &"hair_12_back",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h7dn1")
+}],
+"loop": true,
+"name": &"hair_12_front",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mjrwx")
+}],
+"loop": true,
+"name": &"hair_12_side",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7uewn"]
+atlas = ExtResource("4_0ap8a")
+region = Rect2(140, 140, 140, 140)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ud2t"]
+atlas = ExtResource("4_0ap8a")
+region = Rect2(140, 0, 140, 140)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x56ul"]
+atlas = ExtResource("4_0ap8a")
+region = Rect2(140, 280, 140, 140)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n6s8n"]
+atlas = ExtResource("4_0ap8a")
+region = Rect2(140, 140, 140, 140)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8d333"]
+atlas = ExtResource("4_0ap8a")
+region = Rect2(140, 280, 140, 140)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lqdcd"]
+atlas = ExtResource("4_0ap8a")
+region = Rect2(140, 0, 140, 140)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q5vrs"]
+atlas = ExtResource("4_0ap8a")
+region = Rect2(0, 140, 140, 140)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0aril"]
+atlas = ExtResource("4_0ap8a")
+region = Rect2(0, 0, 140, 140)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_trq8q"]
+atlas = ExtResource("4_0ap8a")
+region = Rect2(0, 280, 140, 140)
+
+ Dev
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_g5nao"]
 animations = [{
@@ -206,8 +330,36 @@ animations = [{
 "speed": 3.0
 }]
 
+ CharacterUpdate_Hair
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sanbu"]
+shader = ExtResource("8_ondsv")
+shader_parameter/modulate = Color(0.287598, 0.381821, 0.890625, 1)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_pu57r"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jtj5d"]
+atlas = SubResource("CompressedTexture2D_pu57r")
+region = Rect2(280, 0, 140, 140)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_da5il"]
+atlas = ExtResource("6_d5rui")
+region = Rect2(0, 0, 140, 140)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_crknt"]
+atlas = ExtResource("6_d5rui")
+region = Rect2(140, 0, 140, 140)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mwmnc"]
+atlas = SubResource("CompressedTexture2D_pu57r")
+region = Rect2(420, 0, 140, 140)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_82v56"]
+atlas = SubResource("CompressedTexture2D_pu57r")
+region = Rect2(560, 0, 140, 140)
+
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_q0ic6"]
 blend_mode = 1
+ Dev
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_nuv2u"]
 animations = [{

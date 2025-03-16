@@ -12,9 +12,15 @@ public partial class Player : Area2D
 	
 	public Vector2 screenSize;
 	
+ CharacterUpdate_Hair
+	public string species = "Twilek";
+	public string bodyType = "1";
+	public string pChoice = "1", eChoice = "3", hChoice = "12";
+
 	public string species = "Togruta";
 	public string bodyType = "1";
 	public string pChoice = "1", eChoice = "3";
+ Dev
 	
 public override void _Ready() //called on start
 {
@@ -53,10 +59,32 @@ if (velocity.Length() > 0){
 	//check to make sure only the ones with patterns have the node active
 	if(species == "Human" || species == "Pureblood"){
 		pattern.Hide();
+ CharacterUpdate_Hair
+		if(StringExtensions.ToInt(hChoice) > 10){
+			AnimationTurn(hairBack, velocity, hChoice, "hair");
+			AnimationTurn(hair, velocity, hChoice, "hair");
+			hairBack.Show();
 		} else {
+			AnimationTurn(hair, velocity, hChoice, "hair");
+			hairBack.Hide();
+			}
+		hair.Show();
+	}else {
+
+		} else {
+ Dev
 		pattern.Show();
+		hair.Hide();
+		hairBack.Hide();
 		AnimationTurn(pattern, velocity, pChoice);
 		pattern.Play();
+ CharacterUpdate_Hair
+		}
+} else {
+	body.Stop();
+	head.Stop();
+	pattern.Stop();
+
 		if(species == "Togruta"){
 			whites.Show();
 			AnimationTurn(whites, velocity, pChoice);
@@ -71,6 +99,7 @@ if (velocity.Length() > 0){
 		head.Stop();
 		pattern.Stop();
 		whites.Stop();
+ Dev
 }
 	
 	//actual thing that makes movement work
