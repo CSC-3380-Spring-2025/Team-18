@@ -10,15 +10,21 @@ public partial class Player : Area2D
 	//[Signal]
 	//public delegate void HitEventHandler();
 	
-	public Vector2 ScreenSize;
+	public Vector2 screenSize;
 	
+ CharacterUpdate_Hair
 	public string species = "Twilek";
 	public string bodyType = "1";
 	public string pChoice = "1", eChoice = "3", hChoice = "12";
+
+	public string species = "Togruta";
+	public string bodyType = "1";
+	public string pChoice = "1", eChoice = "3";
+ Dev
 	
 public override void _Ready() //called on start
 {
-	ScreenSize = GetViewportRect().Size;
+	screenSize = GetViewportRect().Size;
 	 Load();
 }
 
@@ -36,8 +42,8 @@ public override void _Process(double delta) //called in real time
 	var head = GetNode<AnimatedSprite2D>("Head");
 	var eye = GetNode<AnimatedSprite2D>("Eyes");
 	var hair = GetNode<AnimatedSprite2D>("Hair");
-	var hairBack = GetNode<AnimatedSprite2D>("Hair_Back");
 	var pattern = GetNode<AnimatedSprite2D>("Head/Pattern");
+	var whites = GetNode<AnimatedSprite2D>("Head/Whites");
 	
 //movement and animation controls
 if (velocity.Length() > 0){
@@ -53,6 +59,7 @@ if (velocity.Length() > 0){
 	//check to make sure only the ones with patterns have the node active
 	if(species == "Human" || species == "Pureblood"){
 		pattern.Hide();
+ CharacterUpdate_Hair
 		if(StringExtensions.ToInt(hChoice) > 10){
 			AnimationTurn(hairBack, velocity, hChoice, "hair");
 			AnimationTurn(hair, velocity, hChoice, "hair");
@@ -63,23 +70,43 @@ if (velocity.Length() > 0){
 			}
 		hair.Show();
 	}else {
+
+		} else {
+ Dev
 		pattern.Show();
 		hair.Hide();
 		hairBack.Hide();
 		AnimationTurn(pattern, velocity, pChoice);
 		pattern.Play();
+ CharacterUpdate_Hair
 		}
 } else {
 	body.Stop();
 	head.Stop();
 	pattern.Stop();
+
+		if(species == "Togruta"){
+			whites.Show();
+			AnimationTurn(whites, velocity, pChoice);
+			whites.Play();
+		} else {
+			whites.Hide();
+			}
+		}
+	}
+	else{
+		body.Stop();
+		head.Stop();
+		pattern.Stop();
+		whites.Stop();
+ Dev
 }
 	
 	//actual thing that makes movement work
 	Position += velocity * (float)delta;
 	Position = new Vector2(
-	x: Mathf.Clamp(Position.X, 0, ScreenSize.X),
-	y: Mathf.Clamp(Position.Y, 0, ScreenSize.Y)
+	x: Mathf.Clamp(Position.X, 0, screenSize.X),
+	y: Mathf.Clamp(Position.Y, 0, screenSize.Y)
 	);
 //end of delta
 }
