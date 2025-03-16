@@ -1,0 +1,130 @@
+import pygame
+import sys
+
+# Initialize Pygame
+pygame.init()
+
+# Screen settings
+SCREEN_WIDTH = 800
+SCREEN_HEIGHT = 600
+FPS = 60
+
+# Color palette (inspired by the dark, blue-accented theme)
+BLACK      = (0, 0, 0)         # Floor/background
+DARK_GRAY  = (40, 40, 40)      # Walls
+BLUE       = (50, 100, 200)    # Interactive items (primary)
+LIGHT_BLUE = (100, 150, 255)   # Accent/border for interactive items
+WHITE      = (255, 255, 255)   # Player sprite for contrast
+
+# Tile settings
+TILE_SIZE = 40
+
+# Define a simple map using a 2D list:
+# 0 = floor tile, 1 = wall tile, 2 = interactive item tile
+game_map = [
+    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+    [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+    [1,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,1],
+    [1,0,0,0,1,1,1,0,0,0,0,0,0,1,1,1,0,0,0,1],
+    [1,0,0,0,1,0,1,0,0,0,0,0,0,1,0,1,0,0,0,1],
+    [1,0,0,0,1,1,1,0,0,0,0,0,0,1,1,1,0,0,0,1],
+    [1,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,1],
+    [1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+    [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+]
+
+class Map:
+    def __init__(self, map_data):
+        self.map_data = map_data
+        self.width = len(map_data[0])
+        self.height = len(map_data)
+
+    def draw(self, surface):
+        """Draw the map to the given surface."""
+        for y, row in enumerate(self.map_data):
+            for x, tile in enumerate(row):
+                rect = pygame.Rect(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE)
+                if tile == 1:
+                    # Draw wall tile
+                    pygame.draw.rect(surface, DARK_GRAY, rect)
+                elif tile == 2:
+                    # Draw interactive tile with an accent border
+                    pygame.draw.rect(surface, BLUE, rect)
+                    pygame.draw.rect(surface, LIGHT_BLUE, rect, 2)
+                else:
+                    # Draw floor tile
+                    pygame.draw.rect(surface, BLACK, rect)
+
+class Player(pygame.sprite.Sprite):
+    def __init__(self, x, y):
+        super().__init__()
+        # Create a simple square sprite for the player
+        self.image = pygame.Surface((TILE_SIZE - 4, TILE_SIZE - 4))
+        self.image.fill(WHITE)
+        self.rect = self.image.get_rect(center=(x, y))
+        self.speed = 4
+
+    def update(self, keys_pressed, game_map):
+        """Move the player based on key presses and handle wall collisions."""
+        dx = 0
+        dy = 0
+        if keys_pressed[pygame.K_LEFT]:
+            dx = -self.speed
+        if keys_pressed[pygame.K_RIGHT]:
+            dx = self.speed
+        if keys_pressed[pygame.K_UP]:
+            dy = -self.speed
+        if keys_pressed[pygame.K_DOWN]:
+            dy = self.speed
+
+        # Update position with collision checking
+        if not self._collides(dx, 0, game_map):
+            self.rect.x += dx
+        if not self._collides(0, dy, game_map):
+            self.rect.y += dy
+
+    def _collides(self, dx, dy, game_map):
+        """Check for collisions with wall tiles after moving by (dx, dy)."""
+        new_rect = self.rect.move(dx, dy)
+        # Loop through map tiles to detect a collision with walls
+        for y in range(game_map.height):
+            for x in range(game_map.width):
+                if game_map.map_data[y][x] == 1:  # Wall tile
+                    tile_rect = pygame.Rect(x * TILE_SIZE, y * TILE_SIZE, TILE_SIZE, TILE_SIZE)
+                    if new_rect.colliderect(tile_rect):
+                        return True
+        return False
+
+def main():
+    # Set up the display
+    screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+    pygame.display.set_caption("Star Wars DND Map")
+    clock = pygame.time.Clock()
+
+    # Initialize the map and player
+    map_obj = Map(game_map)
+    # Start the player on a floor tile (adjust coordinates as needed)
+    player = Player(TILE_SIZE + TILE_SIZE // 2, TILE_SIZE + TILE_SIZE // 2)
+    all_sprites = pygame.sprite.Group(player)
+
+    running = True
+    while running:
+        clock.tick(FPS)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+
+        # Update player movement based on key presses
+        keys_pressed = pygame.key.get_pressed()
+        player.update(keys_pressed, map_obj)
+
+        # Draw the map and sprites
+        map_obj.draw(screen)
+        all_sprites.draw(screen)
+        pygame.display.flip()
+
+    pygame.quit()
+    sys.exit()
+
+if __name__ == '__main__':
+    main()
