@@ -1,0 +1,70 @@
+using Godot;
+using System;
+
+public class MapScreen : Node2D
+{
+    // Map layout: 0 = floor, 1 = wall, 2 = interactive tile.
+    private int[,] _mapData = new int[,]
+    {
+        {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,1},
+        {1,0,0,0,1,1,1,0,0,0,0,0,0,1,1,1,0,0,0,1},
+        {1,0,0,0,1,0,1,0,0,0,0,0,0,1,0,1,0,0,0,1},
+        {1,0,0,0,1,1,1,0,0,0,0,0,0,1,1,1,0,0,0,1},
+        {1,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,0,1},
+        {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+        {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+    };
+
+    private int _tileSize = 40;
+
+    // Colors (using float ranges from 0 to 1)
+    private Color _floorColor = new Color(0, 0, 0);
+    private Color _wallColor = new Color(40f / 255f, 40f / 255f, 40f / 255f);
+    private Color _interactiveColor = new Color(50f / 255f, 100f / 255f, 200f / 255f);
+    private Color _interactiveBorderColor = new Color(100f / 255f, 150f / 255f, 255f / 255f);
+
+    public override void _Draw()
+    {
+        int rows = _mapData.GetLength(0);
+        int cols = _mapData.GetLength(1);
+
+        for (int y = 0; y < rows; y++)
+        {
+            for (int x = 0; x < cols; x++)
+            {
+                Rect2 tileRect = new Rect2(new Vector2(x * _tileSize, y * _tileSize), new Vector2(_tileSize, _tileSize));
+                int tile = _mapData[y, x];
+
+                if (tile == 1)
+                {
+                    // Draw wall tile.
+                    DrawRect(tileRect, _wallColor);
+                }
+                else if (tile == 2)
+                {
+                    // Draw interactive tile.
+                    DrawRect(tileRect, _interactiveColor);
+                    float borderThickness = 2f;
+                    // Draw borders.
+                    DrawRect(new Rect2(tileRect.Position, new Vector2(tileRect.Size.x, borderThickness)), _interactiveBorderColor);
+                    DrawRect(new Rect2(tileRect.Position + new Vector2(0, tileRect.Size.y - borderThickness), new Vector2(tileRect.Size.x, borderThickness)), _interactiveBorderColor);
+                    DrawRect(new Rect2(tileRect.Position, new Vector2(borderThickness, tileRect.Size.y)), _interactiveBorderColor);
+                    DrawRect(new Rect2(tileRect.Position + new Vector2(tileRect.Size.x - borderThickness, 0), new Vector2(borderThickness, tileRect.Size.y)), _interactiveBorderColor);
+                }
+                else
+                {
+                    // Draw floor tile.
+                    DrawRect(tileRect, _floorColor);
+                }
+            }
+        }
+    }
+
+    public override void _Ready()
+    {
+        // Force the _Draw() function to run.
+        Update();
+    }
+}
