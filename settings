@@ -1,0 +1,90 @@
+import pygame
+import sys
+pygame.init()
+
+# Screen settings
+SCREEN_WIDTH = 800
+SCREEN_HEIGHT = 600
+FPS = 60
+
+# Color palette 
+BLACK      = (0, 0, 0)
+DARK_GRAY  = (40, 40, 40)
+BLUE       = (50, 100, 200)
+LIGHT_BLUE = (100, 150, 255)
+WHITE      = (255, 255, 255)
+
+# Font settings
+FONT_SIZE = 36
+FONT = pygame.font.SysFont("Arial", FONT_SIZE)
+
+class SettingsScreen:
+    def __init__(self, screen):
+        self.screen = screen
+        self.clock = pygame.time.Clock()
+        # Define settings options with default values
+        self.options = [
+            {"name": "Music", "value": True},
+            {"name": "Sound Effects", "value": True},
+            {"name": "Fullscreen", "value": False},
+        ]
+        self.selected_index = 0  # The currently highlighted option
+
+    def draw(self):
+        # Clear the screen
+        self.screen.fill(BLACK)
+        
+        # Draw the title
+        title_text = FONT.render("Settings", True, BLUE)
+        self.screen.blit(title_text, (SCREEN_WIDTH // 2 - title_text.get_width() // 2, 50))
+        
+        # Draw each option
+        for idx, option in enumerate(self.options):
+            # Highlight the selected option
+            color = LIGHT_BLUE if idx == self.selected_index else WHITE
+            status = "ON" if option["value"] else "OFF"
+            option_text = FONT.render(f"{option['name']}: {status}", True, color)
+            self.screen.blit(option_text, (SCREEN_WIDTH // 2 - option_text.get_width() // 2, 150 + idx * 50))
+        
+        # Instructions for exiting the settings screen
+        exit_text = FONT.render("Press ESC to return", True, DARK_GRAY)
+        self.screen.blit(exit_text, (SCREEN_WIDTH // 2 - exit_text.get_width() // 2, SCREEN_HEIGHT - 100))
+
+    def run(self):
+        running = True
+        while running:
+            self.clock.tick(FPS)
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_ESCAPE:
+                        # Exit settings screen (return to main menu or previous screen)
+                        running = False
+                    elif event.key == pygame.K_UP:
+                        self.selected_index = (self.selected_index - 1) % len(self.options)
+                    elif event.key == pygame.K_DOWN:
+                        self.selected_index = (self.selected_index + 1) % len(self.options)
+                    elif event.key in (pygame.K_RETURN, pygame.K_SPACE):
+                        # Toggle the selected option
+                        self.options[self.selected_index]["value"] = not self.options[self.selected_index]["value"]
+
+            self.draw()
+            pygame.display.flip()
+
+def main():
+    # Set up the display window
+    screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+    pygame.display.set_caption("Settings Screen")
+    
+    # Create and run the settings screen
+    settings_screen = SettingsScreen(screen)
+    settings_screen.run()
+    
+    # Once done, you can either return to your main menu or exit
+    pygame.quit()
+    sys.exit()
+
+if __name__ == '__main__':
+    main()
