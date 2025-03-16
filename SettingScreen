@@ -1,0 +1,88 @@
+using Godot;
+using System.Collections.Generic;
+
+public class SettingsScreen : Control
+{
+    private List<SettingOption> _options = new List<SettingOption>();
+    private int _selectedIndex = 0;
+    private int _optionSpacing = 50;
+    private DynamicFont _font;
+
+    public override void _Ready()
+    {
+        // Load and configure a DynamicFont.
+        _font = new DynamicFont();
+        _font.FontData = ResourceLoader.Load<DynamicFontData>("res://Fonts/DefaultFont.tres"); // Make sure this font exists
+        _font.Size = 36;
+
+        // Initialize settings options.
+        _options.Add(new SettingOption("Music", true));
+        _options.Add(new SettingOption("Sound Effects", true));
+        _options.Add(new SettingOption("Fullscreen", false));
+
+        // Enable input processing.
+        SetProcessInput(true);
+        Update();
+    }
+
+    public override void _Input(InputEvent @event)
+    {
+        if (@event is InputEventKey keyEvent && keyEvent.Pressed)
+        {
+            if (keyEvent.Scancode == (int)KeyList.Escape)
+            {
+                // Return to Main Menu.
+                GetTree().ChangeScene("res://Scenes/MainMenu.tscn");
+            }
+            else if (keyEvent.Scancode == (int)KeyList.Up)
+            {
+                _selectedIndex = (_selectedIndex - 1 + _options.Count) % _options.Count;
+                Update();
+            }
+            else if (keyEvent.Scancode == (int)KeyList.Down)
+            {
+                _selectedIndex = (_selectedIndex + 1) % _options.Count;
+                Update();
+            }
+            else if (keyEvent.Scancode == (int)KeyList.Enter || keyEvent.Scancode == (int)KeyList.Space)
+            {
+                _options[_selectedIndex].Value = !_options[_selectedIndex].Value;
+                Update();
+            }
+        }
+    }
+
+    public override void _Draw()
+    {
+        // Draw the title.
+        string title = "Settings";
+        Vector2 titleSize = _font.GetStringSize(title);
+        DrawString(_font, new Vector2((RectSize.x - titleSize.x) / 2, 50), title, new Color(50f / 255f, 100f / 255f, 200f / 255f));
+
+        // Draw each option.
+        for (int i = 0; i < _options.Count; i++)
+        {
+            string optionText = _options[i].Name + ": " + (_options[i].Value ? "ON" : "OFF");
+            Vector2 textSize = _font.GetStringSize(optionText);
+            Color color = (i == _selectedIndex) ? new Color(100f / 255f, 150f / 255f, 255f / 255f) : Colors.White;
+            DrawString(_font, new Vector2((RectSize.x - textSize.x) / 2, 150 + i * _optionSpacing), optionText, color);
+        }
+
+        // Draw instructions.
+        string instruction = "Press ESC to return";
+        Vector2 instSize = _font.GetStringSize(instruction);
+        DrawString(_font, new Vector2((RectSize.x - instSize.x) / 2, RectSize.y - 100), instruction, new Color(40f / 255f, 40f / 255f, 40f / 255f));
+    }
+}
+
+public class SettingOption
+{
+    public string Name;
+    public bool Value;
+
+    public SettingOption(string name, bool value)
+    {
+        Name = name;
+        Value = value;
+    }
+}
