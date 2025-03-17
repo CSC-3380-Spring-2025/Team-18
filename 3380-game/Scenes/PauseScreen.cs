@@ -5,6 +5,11 @@ public partial class PauseScreen : CanvasLayer
 {
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready(){
+		//GetNode<Button>("Resume").Pressed += ResumePressed;
+		//GetNode<Button>("Inventory").Pressed += InventoryPressed;
+		//GetNode<Button>("Stats").Pressed += StatsPressed;
+		//GetNode<Button>("Settings").Pressed += SettingsPressed;
+		//GetNode<Button>("Quit").Pressed += QuitPressed;
 	}
 	public void ResumePressed(){
 			Visible = false;
