@@ -13,9 +13,11 @@ public partial class Player : Area2D
 	
 	public Vector2 screenSize;
 	
-	public string species = "Togruta";
+
+	public string species = "Twilek";
 	public string bodyType = "1";
-	public string pChoice = "1", eChoice = "3";
+	public string pChoice = "1", eChoice = "3", hChoice = "12";
+
 	
 public override void _Ready() //called on start
 {
@@ -37,8 +39,8 @@ public override void _Process(double delta) //called in real time
 	var head = GetNode<AnimatedSprite2D>("Head");
 	var eye = GetNode<AnimatedSprite2D>("Eyes");
 	var hair = GetNode<AnimatedSprite2D>("Hair");
+	var hairBack = GetNode<AnimatedSprite2D>("Hair_Back");
 	var pattern = GetNode<AnimatedSprite2D>("Head/Pattern");
-	var whites = GetNode<AnimatedSprite2D>("Head/Whites");
 	
 //movement and animation controls
 if (velocity.Length() > 0){
@@ -54,24 +56,26 @@ if (velocity.Length() > 0){
 	//check to make sure only the ones with patterns have the node active
 	if(species == "Human" || species == "Pureblood"){
 		pattern.Hide();
+
+		if(StringExtensions.ToInt(hChoice) > 10){
+			AnimationTurn(hairBack, velocity, hChoice, "hair");
+			AnimationTurn(hair, velocity, hChoice, "hair");
+			hairBack.Show();
 		} else {
+			AnimationTurn(hair, velocity, hChoice, "hair");
+			hairBack.Hide();
+			}
+		hair.Show();
+	}else {
 		pattern.Show();
 		AnimationTurn(pattern, velocity, pChoice);
 		pattern.Play();
-		if(species == "Togruta"){
-			whites.Show();
-			AnimationTurn(whites, velocity, pChoice);
-			whites.Play();
-		} else {
-			whites.Hide();
-			}
 		}
-	}
-	else{
-		body.Stop();
-		head.Stop();
-		pattern.Stop();
-		whites.Stop();
+} else {
+	body.Stop();
+	head.Stop();
+	pattern.Stop();
+
 }
 	
 	//actual thing that makes movement work
