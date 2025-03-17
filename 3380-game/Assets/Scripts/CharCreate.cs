@@ -4,6 +4,7 @@ using System.Linq;
 
 class PlayerData
 {
+
 	public string Name { get; set; }
 	public string Class { get; set; }
 	public string Race { get; set; }
@@ -18,7 +19,7 @@ class PlayerData
 	public int Constitution { get; set; }
 	public int Wisdom { get; set; }
 	public int Charisma { get; set; }
-	
+
 	public PlayerData(string name, string characterClass, string race, string eyeColor, string hairColor, string facialMarkings)
 	{
 		Name = name;
@@ -83,7 +84,7 @@ class PlayerData
 		Wisdom = statDictionary["wisdom"];
 		Charisma = statDictionary["charisma"];
 	}
-	//Displays the characters physical features and their attributes.
+	
 	public void DisplayCharacter()
 	{
 		Console.WriteLine("\nCharacter Created!");

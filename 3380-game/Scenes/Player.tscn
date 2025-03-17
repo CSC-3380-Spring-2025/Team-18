@@ -1,6 +1,7 @@
 [gd_scene load_steps=108 format=3 uid="uid://meh74a6p1vvp"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/Player.cs" id="1_ovr1q"]
+
 [ext_resource type="Texture2D" uid="uid://bhp05vupkwq8h" path="res://Assets/Sprites/Hairs/3380 player_hair_long.png" id="2_em26k"]
 [ext_resource type="Texture2D" uid="uid://b17sh63bn7o4a" path="res://Assets/Sprites/bodies/3380 player_b1.png" id="4_0ap8a"]
 [ext_resource type="Texture2D" uid="uid://c7r1blir0xf6j" path="res://Assets/Sprites/heads/3380 player_h1-4.png" id="5_om6ds"]
@@ -123,6 +124,7 @@ region = Rect2(0, 0, 140, 140)
 [sub_resource type="AtlasTexture" id="AtlasTexture_trq8q"]
 atlas = ExtResource("4_0ap8a")
 region = Rect2(0, 280, 140, 140)
+
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_g5nao"]
 animations = [{
@@ -350,6 +352,7 @@ animations = [{
 "speed": 3.0
 }]
 
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sanbu"]
 shader = ExtResource("8_ondsv")
 shader_parameter/modulate = Color(0.287598, 0.381821, 0.890625, 1)
@@ -380,6 +383,7 @@ region = Rect2(560, 0, 140, 140)
 [sub_resource type="AtlasTexture" id="AtlasTexture_lvt2d"]
 atlas = ExtResource("7_pl6dk")
 region = Rect2(280, 0, 140, 140)
+
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7lxpr"]
 atlas = ExtResource("7_pl6dk")

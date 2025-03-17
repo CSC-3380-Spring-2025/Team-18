@@ -1,3 +1,4 @@
+
 using Godot;
 using System;
 using Game.Assets.Scripts.Loading;
@@ -12,9 +13,11 @@ public partial class Player : Area2D
 	
 	public Vector2 screenSize;
 	
+
 	public string species = "Twilek";
 	public string bodyType = "1";
 	public string pChoice = "1", eChoice = "3", hChoice = "12";
+
 	
 public override void _Ready() //called on start
 {
@@ -53,6 +56,7 @@ if (velocity.Length() > 0){
 	//check to make sure only the ones with patterns have the node active
 	if(species == "Human" || species == "Pureblood"){
 		pattern.Hide();
+
 		if(StringExtensions.ToInt(hChoice) > 10){
 			AnimationTurn(hairBack, velocity, hChoice, "hair");
 			AnimationTurn(hair, velocity, hChoice, "hair");
@@ -64,8 +68,6 @@ if (velocity.Length() > 0){
 		hair.Show();
 	}else {
 		pattern.Show();
-		hair.Hide();
-		hairBack.Hide();
 		AnimationTurn(pattern, velocity, pChoice);
 		pattern.Play();
 		}
@@ -73,6 +75,7 @@ if (velocity.Length() > 0){
 	body.Stop();
 	head.Stop();
 	pattern.Stop();
+
 }
 	
 	//actual thing that makes movement work
