@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-class PlayerData
+public class PlayerData
 {
 
 	public string Name { get; set; }

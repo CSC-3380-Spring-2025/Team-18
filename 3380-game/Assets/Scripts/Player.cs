@@ -12,9 +12,8 @@ public partial class Player : Area2D
 	//public delegate void HitEventHandler();
 	
 	public Vector2 screenSize;
-	
-
-	public string species = "Twilek";
+		
+	public PlayerData PlayerData;
 	public string bodyType = "1";
 	public string pChoice = "1", eChoice = "3", hChoice = "12";
 
@@ -22,7 +21,12 @@ public partial class Player : Area2D
 public override void _Ready() //called on start
 {
 	screenSize = GetViewportRect().Size;
-	 Load();
+	Load();
+	// If our PlayerData hasn't been defined elsewhere, use one with default values
+	if (PlayerData is null)
+	{
+		PlayerData = new PlayerData("Default", "Soldier", "Twilek", "Red", "Black", "Blue");
+	}
 }
 
 public override void _Process(double delta) //called in real time
@@ -54,7 +58,7 @@ if (velocity.Length() > 0){
 	eye.Play();
 	
 	//check to make sure only the ones with patterns have the node active
-	if(species == "Human" || species == "Pureblood"){
+	if(PlayerData.Race == "Human" || PlayerData.Race == "Pureblood"){
 		pattern.Hide();
 
 		if(StringExtensions.ToInt(hChoice) > 10){
@@ -101,7 +105,7 @@ public void AnimationTurn(AnimatedSprite2D node, Vector2 velocity, string choice
 		choice = ("_"+choice);
 	}
 	if(type == ""){
-		type = species;
+		type = PlayerData.Race;
 	}
 		
 	if(velocity.X != 0){
