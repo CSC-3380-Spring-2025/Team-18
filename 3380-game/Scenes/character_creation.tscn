@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://ckltea74vko7w"]
 
-[ext_resource type="Script" path="res://Assets/Scripts/Character.cs" id="1_d8uaa"]
+[ext_resource type="Script" path="res://Assets/Scripts/Character_Select.cs" id="1_d8uaa"]
 [ext_resource type="PackedScene" uid="uid://m81cq124ltn8" path="res://Scenes/Player.tscn" id="2_clebg"]
 
 [node name="Character_Creation" type="CanvasLayer" node_paths=PackedStringArray("Species", "Hair", "Eye", "Pattern")]
@@ -85,3 +85,5 @@ offset_left = 192.0
 offset_top = 163.0
 offset_right = 216.0
 offset_bottom = 187.0
+
+[connection signal="item_selected" from="Control/Species" to="." method="SpeciesSelect"]
