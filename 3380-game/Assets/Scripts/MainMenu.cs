@@ -28,6 +28,7 @@ public partial class MainMenu : CanvasLayer
 		if(pauseScene != null){
 			pauseScreen = (PauseScreen)pauseScene.Instantiate();
 			GetParent().AddChild(pauseScreen);
+			pauseScreen.Visible = false;
 		} 
 		else{ 
 			GD.PrintErr("Failed to load PauseScreen");
