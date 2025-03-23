@@ -1,69 +1,89 @@
 [gd_scene load_steps=2 format=3 uid="uid://liq25vhrxyqs"]
 
-[ext_resource type="Script" path="res://Scenes/PauseScreen.cs" id="1_ddiaj"]
+[ext_resource type="Script" path="res://Assets/Scripts/PauseScreen.cs" id="1_ddiaj"]
 
-[node name="Pause Screen" type="CanvasLayer"]
+[node name="Pause Screen" type="CanvasLayer" node_paths=PackedStringArray("resume", "quit", "inventory", "stats", "settings")]
 script = ExtResource("1_ddiaj")
+resume = NodePath("Control/Resume")
+quit = NodePath("Control/Quit")
+inventory = NodePath("Control/Inventory")
+stats = NodePath("Control/Stats")
+settings = NodePath("Control/Settings")
 
-[node name="Resume" type="Button" parent="."]
+[node name="Control" type="Control" parent="."]
+process_mode = 3
+process_priority = -1
+layout_mode = 3
+anchors_preset = 0
+offset_left = 271.0
+offset_top = 138.0
+offset_right = 311.0
+offset_bottom = 178.0
+
+[node name="Resume" type="Button" parent="Control"]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 508.0
 offset_top = 225.0
-offset_right = -574.0
-offset_bottom = -392.0
+offset_right = 538.0
+offset_bottom = 216.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Resume"
 
-[node name="Quit" type="Button" parent="."]
+[node name="Quit" type="Button" parent="Control"]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 533.0
 offset_top = 391.0
-offset_right = -577.0
-offset_bottom = -226.0
+offset_right = 535.0
+offset_bottom = 382.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Quit"
 
-[node name="Inventory" type="Button" parent="."]
+[node name="Inventory" type="Button" parent="Control"]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 511.0
 offset_top = 307.0
-offset_right = -558.0
-offset_bottom = -310.0
+offset_right = 554.0
+offset_bottom = 298.0
 text = "Inventory"
 
-[node name="Stats" type="Button" parent="."]
+[node name="Stats" type="Button" parent="Control"]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 523.0
 offset_top = 265.0
-offset_right = -582.0
-offset_bottom = -352.0
+offset_right = 530.0
+offset_bottom = 256.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Stats"
 
-[node name="Settings" type="Button" parent="."]
+[node name="Settings" type="Button" parent="Control"]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 518.0
 offset_top = 345.0
-offset_right = -564.0
-offset_bottom = -272.0
+offset_right = 548.0
+offset_bottom = 336.0
 text = "Settings
 "
 
-[connection signal="pressed" from="Resume" to="." method="ResumePressed"]
-[connection signal="pressed" from="Quit" to="." method="QuitPressed"]
-[connection signal="pressed" from="Inventory" to="." method="InventoryPressed"]
-[connection signal="pressed" from="Stats" to="." method="StatsPressed"]
-[connection signal="pressed" from="Settings" to="." method="SettingsPressed"]
+[connection signal="pressed" from="Control/Resume" to="." method="ResumePressed"]
+[connection signal="pressed" from="Control/Quit" to="." method="QuitPressed"]
+[connection signal="pressed" from="Control/Inventory" to="." method="InventoryPressed"]
+[connection signal="pressed" from="Control/Stats" to="." method="StatsPressed"]
+[connection signal="pressed" from="Control/Settings" to="." method="SettingsPressed"]

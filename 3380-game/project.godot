@@ -15,9 +15,16 @@ run/main_scene="res://Scenes/main_menu.tscn"
 config/features=PackedStringArray("4.3", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+PauseScreen="*res://Assets/Scripts/PauseScreen.cs"
+
 [display]
 
+window/size/viewport_width=1600
+window/size/viewport_height=900
 window/stretch/mode="viewport"
+window/per_pixel_transparency/allowed=true
 
 [dotnet]
 

@@ -1,4 +1,3 @@
-
 using Godot;
 using System;
 using Game.Assets.Scripts.Loading;
@@ -8,8 +7,9 @@ public partial class Player : Area2D
 {
 	[Export]
 	public int Speed { get; set; } = 200; // How fast the player will move (pixels/sec).
-	//[Signal]
-	//public delegate void HitEventHandler();
+	
+	[Signal]
+	public delegate void HitEventHandler();
 	
 	public Vector2 screenSize;
 		
@@ -73,7 +73,7 @@ if (velocity.Length() > 0){
 	}else {
 		pattern.Show();
   		hair.Hide();
-    		hairBack.Hide();
+			hairBack.Hide();
 		AnimationTurn(pattern, velocity, pChoice);
 		pattern.Play();
 		}

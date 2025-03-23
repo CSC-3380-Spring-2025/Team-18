@@ -1,18 +1,17 @@
-[gd_scene load_steps=108 format=3 uid="uid://meh74a6p1vvp"]
+[gd_scene load_steps=108 format=3 uid="uid://m81cq124ltn8"]
 
 [ext_resource type="Script" path="res://Assets/Scripts/Player.cs" id="1_ovr1q"]
-
 [ext_resource type="Texture2D" uid="uid://bhp05vupkwq8h" path="res://Assets/Sprites/Hairs/3380 player_hair_long.png" id="2_em26k"]
-[ext_resource type="Texture2D" uid="uid://b17sh63bn7o4a" path="res://Assets/Sprites/bodies/3380 player_b1.png" id="4_0ap8a"]
+[ext_resource type="Texture2D" uid="uid://cr1jnakw4drkq" path="res://Assets/Sprites/bodies/3380 player_b1.png" id="4_0ap8a"]
 [ext_resource type="Texture2D" uid="uid://c7r1blir0xf6j" path="res://Assets/Sprites/heads/3380 player_h1-4.png" id="5_om6ds"]
 [ext_resource type="Texture2D" uid="uid://borcwroyp1l8m" path="res://Assets/Sprites/patterns/3380 player_h3_patterns.png" id="6_d5rui"]
 [ext_resource type="Texture2D" uid="uid://5pnruxl4pg0x" path="res://Assets/Sprites/patterns/3380 player_h2_patterns.png" id="7_pl6dk"]
 [ext_resource type="Shader" path="res://Assets/Shaders/KeepWhite.gdshader" id="8_ondsv"]
 [ext_resource type="Texture2D" uid="uid://7cyr38bqm1aq" path="res://Assets/Sprites/Hairs/3380 player_hair_short.png" id="11_me3qc"]
-[ext_resource type="Texture2D" uid="uid://nu8vnsdtevfr" path="res://Assets/Sprites/eyes/3380 player_e1.png" id="35_wpo1r"]
-[ext_resource type="Texture2D" uid="uid://cbaxcntvsohmg" path="res://Assets/Sprites/eyes/3380 player_e2.png" id="36_pqity"]
-[ext_resource type="Texture2D" uid="uid://cdspcch4c7cqm" path="res://Assets/Sprites/eyes/3380 player_e3.png" id="47_v5fqo"]
-[ext_resource type="Texture2D" uid="uid://wxntcmmuhswr" path="res://Assets/Sprites/eyes/3380 player_e4.png" id="51_lejyy"]
+[ext_resource type="Texture2D" uid="uid://b3iv5fcqo2qf2" path="res://Assets/Sprites/eyes/3380 player_e1.png" id="35_wpo1r"]
+[ext_resource type="Texture2D" uid="uid://5gmwynkts6qe" path="res://Assets/Sprites/eyes/3380 player_e2.png" id="36_pqity"]
+[ext_resource type="Texture2D" uid="uid://diyyi0w7gc3eq" path="res://Assets/Sprites/eyes/3380 player_e3.png" id="47_v5fqo"]
+[ext_resource type="Texture2D" uid="uid://bsfdmg6vryfk6" path="res://Assets/Sprites/eyes/3380 player_e4.png" id="51_lejyy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0foxm"]
 atlas = ExtResource("2_em26k")
@@ -124,7 +123,6 @@ region = Rect2(0, 0, 140, 140)
 [sub_resource type="AtlasTexture" id="AtlasTexture_trq8q"]
 atlas = ExtResource("4_0ap8a")
 region = Rect2(0, 280, 140, 140)
-
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_g5nao"]
 animations = [{
@@ -352,7 +350,6 @@ animations = [{
 "speed": 3.0
 }]
 
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sanbu"]
 shader = ExtResource("8_ondsv")
 shader_parameter/modulate = Color(0.287598, 0.381821, 0.890625, 1)
@@ -383,7 +380,6 @@ region = Rect2(560, 0, 140, 140)
 [sub_resource type="AtlasTexture" id="AtlasTexture_lvt2d"]
 atlas = ExtResource("7_pl6dk")
 region = Rect2(280, 0, 140, 140)
-
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7lxpr"]
 atlas = ExtResource("7_pl6dk")

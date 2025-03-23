@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://qoqpdflv41tw"]
+[gd_scene load_steps=2 format=3 uid="uid://cfit1uvhucaei"]
+
+[ext_resource type="Texture2D" uid="uid://bq761okmjj805" path="res://Assets/Images/Stats-QT.png" id="1_an3q6"]
 
 [node name="Stats" type="Control"]
 layout_mode = 3
@@ -73,8 +75,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 479.0
 offset_top = 152.0
-offset_right = -647.0
-offset_bottom = -465.0
+offset_right = -1098.0
+offset_bottom = -710.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "-1
@@ -97,3 +99,8 @@ offset_right = 512.0
 offset_bottom = 356.0
 text = "-1
 "
+
+[node name="Stats-qt" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(800, 450)
+texture = ExtResource("1_an3q6")

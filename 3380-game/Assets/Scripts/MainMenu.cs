@@ -13,15 +13,17 @@ public partial class MainMenu : CanvasLayer
 		ProcessMode = ProcessModeEnum.Always;
 	}
 	
+
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	///set the visibility of the main menu screen to true, as well as call the GetTree.Paused to pause the game when 'esc' is pressed.
 	public override void _Process(double delta){
+
 		if(Input.IsActionJustPressed("ui_cancel")){
 			TogglePauseScreen();
-			//Visible = true; 
-			//GetTree().Paused = true;
+			GetTree().Paused = !GetTree().Paused;
 		}
 	}
+	
 	private void TogglePauseScreen(){
 		if(pauseScreen == null){
 			PackedScene pauseScene = GD.Load<PackedScene>("res://Scenes//pauseScreen.tscn");
@@ -32,10 +34,11 @@ public partial class MainMenu : CanvasLayer
 		else{ 
 			GD.PrintErr("Failed to load PauseScreen");
 			return;
+			}
 		}
-		}
-		pauseScreen.Visible = !pauseScreen.Visible;
-		GetTree().Paused = pauseScreen.Visible;
+		
+		if(GetTree().Paused){pauseScreen.Visible = true;}
+		if(GetTree().Paused == false){pauseScreen.Visible = false;}
 	}
 	
 	///Creates the functionality of the Play button when pressed
@@ -51,24 +54,9 @@ public partial class MainMenu : CanvasLayer
 		}
 		
 		//Once the button is clicked, it moves the current scene (main menu) to the Player scene
-		var gameScene = GD.Load<PackedScene>("res://Scenes//Player.tscn");
-		var gameSceneNode = gameScene.Instantiate();
-		GetParent().AddChild(gameSceneNode);
-		// Load elements if it is the first load and they are loadable
-		if (_isFirstLoad)
-		{
-			foreach (var child in GetParent().GetChildren())
-			{
-				if (child is Loadable loadable)
-				{
-					loadable.Load();
-				}
-			}
-
-			_isFirstLoad = false;
-		}
-		
+		sceneSwap("main");
 	}
+	
 	///Functionality for the exit button
 	public void OnExitPressed(){
 		// Save any savables on exit
@@ -80,5 +68,28 @@ public partial class MainMenu : CanvasLayer
 			}
 		}
 		GetTree().Quit();
+	}
+	
+	//functionality for new game button
+	public void OnNewGamePressed(){
+		GetTree().ChangeSceneToFile("res://Scenes/character_creation.tscn");
+	}
+	
+	public void sceneSwap(string scene){
+		var gameScene = GD.Load<PackedScene>("res://Scenes//"+scene+".tscn");
+		var gameSceneNode = gameScene.Instantiate();
+		GetParent().AddChild(gameSceneNode);
+		
+		if (_isFirstLoad)
+		{
+			foreach (var child in GetParent().GetChildren())
+			{
+				if (child is Loadable loadable)
+				{
+					loadable.Load();
+				}
+			}
+			_isFirstLoad = false;
+		}
 	}
 }

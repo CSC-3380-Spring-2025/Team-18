@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://duqg2yepqesgi"]
+[gd_scene load_steps=2 format=3 uid="uid://bakypyj2gb38p"]
+
+[ext_resource type="Texture2D" uid="uid://bp3vwvlkb6trw" path="res://Assets/Images/3380 Settings.png" id="1_avrk1"]
 
 [node name="Settings" type="Control"]
 layout_mode = 3
@@ -7,3 +9,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="3380Settings" type="Sprite2D" parent="."]
+position = Vector2(800, 450)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_avrk1")

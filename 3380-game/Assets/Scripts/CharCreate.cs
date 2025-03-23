@@ -4,7 +4,6 @@ using System.Linq;
 
 public class PlayerData
 {
-
 	public string Name { get; set; }
 	public string Class { get; set; }
 	public string Race { get; set; }
@@ -85,8 +84,10 @@ public class PlayerData
 		Charisma = statDictionary["charisma"];
 	}
 	
-	public void DisplayCharacter()
-	{
+
+
+public void DisplayCharacter()
+{
 		Console.WriteLine("\nCharacter Created!");
 		Console.WriteLine($"Name: {Name}");
 		Console.WriteLine($"Class: {Class}");
@@ -103,7 +104,6 @@ public class PlayerData
 		Console.WriteLine($"Charisma: {Charisma}");
 	}
 }
-
 class Program
 {
 	static void Main(string[] args)
