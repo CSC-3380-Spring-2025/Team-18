@@ -73,7 +73,7 @@ if (velocity.Length() > 0){
 	}else {
 		pattern.Show();
   		hair.Hide();
-    		hairBack.Hide();
+			hairBack.Hide();
 		AnimationTurn(pattern, velocity, pChoice);
 		pattern.Play();
 		}
