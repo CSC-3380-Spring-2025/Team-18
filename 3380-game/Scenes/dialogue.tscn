@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://cveb6clbpx2ms"]
+
+[ext_resource type="Texture2D" uid="uid://pf0ksyn43jey" path="res://Assets/Images/3380 Dialogue box.png" id="1_r6vlv"]
+[ext_resource type="PackedScene" uid="uid://dycymydk1237u" path="res://Scenes/HUD.tscn" id="2_gao1m"]
+
+[node name="Dialogue" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="3380DialogueBox" type="Sprite2D" parent="."]
+top_level = true
+position = Vector2(800, 450)
+texture = ExtResource("1_r6vlv")
+
+[node name="HUD" parent="." instance=ExtResource("2_gao1m")]

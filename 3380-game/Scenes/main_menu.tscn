@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://b048g7jb4l3fh"]
 
-[ext_resource type="Script" path="res://Assets/Scripts/MainMenu.cs" id="1_bhe5c"]
+[ext_resource type="Script" uid="uid://dusqry6v6vy47" path="res://Assets/Scripts/MainMenu.cs" id="1_bhe5c"]
 [ext_resource type="Texture2D" uid="uid://jup4r58ep5bu" path="res://Assets/Images/Main_menu.png" id="2_613f7"]
 [ext_resource type="Texture2D" uid="uid://cv156e2xlyb" path="res://Assets/Images/Buttons/Continue_Off.png" id="4_3dni4"]
 [ext_resource type="Texture2D" uid="uid://df0o3nrf4u536" path="res://Assets/Images/Buttons/Continue_Hover.png" id="5_exodf"]
@@ -18,9 +18,8 @@ follow_viewport_enabled = true
 script = ExtResource("1_bhe5c")
 
 [node name="MainMenu" type="Sprite2D" parent="."]
-light_mask = 0
-texture_filter = 5
-position = Vector2(800, 451)
+texture_filter = 1
+position = Vector2(800, 450)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_613f7")
 

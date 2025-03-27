@@ -1,10 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://d3gxvxspuj61g"]
+[gd_scene load_steps=3 format=3 uid="uid://d3gxvxspuj61g"]
 
 [ext_resource type="Texture2D" uid="uid://77w0yw7j8a1n" path="res://Assets/Images/3380 Map.png" id="1_ufsyg"]
+[ext_resource type="PackedScene" uid="uid://dycymydk1237u" path="res://Scenes/HUD.tscn" id="2_72yx0"]
 
 [node name="CanvasLayer" type="CanvasLayer"]
 
 [node name="3380Map" type="Sprite2D" parent="."]
-position = Vector2(800, 451)
-scale = Vector2(0.5, 0.5)
+texture_filter = 5
+position = Vector2(800, 450)
 texture = ExtResource("1_ufsyg")
+
+[node name="HUD" parent="." instance=ExtResource("2_72yx0")]

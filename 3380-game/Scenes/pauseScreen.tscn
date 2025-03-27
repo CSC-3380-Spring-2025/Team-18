@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://liq25vhrxyqs"]
 
-[ext_resource type="Script" path="res://Assets/Scripts/PauseScreen.cs" id="1_ddiaj"]
+[ext_resource type="Script" uid="uid://bopt7wr6un60i" path="res://Assets/Scripts/PauseScreen.cs" id="1_ddiaj"]
 
 [node name="Pause Screen" type="CanvasLayer" node_paths=PackedStringArray("resume", "quit", "inventory", "stats", "settings")]
 script = ExtResource("1_ddiaj")
@@ -55,6 +55,8 @@ offset_left = 511.0
 offset_top = 307.0
 offset_right = 554.0
 offset_bottom = 298.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "Inventory"
 
 [node name="Stats" type="Button" parent="Control"]
@@ -79,6 +81,8 @@ offset_left = 518.0
 offset_top = 345.0
 offset_right = 548.0
 offset_bottom = 336.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "Settings
 "
 

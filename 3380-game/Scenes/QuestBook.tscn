@@ -1,10 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://bj3xgfn6aty6h"]
+[gd_scene load_steps=3 format=3 uid="uid://bj3xgfn6aty6h"]
 
 [ext_resource type="Texture2D" uid="uid://0lysb2tshxc5" path="res://Assets/Images/3380 Quest Book.png" id="1_e4puy"]
+[ext_resource type="PackedScene" uid="uid://dycymydk1237u" path="res://Scenes/HUD.tscn" id="2_815al"]
 
 [node name="CanvasLayer" type="CanvasLayer"]
 
 [node name="3380QuestBook" type="Sprite2D" parent="."]
-position = Vector2(801, 451)
-scale = Vector2(0.5, 0.5)
+texture_filter = 5
+position = Vector2(800, 450)
 texture = ExtResource("1_e4puy")
+
+[node name="Buttons" parent="." instance=ExtResource("2_815al")]
