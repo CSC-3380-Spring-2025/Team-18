@@ -1,4 +1,8 @@
-[gd_scene format=3 uid="uid://duqg2yepqesgi"]
+[gd_scene load_steps=4 format=3 uid="uid://bakypyj2gb38p"]
+
+[ext_resource type="Texture2D" uid="uid://bp3vwvlkb6trw" path="res://Assets/Images/3380 Settings.png" id="1_avrk1"]
+[ext_resource type="Script" uid="uid://ct2edhcgm7svx" path="res://Assets/Scripts/Settings.cs" id="1_b5yji"]
+[ext_resource type="PackedScene" uid="uid://dycymydk1237u" path="res://Scenes/HUD.tscn" id="2_8w0oq"]
 
 [node name="Settings" type="Control"]
 layout_mode = 3
@@ -7,3 +11,20 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_b5yji")
+
+[node name="3380Settings" type="Sprite2D" parent="."]
+texture_filter = 5
+position = Vector2(800, 450)
+texture = ExtResource("1_avrk1")
+
+[node name="HUD" parent="." instance=ExtResource("2_8w0oq")]
+
+[node name="Quit" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 183.0
+offset_top = 608.0
+offset_right = 736.0
+offset_bottom = 723.0
+
+[connection signal="pressed" from="Quit" to="." method="OnQuit"]

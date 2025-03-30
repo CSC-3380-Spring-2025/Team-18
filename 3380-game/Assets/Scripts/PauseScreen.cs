@@ -3,6 +3,9 @@ using System;
 
 public partial class PauseScreen : CanvasLayer
 {
+
+	[Export] private Button resume, quit, inventory, stats, settings;
+
 	private Node currentMenu = null;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready(){
@@ -14,6 +17,7 @@ public partial class PauseScreen : CanvasLayer
 			currentMenu.QueueFree();
 			currentMenu = null;
 		}
+
 			Visible = false;
 			GetTree().Paused = false;
 			}
@@ -21,6 +25,7 @@ public partial class PauseScreen : CanvasLayer
 		GetTree().Quit();
 	}
 	public void InventoryPressed(){
+
 		SwitchScene("res://Scenes//inventory.tscn");
 	}
 	public void StatsPressed(){
@@ -48,5 +53,6 @@ public partial class PauseScreen : CanvasLayer
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+
 	}
 }

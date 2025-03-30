@@ -1,15 +1,25 @@
-[gd_scene format=3 uid="uid://cd5u01fx4d8v6"]
+[gd_scene load_steps=3 format=3 uid="uid://cd5u01fx4d8v6"]
+
+[ext_resource type="Texture2D" uid="uid://dwutpj63i31w3" path="res://Assets/Images/3380 Inventory.png" id="1_vnlv7"]
+[ext_resource type="PackedScene" uid="uid://dycymydk1237u" path="res://Scenes/HUD.tscn" id="2_2dgjs"]
 
 [node name="Inventory" type="CanvasLayer"]
+
+[node name="3380Inventory" type="Sprite2D" parent="."]
+texture_filter = 5
+position = Vector2(800, 450)
+texture = ExtResource("1_vnlv7")
 
 [node name="Label" type="Label" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 483.0
-offset_top = 197.0
-offset_right = -625.0
-offset_bottom = -428.0
+offset_left = 81.0
+offset_top = 179.0
+offset_right = -1027.0
+offset_bottom = -446.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Items"
+
+[node name="HUD" parent="." instance=ExtResource("2_2dgjs")]

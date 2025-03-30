@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://cge1k6us2x3si"]
+
+[ext_resource type="Texture2D" uid="uid://orpovkd8fac8" path="res://Assets/Images/3380 Abilities.png" id="1_3okr5"]
+[ext_resource type="PackedScene" uid="uid://dycymydk1237u" path="res://Scenes/HUD.tscn" id="2_1km4f"]
+
+[node name="Abilities" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="3380Abilities" type="Sprite2D" parent="."]
+top_level = true
+texture_filter = 5
+position = Vector2(800, 450)
+texture = ExtResource("1_3okr5")
+
+[node name="HUD" parent="." instance=ExtResource("2_1km4f")]

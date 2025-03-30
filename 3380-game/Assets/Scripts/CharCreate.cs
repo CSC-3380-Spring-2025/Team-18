@@ -1,17 +1,23 @@
+using Godot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-public class PlayerData
+public partial class PlayerData : GodotObject
 {
-
 	public string Name { get; set; }
 	public string Class { get; set; }
 	public string Race { get; set; }
+	public string Hair { get; set; }
+	public string Eye { get; set; }
+	public string Pattern { get; set; }
 	public string Feature { get; set; }
-	public string EyeColor { get; set; }
-	public string HairColor { get; set; }
-	public string FacialMarkings { get; set; }
+	public Color SkinColor { get ; set; } 
+	public Color EyeColor { get; set; }
+	public Color HairColor { get; set; }
+	public Color FacialMarkings { get; set; }
+
+
 
 	public int Strength { get; set; }
 	public int Dexterity { get; set; }
@@ -20,14 +26,21 @@ public class PlayerData
 	public int Wisdom { get; set; }
 	public int Charisma { get; set; }
 
-	public PlayerData(string name, string characterClass, string race, string eyeColor, string hairColor, string facialMarkings)
+	public PlayerData(string name = "Placeholder", string characterClass = "Null", string race = "Human", 
+	string hair = "1", string eye = "1", string pattern = "1", Color skinColor = new Color(), 
+	Color eyeColor = new Color(), Color hairColor = new Color(), Color facialMarkings = new Color())
 	{
 		Name = name;
 		Class = characterClass;
 		Race = race;
+		Hair = hair;
+		Eye = eye;
+		Pattern = pattern;
+		SkinColor = skinColor;
 		EyeColor = eyeColor;
 		HairColor = hairColor;
 		FacialMarkings = facialMarkings;
+
 
 		Random rand = new Random();
 		Strength = rand.Next(1, 21);
@@ -37,7 +50,7 @@ public class PlayerData
 		Wisdom = rand.Next(1, 21);
 		Charisma = rand.Next(1, 21);
 
-		if (Race.ToLower() == "twi'lek" || Race.ToLower() == "zabrak" || Race.ToLower() == "togruta")
+		if (Race.ToLower() == "Twilek" || Race.ToLower() == "Zabrak" || Race.ToLower() == "Togruta")
 		{
 			Feature = "Facial Markings";
 		}
@@ -85,8 +98,10 @@ public class PlayerData
 		Charisma = statDictionary["charisma"];
 	}
 	
-	public void DisplayCharacter()
-	{
+
+
+public void DisplayCharacter()
+{
 		Console.WriteLine("\nCharacter Created!");
 		Console.WriteLine($"Name: {Name}");
 		Console.WriteLine($"Class: {Class}");
@@ -103,7 +118,6 @@ public class PlayerData
 		Console.WriteLine($"Charisma: {Charisma}");
 	}
 }
-
 class Program
 {
 	static void Main(string[] args)
@@ -134,7 +148,10 @@ class Program
 			facialMarkings = Console.ReadLine();
 		}
 
-		PlayerData player = new PlayerData(name, characterClass, race, eyeColor, hairColor, facialMarkings);
+		string hair = "", eye = "", pattern = "";
+
+		PlayerData player = new PlayerData(name, characterClass, race, hair, eye, pattern,
+		 new Color(), new Color(), new Color(), new Color());
 		player.RandomizeStats(3, 20);
 		player.DisplayCharacter();
 	}
