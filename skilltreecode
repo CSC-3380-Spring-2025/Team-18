@@ -1,0 +1,145 @@
+using Godot;
+using System.Collections.Generic;
+using Godot.Collections;
+
+public class Skill
+{
+    public string Name;
+    public string Description;
+    public int Cost;
+    public bool Unlocked;
+    public List<string> Prerequisites;
+
+    public Skill(string name, string description, int cost, List<string> prerequisites = null)
+    {
+        Name = name;
+        Description = description;
+        Cost = cost;
+        Unlocked = false;
+        Prerequisites = prerequisites ?? new List<string>();
+    }
+}
+
+public class SkillTree : Control
+{
+    // A dictionary to store our skills.
+    private Dictionary<string, Skill> skills = new Dictionary<string, Skill>();
+    // Starting skill points.
+    private int availableSkillPoints = 3;
+
+    // UI nodes (set these up in your SkillTree.tscn scene)
+    private GridContainer skillContainer;
+    private Label skillPointsLabel;
+
+    public override void _Ready()
+    {
+        // Get the UI nodes from the scene.
+        skillContainer = GetNode<GridContainer>("SkillContainer");
+        skillPointsLabel = GetNode<Label>("SkillPointsLabel");
+
+        // Initialize the skill tree data.
+        InitializeSkills();
+        // Build the UI (create buttons for each skill).
+        BuildSkillTreeUI();
+        // Update the available skill points label.
+        UpdateSkillPointsLabel();
+    }
+
+    private void InitializeSkills()
+    {
+        // Create sample skills. Format: (name, description, cost, prerequisites)
+        skills["Increase Health"] = new Skill("Increase Health", "Increase your maximum health by 10%.", 1);
+        skills["Increase Damage"] = new Skill("Increase Damage", "Increase your damage output by 10%.", 1, new List<string> { "Increase Health" });
+        skills["Unlock Special Ability"] = new Skill("Unlock Special Ability", "Unlock a unique special ability.", 2, new List<string> { "Increase Damage" });
+        skills["Increase Speed"] = new Skill("Increase Speed", "Increase your movement speed by 5%.", 1);
+    }
+
+    private void BuildSkillTreeUI()
+    {
+        // Remove any existing buttons from the container.
+        foreach (Node child in skillContainer.GetChildren())
+        {
+            child.QueueFree();
+        }
+
+        // For each skill, create a button.
+        foreach (var pair in skills)
+        {
+            Skill skill = pair.Value;
+            Button skillButton = new Button();
+            // Use the skill name as the node's Name.
+            skillButton.Name = skill.Name;
+            // Set the button text to include the name, cost, and unlock status.
+            skillButton.Text = $"{skill.Name}\nCost: {skill.Cost}\n{(skill.Unlocked ? "[UNLOCKED]" : "[LOCKED]")}";
+            // Set a minimum size so buttons are uniformly sized.
+            skillButton.RectMinSize = new Vector2(150, 80);
+
+            // Pass the skill name as an argument when the button is pressed.
+            // This is done by connecting the "pressed" signal with the skill name.
+            skillButton.Connect("pressed", new Callable(this, "OnSkillButtonPressed"), new Godot.Collections.Array { skill.Name });
+
+            // Add the button to the GridContainer.
+            skillContainer.AddChild(skillButton);
+        }
+    }
+
+    // This function is called when a skill button is pressed.
+    public void OnSkillButtonPressed(string skillName)
+    {
+        if (!skills.ContainsKey(skillName))
+            return;
+
+        Skill skill = skills[skillName];
+
+        if (skill.Unlocked)
+        {
+            GD.Print(skillName + " is already unlocked.");
+            return;
+        }
+
+        // Check if all prerequisites are unlocked.
+        foreach (string prereq in skill.Prerequisites)
+        {
+            if (!skills.ContainsKey(prereq) || !skills[prereq].Unlocked)
+            {
+                GD.Print("Cannot unlock " + skillName + ". Prerequisite '" + prereq + "' is not unlocked.");
+                return;
+            }
+        }
+
+        // Check if there are enough skill points.
+        if (availableSkillPoints < skill.Cost)
+        {
+            GD.Print("Not enough skill points for " + skillName + ". Cost: " + skill.Cost);
+            return;
+        }
+
+        // Unlock the skill.
+        skill.Unlocked = true;
+        availableSkillPoints -= skill.Cost;
+        GD.Print(skillName + " unlocked!");
+
+        // Update the UI to reflect changes.
+        UpdateSkillTreeUI();
+        UpdateSkillPointsLabel();
+    }
+
+    private void UpdateSkillTreeUI()
+    {
+        // Update the text of each button to show current status.
+        foreach (Button btn in skillContainer.GetChildren())
+        {
+            if (skills.TryGetValue(btn.Name, out Skill skill))
+            {
+                btn.Text = $"{skill.Name}\nCost: {skill.Cost}\n{(skill.Unlocked ? "[UNLOCKED]" : "[LOCKED]")}";
+                // Disable the button if the skill is already unlocked.
+                btn.Disabled = skill.Unlocked;
+            }
+        }
+    }
+
+    private void UpdateSkillPointsLabel()
+    {
+        skillPointsLabel.Text = "Available Skill Points: " + availableSkillPoints;
+    }
+}
