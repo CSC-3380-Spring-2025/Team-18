@@ -80,6 +80,7 @@ public override void _Process(double delta) //called in real time
 		hairBack.Hide();
 		AnimationTurn(pattern, velocity, playerData.Pattern);
 		pattern.SelfModulate = (playerData.FacialMarkings);
+
 		}
 	
 if (velocity.Length() > 0){
