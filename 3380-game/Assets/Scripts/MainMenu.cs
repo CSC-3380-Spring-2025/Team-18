@@ -44,6 +44,10 @@ public partial class MainMenu : CanvasLayer
 	
 	///Creates the functionality of the Play button when pressed
 	public void OnPlayPressed(){
+		// Do not allow playing if the character creator save file has not been created
+		using var file = FileAccess.Open("user://playerSprite0.dat", FileAccess.ModeFlags.Read);
+		if (file is null) return;
+		
 		Visible = false;
 		GetTree().Paused = false;
 		
