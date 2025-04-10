@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using Game.Assets.Scripts;
 using Game.Assets.Scripts.Loading;
 using Game.Assets.Scripts.Saving;
 
@@ -31,7 +32,6 @@ public override void _Ready() //called on start
 	Load();
 	LoadSprite();
 	direction = "front";
-	
 	body = GetNode<AnimatedSprite2D>("Body");
 	head = GetNode<AnimatedSprite2D>("Head");
 	eye = GetNode<AnimatedSprite2D>("Eyes");
@@ -50,7 +50,6 @@ public override void _Process(double delta) //called in real time
 	if (Input.IsActionPressed("move_left")){velocity.X -= 1; direction = "side";}
 	if (Input.IsActionPressed("move_down")){velocity.Y += 1; direction = "front";}
 	if (Input.IsActionPressed("move_up")){velocity.Y -= 1; direction = "back";}
-	
 //movement and animation controls
 	AnimationTurn(body, velocity, bodyType, "body");
 	body.SelfModulate = (playerData.SkinColor);
@@ -149,10 +148,11 @@ public void AnimationTurn(AnimatedSprite2D node, Vector2 velocity, string choice
 public void Load()
 	{   //for some reason once i run the bitch enough times it breaks. for no reason. if that happens to you,
 		//just change the file name to something that hasnt been used yet and it should be fine.
-		using var file = FileAccess.Open("user://playerData2.dat", FileAccess.ModeFlags.Read);
+		using var file = FileAccess.Open("user://playerData_v3.dat", FileAccess.ModeFlags.Read);
 		if (file is not null)
 		{	
 			Position = (Vector2)file.GetVar();
+			playerData.Experience.AddPoints(file.Get32());
 		}
 	}
 
@@ -180,8 +180,9 @@ public void LoadSprite(){
 
 	public void Save()
 	{
-		using var file = FileAccess.Open("user://playerData2.dat", FileAccess.ModeFlags.Write);
+		using var file = FileAccess.Open("user://playerData_v3.dat", FileAccess.ModeFlags.Write);
 		file.StoreVar(Position);
+		file.Store32(playerData.Experience.Points);
 	}
 //end of code <- keep right before final bracket
 }
