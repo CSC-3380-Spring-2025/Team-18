@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Game.Assets.Scripts;
 
 public partial class PlayerData : GodotObject
 {
@@ -16,7 +17,7 @@ public partial class PlayerData : GodotObject
 	public Color EyeColor { get; set; }
 	public Color HairColor { get; set; }
 	public Color FacialMarkings { get; set; }
-
+	public Experience Experience { get; private set; }
 
 
 	public int Strength { get; set; }
@@ -40,7 +41,7 @@ public partial class PlayerData : GodotObject
 		EyeColor = eyeColor;
 		HairColor = hairColor;
 		FacialMarkings = facialMarkings;
-
+		Experience = new Experience();
 
 		Random rand = new Random();
 		Strength = rand.Next(1, 21);
