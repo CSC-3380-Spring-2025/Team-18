@@ -3,20 +3,71 @@ using System;
 public class DiceRoller
 {
     private static readonly Random _random = new Random();
-    
-    public int Roll()
+
+    // Generalized roll method
+    public int Roll(int sides)
     {
-        return _random.Next(1, 21); // Generates a number between 1 and 20 (inclusive)
+        return _random.Next(1, sides + 1); // Inclusive of 1 to sides
     }
+
+    // Individual methods (optional)
+    public int RollD4() => Roll(4);
+    public int RollD6() => Roll(6);
+    public int RollD8() => Roll(8);
+    public int RollD10() => Roll(10);
+    public int RollD12() => Roll(12);
+    public int RollD20() => Roll(20);
 }
 
-// Example usage
 class Program
 {
     static void Main()
     {
         DiceRoller dice = new DiceRoller();
-        Console.WriteLine("Rolling the dice...");
-        Console.WriteLine("You rolled a: " + dice.Roll());
+        bool running = true;
+
+        while (running)
+        {
+            Console.WriteLine("\nChoose a die to roll:");
+            Console.WriteLine("1. d4");
+            Console.WriteLine("2. d6");
+            Console.WriteLine("3. d8");
+            Console.WriteLine("4. d10");
+            Console.WriteLine("5. d12");
+            Console.WriteLine("6. d20");
+            Console.WriteLine("7. Exit");
+            Console.Write("Your choice: ");
+
+            string choice = Console.ReadLine();
+
+            switch (choice)
+            {
+                case "1":
+                    Console.WriteLine("You rolled a d4: " + dice.RollD4());
+                    break;
+                case "2":
+                    Console.WriteLine("You rolled a d6: " + dice.RollD6());
+                    break;
+                case "3":
+                    Console.WriteLine("You rolled a d8: " + dice.RollD8());
+                    break;
+                case "4":
+                    Console.WriteLine("You rolled a d10: " + dice.RollD10());
+                    break;
+                case "5":
+                    Console.WriteLine("You rolled a d12: " + dice.RollD12());
+                    break;
+                case "6":
+                    Console.WriteLine("You rolled a d20: " + dice.RollD20());
+                    break;
+                case "7":
+                    running = false;
+                    Console.WriteLine("Goodbye!");
+                    break;
+                default:
+                    Console.WriteLine("Invalid choice. Please enter a number between 1 and 7.");
+                    break;
+            }
+        }
     }
 }
