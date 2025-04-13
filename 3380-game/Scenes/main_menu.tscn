@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://b048g7jb4l3fh"]
 
-[ext_resource type="Script" path="res://Assets/Scripts/MainMenu.cs" id="1_bhe5c"]
+[ext_resource type="Script" uid="uid://dusqry6v6vy47" path="res://Assets/Scripts/MainMenu.cs" id="1_bhe5c"]
 [ext_resource type="Texture2D" uid="uid://jup4r58ep5bu" path="res://Assets/Images/Main_menu.png" id="2_613f7"]
 [ext_resource type="Texture2D" uid="uid://cv156e2xlyb" path="res://Assets/Images/Buttons/Continue_Off.png" id="4_3dni4"]
 [ext_resource type="Texture2D" uid="uid://df0o3nrf4u536" path="res://Assets/Images/Buttons/Continue_Hover.png" id="5_exodf"]
@@ -18,9 +18,9 @@ follow_viewport_enabled = true
 script = ExtResource("1_bhe5c")
 
 [node name="MainMenu" type="Sprite2D" parent="."]
-light_mask = 0
-position = Vector2(575, 325)
-scale = Vector2(0.359444, 0.359444)
+texture_filter = 1
+position = Vector2(800, 450)
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_613f7")
 
 [node name="Continue" type="TextureButton" parent="MainMenu"]
@@ -37,26 +37,6 @@ shortcut_in_tooltip = false
 texture_normal = ExtResource("4_3dni4")
 texture_pressed = ExtResource("5_exodf")
 texture_hover = ExtResource("5_exodf")
-stretch_mode = 4
-
-[node name="Quit Game" type="TextureButton" parent="MainMenu"]
-offset_left = 172.488
-offset_top = 592.581
-offset_right = 700.488
-offset_bottom = 726.581
-texture_normal = ExtResource("12_m43g4")
-texture_pressed = ExtResource("13_ay8yo")
-texture_hover = ExtResource("13_ay8yo")
-stretch_mode = 4
-
-[node name="Settings" type="TextureButton" parent="MainMenu"]
-offset_left = -225.348
-offset_top = 439.567
-offset_right = -36.3478
-offset_bottom = 487.567
-texture_normal = ExtResource("10_yt4co")
-texture_pressed = ExtResource("11_rca86")
-texture_hover = ExtResource("11_rca86")
 stretch_mode = 4
 
 [node name="New Game" type="TextureButton" parent="MainMenu"]
@@ -79,5 +59,26 @@ texture_pressed = ExtResource("9_lmvht")
 texture_hover = ExtResource("9_lmvht")
 stretch_mode = 4
 
+[node name="Settings" type="TextureButton" parent="MainMenu"]
+offset_left = -225.348
+offset_top = 439.567
+offset_right = 302.652
+offset_bottom = 573.567
+texture_normal = ExtResource("10_yt4co")
+texture_pressed = ExtResource("11_rca86")
+texture_hover = ExtResource("11_rca86")
+stretch_mode = 4
+
+[node name="Quit Game" type="TextureButton" parent="MainMenu"]
+offset_left = 172.488
+offset_top = 592.581
+offset_right = 700.488
+offset_bottom = 726.581
+texture_normal = ExtResource("12_m43g4")
+texture_pressed = ExtResource("13_ay8yo")
+texture_hover = ExtResource("13_ay8yo")
+stretch_mode = 4
+
 [connection signal="pressed" from="MainMenu/Continue" to="." method="OnPlayPressed"]
+[connection signal="pressed" from="MainMenu/New Game" to="." method="OnNewGamePressed"]
 [connection signal="pressed" from="MainMenu/Quit Game" to="." method="OnExitPressed"]

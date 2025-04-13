@@ -1,0 +1,165 @@
+[gd_scene load_steps=3 format=3 uid="uid://ckltea74vko7w"]
+
+[ext_resource type="Script" uid="uid://bwev3ob55cf1b" path="res://Assets/Scripts/Character_Select.cs" id="1_d8uaa"]
+[ext_resource type="PackedScene" uid="uid://m81cq124ltn8" path="res://Scenes/Player.tscn" id="2_clebg"]
+
+[node name="Character_Creation" type="CanvasLayer"]
+
+[node name="Player" parent="." instance=ExtResource("2_clebg")]
+position = Vector2(100, 120)
+
+[node name="Control" type="Control" parent="." node_paths=PackedStringArray("Species", "Hair", "Eye", "Pattern")]
+texture_filter = 5
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_d8uaa")
+Species = NodePath("Species")
+Hair = NodePath("Hair")
+Eye = NodePath("Eye")
+Pattern = NodePath("Pattern")
+
+[node name="Species" type="OptionButton" parent="Control"]
+texture_filter = 5
+layout_mode = 0
+offset_left = 179.0
+offset_top = 17.0
+offset_right = 351.0
+offset_bottom = 58.0
+selected = 0
+allow_reselect = true
+item_count = 4
+popup/item_0/text = "Human"
+popup/item_0/id = 0
+popup/item_1/text = "Togruta"
+popup/item_1/id = 1
+popup/item_2/text = "Twilek"
+popup/item_2/id = 2
+popup/item_3/text = "Pureblood"
+popup/item_3/id = 3
+
+[node name="SkinColor" type="ColorPickerButton" parent="Control/Species"]
+texture_filter = 5
+layout_mode = 0
+offset_left = 183.0
+offset_top = 1.0
+offset_right = 309.0
+offset_bottom = 38.0
+color = Color(1, 1, 1, 1)
+edit_alpha = false
+
+[node name="Hair" type="OptionButton" parent="Control"]
+layout_mode = 0
+offset_left = 185.0
+offset_top = 71.0
+offset_right = 227.0
+offset_bottom = 102.0
+flat = true
+selected = 0
+fit_to_longest_item = false
+allow_reselect = true
+item_count = 7
+popup/item_0/text = "1"
+popup/item_0/id = 1
+popup/item_1/text = "2"
+popup/item_1/id = 2
+popup/item_2/text = "3"
+popup/item_2/id = 3
+popup/item_3/text = "4"
+popup/item_3/id = 4
+popup/item_4/text = "5"
+popup/item_4/id = 5
+popup/item_5/text = "11"
+popup/item_5/id = 5
+popup/item_6/text = "12"
+popup/item_6/id = 6
+
+[node name="HairColor" type="ColorPickerButton" parent="Control/Hair"]
+layout_mode = 0
+offset_left = 71.0
+offset_top = 1.0
+offset_right = 156.0
+offset_bottom = 30.0
+color = Color(1, 1, 1, 1)
+edit_alpha = false
+
+[node name="Eye" type="OptionButton" parent="Control"]
+layout_mode = 0
+offset_left = 185.0
+offset_top = 110.0
+offset_right = 227.0
+offset_bottom = 141.0
+selected = 0
+allow_reselect = true
+item_count = 4
+popup/item_0/text = "1"
+popup/item_0/id = 0
+popup/item_1/text = "2"
+popup/item_1/id = 1
+popup/item_2/text = "3"
+popup/item_2/id = 2
+popup/item_3/text = "4"
+popup/item_3/id = 3
+
+[node name="EyeColor" type="ColorPickerButton" parent="Control/Eye"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.048
+anchor_top = -1.226
+anchor_right = -0.048
+anchor_bottom = -1.226
+offset_left = 74.016
+offset_top = 37.006
+offset_right = 153.016
+offset_bottom = 68.006
+color = Color(1, 1, 1, 1)
+edit_alpha = false
+
+[node name="Pattern" type="OptionButton" parent="Control"]
+layout_mode = 0
+offset_left = 186.0
+offset_top = 153.0
+offset_right = 228.0
+offset_bottom = 184.0
+selected = 0
+allow_reselect = true
+item_count = 1
+popup/item_0/text = "1"
+popup/item_0/id = 0
+
+[node name="PatternColor" type="ColorPickerButton" parent="Control/Pattern"]
+layout_mode = 0
+offset_left = 68.0
+offset_top = 2.0
+offset_right = 151.0
+offset_bottom = 32.0
+color = Color(1, 1, 1, 1)
+edit_alpha = false
+
+[node name="Name" type="TextEdit" parent="Control"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 7.0
+offset_right = 144.0
+offset_bottom = 49.0
+placeholder_text = "Insert Name"
+
+[node name="Confirm" type="CheckBox" parent="Control"]
+layout_mode = 0
+offset_left = 191.0
+offset_top = 214.0
+offset_right = 215.0
+offset_bottom = 238.0
+
+[connection signal="PDat" from="Control" to="Player" method="PDatTaker"]
+[connection signal="item_selected" from="Control/Species" to="Control" method="SpeciesSelect"]
+[connection signal="color_changed" from="Control/Species/SkinColor" to="Control" method="SkinColor"]
+[connection signal="item_selected" from="Control/Hair" to="Control" method="HairSelect"]
+[connection signal="color_changed" from="Control/Hair/HairColor" to="Control" method="HairColor"]
+[connection signal="item_selected" from="Control/Eye" to="Control" method="EyeSelect"]
+[connection signal="color_changed" from="Control/Eye/EyeColor" to="Control" method="EyeColor"]
+[connection signal="item_selected" from="Control/Pattern" to="Control" method="PatternSelect"]
+[connection signal="color_changed" from="Control/Pattern/PatternColor" to="Control" method="PatternColor"]
+[connection signal="text_set" from="Control/Name" to="Control" method="NameSet"]
+[connection signal="pressed" from="Control/Confirm" to="Control" method="Continue"]

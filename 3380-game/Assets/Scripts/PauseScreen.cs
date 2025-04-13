@@ -3,15 +3,21 @@ using System;
 
 public partial class PauseScreen : CanvasLayer
 {
+
+	[Export] private Button resume, quit, inventory, stats, settings;
+
+	private Node currentMenu = null;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready(){
-		//GetNode<Button>("Resume").Pressed += ResumePressed;
-		//GetNode<Button>("Inventory").Pressed += InventoryPressed;
-		//GetNode<Button>("Stats").Pressed += StatsPressed;
-		//GetNode<Button>("Settings").Pressed += SettingsPressed;
-		//GetNode<Button>("Quit").Pressed += QuitPressed;
+		ProcessMode = ProcessModeEnum.Always;
+		
 	}
 	public void ResumePressed(){
+		if(currentMenu != null){
+			currentMenu.QueueFree();
+			currentMenu = null;
+		}
+
 			Visible = false;
 			GetTree().Paused = false;
 			}
@@ -19,6 +25,7 @@ public partial class PauseScreen : CanvasLayer
 		GetTree().Quit();
 	}
 	public void InventoryPressed(){
+
 		SwitchScene("res://Scenes//inventory.tscn");
 	}
 	public void StatsPressed(){
@@ -28,12 +35,24 @@ public partial class PauseScreen : CanvasLayer
 		SwitchScene("res://Scenes//settings.tscn");
 	}
 	private void SwitchScene(string scenePath){
-		//Visible = false;
-		GetTree().Paused = false;
-		GetTree().ChangeSceneToFile(scenePath);
+		if(currentMenu != null){
+			currentMenu.QueueFree();
+			currentMenu = null;
+			return;
+		}
+		PackedScene scene = GD.Load<PackedScene>(scenePath);
+		if(scene != null){
+			currentMenu = scene.Instantiate();
+			GetParent().AddChild(currentMenu);
+		} else { 
+			GD.PrintErr($"Failed to load scene: {scenePath}");
+		}
+		//GetTree().Paused = false;
+		//GetTree().ChangeSceneToFile(scenePath);
 	}
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+
 	}
 }

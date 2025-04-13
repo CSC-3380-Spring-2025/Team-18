@@ -1,66 +1,26 @@
-[gd_scene load_steps=5 format=3 uid="uid://cl7k8exnmsm5a"]
 
-[ext_resource type="Script" path="res://Assets/Scripts/inventory.cs" id="1_c6kt2"]
-[ext_resource type="Texture2D" uid="uid://budpljum5s6ku" path="res://Scenes/Sword.jpg" id="2_7antn"]
-[ext_resource type="Script" path="res://Assets/Scripts/AddItem.cs" id="2_xauye"]
-[ext_resource type="Texture2D" uid="uid://3c5cmd8bc3hd" path="res://Scenes/Arrow.jpg" id="3_tv0vx"]
+[gd_scene load_steps=3 format=3 uid="uid://cd5u01fx4d8v6"]
 
-[node name="Inventory" type="Node2D"]
+[ext_resource type="Texture2D" uid="uid://dwutpj63i31w3" path="res://Assets/Images/3380 Inventory.png" id="1_vnlv7"]
+[ext_resource type="PackedScene" uid="uid://dycymydk1237u" path="res://Scenes/HUD.tscn" id="2_2dgjs"]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="Inventory" type="CanvasLayer"]
 
-[node name="ItemList" type="ItemList" parent="CanvasLayer"]
-offset_right = 253.0
-offset_bottom = 414.0
-allow_rmb_select = true
-allow_search = false
-auto_height = true
-max_columns = 4
-same_column_width = true
-fixed_column_width = 55
-icon_mode = 0
-fixed_icon_size = Vector2i(50, 50)
-script = ExtResource("1_c6kt2")
+[node name="3380Inventory" type="Sprite2D" parent="."]
+texture_filter = 5
+position = Vector2(800, 450)
+texture = ExtResource("1_vnlv7")
 
-[node name="Sword" type="Button" parent="CanvasLayer" node_paths=PackedStringArray("inv")]
-offset_left = 408.0
-offset_top = 3.0
-offset_right = 465.0
-offset_bottom = 34.0
-text = "Sword"
-script = ExtResource("2_xauye")
-inv = NodePath("../ItemList")
-name = "Sword"
-itmIcon = ExtResource("2_7antn")
-maxQty = 1
-qty = 1
+[node name="Label" type="Label" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 81.0
+offset_top = 179.0
+offset_right = -1027.0
+offset_bottom = -446.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Items"
 
-[node name="Arrow +1" type="Button" parent="CanvasLayer" node_paths=PackedStringArray("inv")]
-offset_left = 394.0
-offset_top = 38.0
-offset_right = 472.0
-offset_bottom = 69.0
-text = "Arrow +1
-"
-script = ExtResource("2_xauye")
-inv = NodePath("../ItemList")
-id = 1
-name = "Arrow"
-itmIcon = ExtResource("3_tv0vx")
-maxQty = 10
-qty = 1
-
-[node name="Arrow +3" type="Button" parent="CanvasLayer" node_paths=PackedStringArray("inv")]
-offset_left = 398.0
-offset_top = 77.0
-offset_right = 467.0
-offset_bottom = 108.0
-text = "Arrow 3
-"
-script = ExtResource("2_xauye")
-inv = NodePath("../ItemList")
-id = 1
-name = "Arrow"
-itmIcon = ExtResource("3_tv0vx")
-maxQty = 10
-qty = 3
+[node name="HUD" parent="." instance=ExtResource("2_2dgjs")]
