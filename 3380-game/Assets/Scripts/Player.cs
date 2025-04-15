@@ -4,7 +4,7 @@ using Game.Assets.Scripts;
 using Game.Assets.Scripts.Loading;
 using Game.Assets.Scripts.Saving;
 
-public partial class Player : Area2D
+public partial class Player : Area2D, Loadable, Savable
 {
 	[Export]
 	public int Speed { get; set; } = 200; // How fast the player will move (pixels/sec).
@@ -29,8 +29,8 @@ public partial class Player : Area2D
 public override void _Ready() //called on start
 {
 	screenSize = GetViewportRect().Size;
-	Load();
 	LoadSprite();
+	Load();
 	direction = "front";
 	body = GetNode<AnimatedSprite2D>("Body");
 	head = GetNode<AnimatedSprite2D>("Head");
