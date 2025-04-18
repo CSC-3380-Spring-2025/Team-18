@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using Game.Assets.Scripts.Saving;
 
 public partial class PauseScreen : CanvasLayer
 {
@@ -22,6 +23,19 @@ public partial class PauseScreen : CanvasLayer
 			GetTree().Paused = false;
 			}
 	public void QuitPressed(){
+		foreach (var scene in GetTree().GetRoot().GetChildren())
+		{
+			// Only save nodes in the Main scene, as we do not currently need saving for other nodes
+			if (!scene.Name.Equals("Main")) continue;
+			
+			foreach (var child in scene.GetChildren())
+			{
+				if (child is Savable savable)
+				{
+					savable.Save();
+				}
+			}
+		}
 		GetTree().Quit();
 	}
 	public void InventoryPressed(){
