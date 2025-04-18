@@ -161,5 +161,6 @@ offset_bottom = 238.0
 [connection signal="color_changed" from="Control/Eye/EyeColor" to="Control" method="EyeColor"]
 [connection signal="item_selected" from="Control/Pattern" to="Control" method="PatternSelect"]
 [connection signal="color_changed" from="Control/Pattern/PatternColor" to="Control" method="PatternColor"]
+[connection signal="text_changed" from="Control/Name" to="Control" method="NameTextChanged"]
 [connection signal="text_set" from="Control/Name" to="Control" method="NameSet"]
 [connection signal="pressed" from="Control/Confirm" to="Control" method="Continue"]
