@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Linq;
 using Game.Assets.Scripts;
 using Game.Assets.Scripts.Loading;
 using Game.Assets.Scripts.Saving;
@@ -44,12 +45,14 @@ public override void _Ready() //called on start
 public override void _Process(double delta) //called in real time
 {
 	velocity = Vector2.Zero; // The player's movement vector.
-
+	if (!IsGamePaused())
+	{
+		if (Input.IsActionPressed("move_right")){velocity.X += 1; direction = "side";}
+		if (Input.IsActionPressed("move_left")){velocity.X -= 1; direction = "side";}
+		if (Input.IsActionPressed("move_down")){velocity.Y += 1; direction = "front";}
+		if (Input.IsActionPressed("move_up")){velocity.Y -= 1; direction = "back";}
+	}
 //input handlers
-	if (Input.IsActionPressed("move_right")){velocity.X += 1; direction = "side";}
-	if (Input.IsActionPressed("move_left")){velocity.X -= 1; direction = "side";}
-	if (Input.IsActionPressed("move_down")){velocity.Y += 1; direction = "front";}
-	if (Input.IsActionPressed("move_up")){velocity.Y -= 1; direction = "back";}
 //movement and animation controls
 	AnimationTurn(body, velocity, bodyType, "body");
 	body.SelfModulate = (playerData.SkinColor);
@@ -184,5 +187,7 @@ public void LoadSprite(){
 		file.StoreVar(Position);
 		file.Store32(playerData.Experience.Points);
 	}
+	
+	private bool IsGamePaused() => GetTree().GetRoot().GetChildren().Any(child => child is PauseScreen { Visible: false });
 //end of code <- keep right before final bracket
 }
