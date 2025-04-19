@@ -4,13 +4,8 @@
 [ext_resource type="Script" uid="uid://ct2edhcgm7svx" path="res://Assets/Scripts/Settings.cs" id="1_b5yji"]
 [ext_resource type="PackedScene" uid="uid://dycymydk1237u" path="res://Scenes/HUD.tscn" id="2_8w0oq"]
 
-[node name="Settings" type="Control"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Settings" type="CanvasLayer"]
+process_mode = 3
 script = ExtResource("1_b5yji")
 
 [node name="3380Settings" type="Sprite2D" parent="."]
@@ -21,7 +16,6 @@ texture = ExtResource("1_avrk1")
 [node name="HUD" parent="." instance=ExtResource("2_8w0oq")]
 
 [node name="Quit" type="TextureButton" parent="."]
-layout_mode = 0
 offset_left = 183.0
 offset_top = 608.0
 offset_right = 736.0

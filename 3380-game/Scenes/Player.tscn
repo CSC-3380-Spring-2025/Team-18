@@ -1,4 +1,4 @@
-[gd_scene load_steps=108 format=3 uid="uid://m81cq124ltn8"]
+[gd_scene load_steps=126 format=3 uid="uid://m81cq124ltn8"]
 
 [ext_resource type="Script" uid="uid://dkqs8ewlx432x" path="res://Assets/Scripts/Player.cs" id="1_ovr1q"]
 [ext_resource type="Texture2D" uid="uid://bhp05vupkwq8h" path="res://Assets/Sprites/Hairs/3380 player_hair_long.png" id="2_em26k"]
@@ -41,11 +41,19 @@ region = Rect2(140, 140, 140, 140)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": null
+}],
+"loop": true,
+"name": &"0",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_0foxm")
 }],
 "loop": true,
 "name": &"hair_11_back",
-"speed": 5.0
+"speed": 3.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -53,7 +61,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"hair_11_front",
-"speed": 5.0
+"speed": 3.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -61,7 +69,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"hair_11_side",
-"speed": 5.0
+"speed": 3.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -69,7 +77,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"hair_12_back",
-"speed": 5.0
+"speed": 3.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -77,7 +85,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"hair_12_front",
-"speed": 5.0
+"speed": 3.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -85,7 +93,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"hair_12_side",
-"speed": 5.0
+"speed": 3.0
 }]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7uewn"]
@@ -193,18 +201,6 @@ region = Rect2(0, 0, 140, 140)
 atlas = ExtResource("5_om6ds")
 region = Rect2(420, 0, 140, 140)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ksdu0"]
-atlas = ExtResource("5_om6ds")
-region = Rect2(280, 420, 140, 140)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_p1msq"]
-atlas = ExtResource("5_om6ds")
-region = Rect2(0, 420, 140, 140)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_svrf1"]
-atlas = ExtResource("5_om6ds")
-region = Rect2(420, 420, 140, 140)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_ibt68"]
 atlas = ExtResource("5_om6ds")
 region = Rect2(280, 280, 140, 140)
@@ -241,6 +237,18 @@ region = Rect2(140, 140, 140, 140)
 atlas = ExtResource("5_om6ds")
 region = Rect2(420, 140, 140, 140)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ksdu0"]
+atlas = ExtResource("5_om6ds")
+region = Rect2(280, 420, 140, 140)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p1msq"]
+atlas = ExtResource("5_om6ds")
+region = Rect2(0, 420, 140, 140)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_svrf1"]
+atlas = ExtResource("5_om6ds")
+region = Rect2(420, 420, 140, 140)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_bfpao"]
 animations = [{
 "frames": [{
@@ -265,30 +273,6 @@ animations = [{
 }],
 "loop": true,
 "name": &"Human_side",
-"speed": 3.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ksdu0")
-}],
-"loop": true,
-"name": &"Pureblood_back",
-"speed": 3.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_p1msq")
-}],
-"loop": true,
-"name": &"Pureblood_front",
-"speed": 2.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_svrf1")
-}],
-"loop": true,
-"name": &"Pureblood_side",
 "speed": 3.0
 }, {
 "frames": [{
@@ -347,6 +331,30 @@ animations = [{
 "loop": true,
 "name": &"Twilek_side",
 "speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ksdu0")
+}],
+"loop": true,
+"name": &"Zabrak_back",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p1msq")
+}],
+"loop": true,
+"name": &"Zabrak_front",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_svrf1")
+}],
+"loop": true,
+"name": &"Zabrak_side",
+"speed": 3.0
 }]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sanbu"]
@@ -375,6 +383,46 @@ region = Rect2(420, 0, 140, 140)
 atlas = SubResource("CompressedTexture2D_pu57r")
 region = Rect2(560, 0, 140, 140)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_glx4g"]
+atlas = ExtResource("6_d5rui")
+region = Rect2(280, 140, 140, 140)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_miouo"]
+atlas = ExtResource("6_d5rui")
+region = Rect2(0, 140, 140, 140)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o3h8g"]
+atlas = ExtResource("6_d5rui")
+region = Rect2(140, 140, 140, 140)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1e7my"]
+atlas = ExtResource("6_d5rui")
+region = Rect2(420, 140, 140, 140)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_arntx"]
+atlas = ExtResource("6_d5rui")
+region = Rect2(560, 140, 140, 140)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lslt6"]
+atlas = ExtResource("6_d5rui")
+region = Rect2(280, 280, 140, 140)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ulo2v"]
+atlas = ExtResource("6_d5rui")
+region = Rect2(0, 280, 140, 140)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1iu4k"]
+atlas = ExtResource("6_d5rui")
+region = Rect2(140, 280, 140, 140)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m0x7a"]
+atlas = ExtResource("6_d5rui")
+region = Rect2(420, 280, 140, 140)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5v66d"]
+atlas = ExtResource("6_d5rui")
+region = Rect2(560, 280, 140, 140)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_lvt2d"]
 atlas = ExtResource("7_pl6dk")
 region = Rect2(280, 0, 140, 140)
@@ -391,12 +439,92 @@ region = Rect2(140, 0, 140, 140)
 atlas = ExtResource("7_pl6dk")
 region = Rect2(420, 0, 140, 140)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_x63xi"]
+atlas = ExtResource("7_pl6dk")
+region = Rect2(280, 140, 140, 140)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i2e8t"]
+atlas = ExtResource("7_pl6dk")
+region = Rect2(0, 140, 140, 140)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qidb7"]
+atlas = ExtResource("7_pl6dk")
+region = Rect2(140, 140, 140, 140)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_70hv0"]
+atlas = ExtResource("7_pl6dk")
+region = Rect2(420, 140, 140, 140)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8flut"]
+atlas = ExtResource("7_pl6dk")
+region = Rect2(280, 280, 140, 140)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u7x0b"]
+atlas = ExtResource("7_pl6dk")
+region = Rect2(0, 280, 140, 140)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_utwlt"]
+atlas = ExtResource("7_pl6dk")
+region = Rect2(140, 280, 140, 140)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kih0c"]
+atlas = ExtResource("7_pl6dk")
+region = Rect2(420, 280, 140, 140)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_bi2j6"]
 animations = [{
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": null
+}],
 "loop": true,
 "name": &"0",
-"speed": 5.0
+"speed": 3.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"Human_1_back",
+"speed": 3.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"Human_1_front",
+"speed": 3.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"Human_1_side",
+"speed": 3.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"Human_2_back",
+"speed": 3.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"Human_2_front",
+"speed": 3.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"Human_2_side",
+"speed": 3.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"Human_3_back",
+"speed": 3.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"Human_3_front",
+"speed": 3.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"Human_3_side",
+"speed": 3.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -430,6 +558,66 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_glx4g")
+}],
+"loop": true,
+"name": &"Togruta_2_back",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_miouo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o3h8g")
+}],
+"loop": true,
+"name": &"Togruta_2_front",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1e7my")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_arntx")
+}],
+"loop": true,
+"name": &"Togruta_2_side",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lslt6")
+}],
+"loop": true,
+"name": &"Togruta_3_back",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ulo2v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1iu4k")
+}],
+"loop": true,
+"name": &"Togruta_3_front",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m0x7a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5v66d")
+}],
+"loop": true,
+"name": &"Togruta_3_side",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_lvt2d")
 }],
 "loop": true,
@@ -454,6 +642,105 @@ animations = [{
 "loop": true,
 "name": &"Twilek_1_side",
 "speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x63xi")
+}],
+"loop": true,
+"name": &"Twilek_2_back",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i2e8t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qidb7")
+}],
+"loop": true,
+"name": &"Twilek_2_front",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_70hv0")
+}],
+"loop": true,
+"name": &"Twilek_2_side",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8flut")
+}],
+"loop": true,
+"name": &"Twilek_3_back",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u7x0b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_utwlt")
+}],
+"loop": true,
+"name": &"Twilek_3_front",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kih0c")
+}],
+"loop": true,
+"name": &"Twilek_3_side",
+"speed": 3.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"Zabrak_1_back",
+"speed": 3.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"Zabrak_1_front",
+"speed": 3.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"Zabrak_1_side",
+"speed": 3.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"Zabrak_2_back",
+"speed": 3.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"Zabrak_2_front",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"Zabrak_2_side",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"Zabrak_3_back",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"Zabrak_3_front",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"Zabrak_3_side",
+"speed": 5.0
 }]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_glx4g"]
@@ -543,17 +830,17 @@ region = Rect2(140, 140, 140, 140)
 atlas = ExtResource("51_lejyy")
 region = Rect2(140, 0, 140, 140)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_kl87x"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_l4crq"]
 atlas = ExtResource("51_lejyy")
-region = Rect2(0, 0, 140, 140)
+region = Rect2(0, 280, 140, 140)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4tb0s"]
 atlas = ExtResource("51_lejyy")
 region = Rect2(0, 140, 140, 140)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_l4crq"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_kl87x"]
 atlas = ExtResource("51_lejyy")
-region = Rect2(0, 280, 140, 140)
+region = Rect2(0, 0, 140, 140)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_xbqs7"]
 animations = [{
@@ -720,15 +1007,6 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_kl87x")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_4tb0s")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_l4crq")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_l4crq")
 }, {
 "duration": 1.0,
@@ -736,6 +1014,15 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_kl87x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kl87x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4tb0s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l4crq")
 }],
 "loop": true,
 "name": &"eye_4_side",
@@ -830,11 +1117,19 @@ region = Rect2(140, 560, 140, 140)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": null
+}],
+"loop": true,
+"name": &"0",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_cioc3")
 }],
 "loop": true,
 "name": &"hair_11_back",
-"speed": 5.0
+"speed": 3.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -842,7 +1137,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"hair_11_front",
-"speed": 5.0
+"speed": 3.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -850,7 +1145,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"hair_11_side",
-"speed": 5.0
+"speed": 3.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -858,7 +1153,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"hair_12_back",
-"speed": 5.0
+"speed": 3.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -866,7 +1161,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"hair_12_front",
-"speed": 5.0
+"speed": 3.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -874,7 +1169,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"hair_12_side",
-"speed": 5.0
+"speed": 3.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -882,7 +1177,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"hair_1_back",
-"speed": 5.0
+"speed": 3.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -890,7 +1185,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"hair_1_front",
-"speed": 5.0
+"speed": 3.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -898,7 +1193,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"hair_1_side",
-"speed": 5.0
+"speed": 3.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -906,7 +1201,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"hair_2_back",
-"speed": 5.0
+"speed": 3.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -914,7 +1209,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"hair_2_front",
-"speed": 5.0
+"speed": 3.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -922,7 +1217,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"hair_2_side",
-"speed": 5.0
+"speed": 3.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -930,7 +1225,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"hair_3_back",
-"speed": 5.0
+"speed": 3.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -938,7 +1233,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"hair_3_front",
-"speed": 5.0
+"speed": 3.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -946,7 +1241,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"hair_3_side",
-"speed": 5.0
+"speed": 3.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -954,7 +1249,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"hair_4_back",
-"speed": 5.0
+"speed": 3.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -962,7 +1257,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"hair_4_front",
-"speed": 5.0
+"speed": 3.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -970,7 +1265,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"hair_4_side",
-"speed": 5.0
+"speed": 3.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -978,7 +1273,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"hair_5_back",
-"speed": 5.0
+"speed": 3.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -986,7 +1281,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"hair_5_front",
-"speed": 5.0
+"speed": 3.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -994,51 +1289,48 @@ animations = [{
 }],
 "loop": true,
 "name": &"hair_5_side",
-"speed": 5.0
+"speed": 3.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5h54m"]
-size = Vector2(42, 95)
+size = Vector2(49.5, 97.5)
 
 [node name="Player" type="Area2D"]
 physics_interpolation_mode = 1
 texture_filter = 1
+disable_mode = 2
+collision_layer = 2
+collision_mask = 13
 script = ExtResource("1_ovr1q")
 
 [node name="Hair_Back" type="AnimatedSprite2D" parent="."]
-visible = false
-modulate = Color(0.331592, 0.150814, 0.373527, 1)
 sprite_frames = SubResource("SpriteFrames_wpo1r")
-animation = &"hair_12_front"
+animation = &"0"
 
 [node name="Body" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_g5nao")
-animation = &"body_1_front"
+animation = &"body_1_back"
 
 [node name="Head" type="AnimatedSprite2D" parent="."]
 clip_children = 2
 material = SubResource("ShaderMaterial_lg7rt")
 sprite_frames = SubResource("SpriteFrames_bfpao")
-animation = &"Togruta_front"
+animation = &"Human_front"
 
 [node name="Pattern" type="AnimatedSprite2D" parent="Head"]
 material = SubResource("ShaderMaterial_sanbu")
 sprite_frames = SubResource("SpriteFrames_bi2j6")
-animation = &"Togruta_1_front"
+animation = &"0"
 
 [node name="Eyes" type="AnimatedSprite2D" parent="."]
-modulate = Color(0, 0.388387, 0.388532, 1)
 material = SubResource("ShaderMaterial_glx4g")
 sprite_frames = SubResource("SpriteFrames_xbqs7")
-animation = &"eye_4_front"
+animation = &"eye_1_front"
 
 [node name="Hair" type="AnimatedSprite2D" parent="."]
-visible = false
-modulate = Color(0.214918, 0.17237, 0.306253, 1)
 sprite_frames = SubResource("SpriteFrames_dfueb")
-animation = &"hair_12_front"
+animation = &"0"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(0, 6.5)
+position = Vector2(0, 4.75)
 shape = SubResource("RectangleShape2D_5h54m")
