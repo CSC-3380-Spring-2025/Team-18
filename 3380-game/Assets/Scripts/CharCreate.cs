@@ -46,31 +46,6 @@ public partial class PlayerData : GodotObject
 		EyeColor = eyeColor;
 		HairColor = hairColor;
 		FacialMarkings = facialMarkings;
-<<<<<<< Updated upstream
-		Experience = new Experience();
-
-		Random rand = new Random();
-		Strength = rand.Next(1, 21);
-		Dexterity = rand.Next(1, 21);
-		Intelligence = rand.Next(1, 21);
-		Constitution = rand.Next(1, 21);
-		Wisdom = rand.Next(1, 21);
-		Charisma = rand.Next(1, 21);
-
-		if (Race.ToLower() == "Twilek" || Race.ToLower() == "Zabrak" || Race.ToLower() == "Togruta")
-		{
-			Feature = "Facial Markings";
-		}
-		else if (Race.ToLower() == "human")
-		{
-			Feature = "Hair";
-		}
-		else
-		{
-			Feature = "Unknown";
-		}
-=======
->>>>>>> Stashed changes
 	}
 	// player.RandomizeStats(3, 20);
 

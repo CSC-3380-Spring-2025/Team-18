@@ -68,13 +68,11 @@ public override void _Process(double delta) //called in real time
 	if (Input.IsActionPressed("move_left")){velocity.X -= 1; direction = "side";}
 	if (Input.IsActionPressed("move_down")){velocity.Y += 1; direction = "front";}
 	if (Input.IsActionPressed("move_up")){velocity.Y -= 1; direction = "back";}
-<<<<<<< Updated upstream
-=======
+
 	
 	//if (Input.IsActionPressed("sprint")){Speed = 300;} else {Speed = 150;}
 
 	
->>>>>>> Stashed changes
 //movement and animation controls
 	AnimationTurn(body, velocity, bodyType, "body");
 	body.SelfModulate = (playerData.SkinColor);
@@ -98,11 +96,9 @@ public override void _Process(double delta) //called in real time
 	} else {
 		hair.Hide();
 		hairBack.Hide();
-<<<<<<< Updated upstream
 		AnimationTurn(pattern, velocity, playerData.Pattern);
 		pattern.SelfModulate = (playerData.FacialMarkings);
 
-=======
 		if(playerData.Pattern.ToInt() == 0){
 			pattern.Hide();
 		} else {
@@ -110,7 +106,6 @@ public override void _Process(double delta) //called in real time
 			AnimationTurn(pattern, velocity, playerData.Pattern);
 			pattern.SelfModulate = (playerData.FacialMarkings);
 		}
->>>>>>> Stashed changes
 		}
 	
 if (velocity.Length() > 0){
@@ -228,11 +223,7 @@ public void LoadSprite(){
 	{
 		using var file = FileAccess.Open("user://playerData_v3.dat", FileAccess.ModeFlags.Write);
 		file.StoreVar(Position);
-<<<<<<< Updated upstream
-		file.Store32(playerData.Experience.Points);
-=======
 		SaveStats();
->>>>>>> Stashed changes
 	}
 	
 	public void SaveStats(){
