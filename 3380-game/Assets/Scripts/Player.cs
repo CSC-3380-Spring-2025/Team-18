@@ -43,10 +43,7 @@ public partial class Player : Area2D, Loadable, Savable
 public override void _Ready() //called on start
 {
 	screenSize = GetViewportRect().Size;
-<<<<<<< Updated upstream
 	LoadSprite();
-=======
->>>>>>> Stashed changes
 	Load();
 	direction = "front";
 	body = GetNode<AnimatedSprite2D>("Body");
@@ -174,7 +171,6 @@ public void Load()
 		if (file is not null)
 		{	
 			Position = (Vector2)file.GetVar();
-			playerData.Experience.AddPoints(file.Get32());
 		}
 		LoadSprite();
 		LoadStats();

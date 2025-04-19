@@ -17,8 +17,6 @@ public partial class PlayerData : GodotObject
 	public Color EyeColor { get; set; }
 	public Color HairColor { get; set; }
 	public Color FacialMarkings { get; set; }
-<<<<<<< Updated upstream
-	public Experience Experience { get; private set; }
 
 
 	public int Strength { get; set; }
@@ -28,10 +26,8 @@ public partial class PlayerData : GodotObject
 	public int Wisdom { get; set; }
 	public int Charisma { get; set; }
 
-=======
 
 	
->>>>>>> Stashed changes
 	public PlayerData(string name = "Placeholder", string characterClass = "Null", string race = "Human", 
 	string hair = "1", string eye = "1", string pattern = "0", Color skinColor = new Color(), 
 	Color eyeColor = new Color(), Color hairColor = new Color(), Color facialMarkings = new Color())
