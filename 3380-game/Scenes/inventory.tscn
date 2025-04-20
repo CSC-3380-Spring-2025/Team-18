@@ -1,8 +1,8 @@
-
-[gd_scene load_steps=3 format=3 uid="uid://cd5u01fx4d8v6"]
+[gd_scene load_steps=4 format=3 uid="uid://cd5u01fx4d8v6"]
 
 [ext_resource type="Texture2D" uid="uid://dwutpj63i31w3" path="res://Assets/Images/3380 Inventory.png" id="1_vnlv7"]
 [ext_resource type="PackedScene" uid="uid://dycymydk1237u" path="res://Scenes/HUD.tscn" id="2_2dgjs"]
+[ext_resource type="Script" path="res://Assets/Scripts/inventory.cs" id="3_j14vy"]
 
 [node name="Inventory" type="CanvasLayer"]
 
@@ -24,3 +24,21 @@ grow_vertical = 2
 text = "Items"
 
 [node name="HUD" parent="." instance=ExtResource("2_2dgjs")]
+
+[node name="ItemList" type="ItemList" parent="."]
+anchors_preset = -1
+anchor_right = 0.012
+anchor_bottom = 0.022
+offset_left = 180.0
+offset_top = 185.0
+offset_right = 413.8
+offset_bottom = 579.2
+allow_rmb_select = true
+allow_search = false
+auto_height = true
+max_columns = 4
+same_column_width = true
+fixed_column_width = 55
+icon_mode = 0
+fixed_icon_size = Vector2i(50, 50)
+script = ExtResource("3_j14vy")
