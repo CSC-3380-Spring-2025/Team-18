@@ -1,0 +1,136 @@
+using Godot;
+using System;
+using System.Collections.Generic;
+
+// Singleton to manage all quests
+public class QuestManager {
+    private static QuestManager _instance;
+    public static QuestManager Instance {
+        get {
+            if (_instance == null) {
+                _instance = new QuestManager();
+            }
+            return _instance;
+        }
+    }
+
+    private List<Quest> activeQuests;
+    private List<Quest> completedQuests;
+    private readonly string savePath = "user://quests.json";
+
+    // Load existing save on creation
+    private QuestManager() {
+        activeQuests = new List<Quest>();
+        completedQuests = new List<Quest>();
+        LoadAll();
+    }
+
+    // Add a new quest
+    public void AddQuest(Quest quest) {
+        activeQuests.Add(quest);
+        SaveAll();
+    }
+
+    // Mark one objective done; complete quest if all objectives are done
+    public void CompleteObjective(string questId, int objectiveIndex) {
+        var quest = activeQuests.Find(q => q.Id == questId);
+        if (quest != null && objectiveIndex >= 0 && objectiveIndex < quest.Objectives.Count) {
+            quest.Objectives[objectiveIndex].IsCompleted = true;
+
+            if (quest.Objectives.TrueForAll(o => o.IsCompleted)) {
+                quest.Status = QuestStatus.Completed;
+                activeQuests.Remove(quest);
+                completedQuests.Add(quest);
+            } else {
+                quest.Status = QuestStatus.InProgress;
+            }
+            SaveAll();
+        }
+    }
+
+    public List<Quest> GetActiveQuests()    => new List<Quest>(activeQuests);
+    public List<Quest> GetCompletedQuests() => new List<Quest>(completedQuests);
+
+    // Serialize to JSON and write to disk
+    public void SaveAll() {
+        var root = new Godot.Collections.Dictionary {
+            ["Active"]    = SerializeQuestList(activeQuests),
+            ["Completed"] = SerializeQuestList(completedQuests)
+        };
+        var json = JSON.Print(root);
+        using var f = FileAccess.Open(savePath, FileAccess.ModeFlags.Write);
+        f.StoreString(json);
+    }
+
+    private Godot.Collections.Array SerializeQuestList(List<Quest> list) {
+        var arr = new Godot.Collections.Array();
+        foreach (var q in list) {
+            var d = new Godot.Collections.Dictionary {
+                ["Id"]          = q.Id,
+                ["Title"]       = q.Title,
+                ["Description"] = q.Description,
+                ["Status"]      = q.Status.ToString(),
+                ["Objectives"]  = SerializeObjectives(q.Objectives)
+            };
+            arr.Add(d);
+        }
+        return arr;
+    }
+
+    private Godot.Collections.Array SerializeObjectives(List<Objective> objs) {
+        var arr = new Godot.Collections.Array();
+        foreach (var o in objs) {
+            arr.Add(new Godot.Collections.Dictionary {
+                ["Description"] = o.Description,
+                ["IsCompleted"] = o.IsCompleted
+            });
+        }
+        return arr;
+    }
+
+    // Read JSON from disk and repopulate lists
+    public void LoadAll() {
+        if (!FileAccess.FileExists(savePath)) return;
+        using var f = FileAccess.Open(savePath, FileAccess.ModeFlags.Read);
+        var json = f.GetAsText();
+        var result = JSON.Parse(json);
+        if (result.Error != Error.Ok) {
+            GD.PrintErr("Quest JSON parse error: " + result.ErrorString);
+            return;
+        }
+
+        if (result.Result is not Godot.Collections.Dictionary root) return;
+        activeQuests.Clear();
+        completedQuests.Clear();
+
+        if (root.TryGetValue("Active", out var aVal) && aVal is Godot.Collections.Array aArr)
+            foreach (var item in aArr)
+                if (item is Godot.Collections.Dictionary qd && DeserializeQuest(qd) is Quest qA)
+                    activeQuests.Add(qA);
+
+        if (root.TryGetValue("Completed", out var cVal) && cVal is Godot.Collections.Array cArr)
+            foreach (var item in cArr)
+                if (item is Godot.Collections.Dictionary qd && DeserializeQuest(qd) is Quest qC)
+                    completedQuests.Add(qC);
+    }
+
+    private Quest DeserializeQuest(Godot.Collections.Dictionary qd) {
+        string id   = qd["Id"] as string;
+        string ttl  = qd["Title"] as string;
+        string desc = qd["Description"] as string;
+        var status  = (QuestStatus)Enum.Parse(typeof(QuestStatus), qd["Status"] as string);
+
+        var objs = new List<Objective>();
+        if (qd.TryGetValue("Objectives", out var oVal) && oVal is Godot.Collections.Array oArr)
+            foreach (var oItem in oArr)
+                if (oItem is Godot.Collections.Dictionary od) {
+                    var obj = new Objective(od["Description"] as string) {
+                        IsCompleted = (bool)od["IsCompleted"]
+                    };
+                    objs.Add(obj);
+                }
+
+        var quest = new Quest(id, ttl, desc, objs) { Status = status };
+        return quest;
+    }
+}
