@@ -1,20 +1,209 @@
-[gd_scene load_steps=3 format=3 uid="uid://bja42ccqhpqlr"]
+[gd_scene load_steps=7 format=3 uid="uid://bja42ccqhpqlr"]
 
 [ext_resource type="Texture2D" uid="uid://cbxduelaswpe4" path="res://Assets/Images/3380 Equipment.png" id="1_4hm6e"]
+[ext_resource type="PackedScene" uid="uid://m81cq124ltn8" path="res://Scenes/Player.tscn" id="2_arhw4"]
 [ext_resource type="PackedScene" uid="uid://dycymydk1237u" path="res://Scenes/HUD.tscn" id="2_y2a5c"]
+[ext_resource type="Script" uid="uid://bmoh44hp6guu6" path="res://Assets/Scripts/Equipment.cs" id="3_85gve"]
 
-[node name="Control" type="Control"]
-texture_filter = 5
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[sub_resource type="LabelSettings" id="LabelSettings_uc00j"]
+font_size = 28
+
+[sub_resource type="LabelSettings" id="LabelSettings_arhw4"]
+font_size = 52
+
+[node name="Equipment" type="CanvasLayer"]
+process_mode = 3
+metadata/_edit_lock_ = true
+
+[node name="Icon" type="ColorRect" parent="."]
+clip_children = 2
+light_mask = 1023
+visibility_layer = 13
+offset_left = 102.0
+offset_top = 159.0
+offset_right = 332.0
+offset_bottom = 389.0
+scale = Vector2(1.62309, 1.80651)
+color = Color(0.00392157, 0.188235, 0.321569, 1)
+
+[node name="Player" parent="." instance=ExtResource("2_arhw4")]
+process_mode = 1
+position = Vector2(260, 396)
+scale = Vector2(4.004, 4)
+Speed = 0
 
 [node name="3380Equipment" type="Sprite2D" parent="."]
 top_level = true
 position = Vector2(800, 450)
 texture = ExtResource("1_4hm6e")
+metadata/_edit_lock_ = true
 
 [node name="HUD" parent="." instance=ExtResource("2_y2a5c")]
+process_mode = 3
+metadata/_edit_lock_ = true
+
+[node name="Equipment" type="Control" parent="."]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 0
+offset_left = 800.0
+offset_top = 450.0
+offset_right = 840.0
+offset_bottom = 490.0
+script = ExtResource("3_85gve")
+
+[node name="Equipment Buttons" type="Control" parent="Equipment"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 3.0
+metadata/_edit_lock_ = true
+
+[node name="Augment1" type="TextureButton" parent="Equipment/Equipment Buttons"]
+layout_mode = 0
+offset_left = -382.0
+offset_top = -250.0
+offset_right = -278.0
+offset_bottom = -146.0
+
+[node name="Augment2" type="TextureButton" parent="Equipment/Equipment Buttons"]
+layout_mode = 0
+offset_left = -128.0
+offset_top = -250.0
+offset_right = -24.0
+offset_bottom = -146.0
+
+[node name="Headgear" type="TextureButton" parent="Equipment/Equipment Buttons"]
+layout_mode = 0
+offset_left = -252.0
+offset_top = -250.0
+offset_right = -153.0
+offset_bottom = -153.0
+
+[node name="Arm" type="TextureButton" parent="Equipment/Equipment Buttons"]
+layout_mode = 0
+offset_left = -382.0
+offset_top = -121.0
+offset_right = -285.0
+offset_bottom = -15.0
+
+[node name="Chest" type="TextureButton" parent="Equipment/Equipment Buttons"]
+layout_mode = 0
+offset_left = -263.0
+offset_top = -131.0
+offset_right = -143.0
+offset_bottom = -11.0
+toggle_mode = true
+action_mode = 0
+keep_pressed_outside = true
+
+[node name="Feet" type="TextureButton" parent="Equipment/Equipment Buttons"]
+layout_mode = 0
+offset_left = -121.0
+offset_top = -121.0
+offset_right = -24.0
+offset_bottom = -15.0
+
+[node name="Weapon1" type="TextureButton" parent="Equipment/Equipment Buttons"]
+layout_mode = 0
+offset_left = -128.0
+offset_top = 11.0
+offset_right = -24.0
+offset_bottom = 123.0
+
+[node name="W1 Damage" type="Label" parent="Equipment/Equipment Buttons/Weapon1"]
+layout_mode = 0
+offset_top = 134.0
+offset_right = 95.0
+offset_bottom = 204.0
+text = "0 - 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="W1 Bonus" type="Label" parent="Equipment/Equipment Buttons/Weapon1"]
+layout_mode = 0
+offset_top = 226.0
+offset_right = 90.0
+offset_bottom = 287.0
+text = "+ 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Weapon2" type="TextureButton" parent="Equipment/Equipment Buttons"]
+layout_mode = 0
+offset_left = -382.0
+offset_top = 11.0
+offset_right = -278.0
+offset_bottom = 123.0
+
+[node name="W2 Damage" type="Label" parent="Equipment/Equipment Buttons/Weapon2"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 134.0
+offset_right = 104.0
+offset_bottom = 204.0
+text = "0 - 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="W2 Bonus" type="Label" parent="Equipment/Equipment Buttons/Weapon2"]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 226.0
+offset_right = 103.0
+offset_bottom = 287.0
+text = "+ 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Belt" type="TextureButton" parent="Equipment/Equipment Buttons"]
+layout_mode = 0
+offset_left = -252.0
+offset_top = 38.0
+offset_right = -153.0
+offset_bottom = 123.0
+
+[node name="Current HP" type="Label" parent="Equipment"]
+layout_mode = 0
+offset_left = -639.0
+offset_top = 48.0
+offset_right = -585.0
+offset_bottom = 88.0
+text = "999"
+label_settings = SubResource("LabelSettings_uc00j")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Max HP" type="Label" parent="Equipment"]
+layout_mode = 0
+offset_left = -583.0
+offset_top = 81.0
+offset_right = -529.0
+offset_bottom = 121.0
+text = "999"
+label_settings = SubResource("LabelSettings_uc00j")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Bonus HP" type="Label" parent="Equipment"]
+layout_mode = 0
+offset_left = -633.0
+offset_top = 111.0
+offset_right = -517.0
+offset_bottom = 150.0
+text = "999  /  999"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AC" type="Label" parent="Equipment"]
+layout_mode = 0
+offset_left = -630.0
+offset_top = 165.0
+offset_right = -541.0
+offset_bottom = 273.0
+text = "99"
+label_settings = SubResource("LabelSettings_arhw4")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="Freeze" from="Equipment" to="Player" method="Freezer"]
+[connection signal="PositionSet" from="Equipment" to="Player" method="PositionSetTaker"]

@@ -6,27 +6,50 @@
 [node name="Character_Creation" type="CanvasLayer"]
 
 [node name="Player" parent="." instance=ExtResource("2_clebg")]
-position = Vector2(100, 120)
+position = Vector2(800, 221)
+scale = Vector2(2, 2)
+Speed = 0
 
-[node name="Control" type="Control" parent="." node_paths=PackedStringArray("Species", "Hair", "Eye", "Pattern")]
+[node name="Control" type="Control" parent="." node_paths=PackedStringArray("Species", "Hair", "Eye", "Pattern", "Class", "ClassDescription", "Str", "Dex", "Con", "Int", "Wis", "Cha")]
 texture_filter = 5
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 698.0
+offset_top = 42.0
+offset_right = 738.0
+offset_bottom = 82.0
+scale = Vector2(1.28, 1.28)
 script = ExtResource("1_d8uaa")
 Species = NodePath("Species")
 Hair = NodePath("Hair")
 Eye = NodePath("Eye")
 Pattern = NodePath("Pattern")
+Class = NodePath("Class")
+ClassDescription = NodePath("Class/ClassDescription")
+Str = NodePath("Stat Randomizer/Strength/Stat+Mod-S")
+Dex = NodePath("Stat Randomizer/Dexterity/Stat+Mod-D")
+Con = NodePath("Stat Randomizer/Constituiton/Stat+Mod-Con")
+Int = NodePath("Stat Randomizer/Intelligence/Stat+Mod-Int")
+Wis = NodePath("Stat Randomizer/Wisdom/Stat+Mod-Wis")
+Cha = NodePath("Stat Randomizer/Charisma/Stat+Mod-Cha")
+
+[node name="Color picker label" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 257.031
+offset_top = 19.5313
+offset_right = 393.031
+offset_bottom = 42.5313
+text = "Pick your colors :)"
 
 [node name="Species" type="OptionButton" parent="Control"]
 texture_filter = 5
 layout_mode = 0
-offset_left = 179.0
-offset_top = 17.0
-offset_right = 351.0
-offset_bottom = 58.0
+offset_left = 200.0
+offset_top = 56.25
+offset_right = 293.0
+offset_bottom = 87.25
+flat = true
+alignment = 2
 selected = 0
 allow_reselect = true
 item_count = 4
@@ -36,60 +59,90 @@ popup/item_1/text = "Togruta"
 popup/item_1/id = 1
 popup/item_2/text = "Twilek"
 popup/item_2/id = 2
-popup/item_3/text = "Pureblood"
+popup/item_3/text = "Zabrak"
 popup/item_3/id = 3
+
+[node name="Species label" type="Label" parent="Control/Species"]
+layout_mode = 0
+offset_left = -58.0
+offset_top = 10.0
+offset_right = 32.0
+offset_bottom = 33.0
+scale = Vector2(0.914, 0.8)
+text = "Species"
 
 [node name="SkinColor" type="ColorPickerButton" parent="Control/Species"]
 texture_filter = 5
 layout_mode = 0
-offset_left = 183.0
-offset_top = 1.0
-offset_right = 309.0
-offset_bottom = 38.0
+offset_left = 110.781
+offset_top = 2.0
+offset_right = 189.781
+offset_bottom = 40.0
+scale = Vector2(0.468745, 1)
+flat = true
 color = Color(1, 1, 1, 1)
 edit_alpha = false
 
 [node name="Hair" type="OptionButton" parent="Control"]
 layout_mode = 0
-offset_left = 185.0
-offset_top = 71.0
-offset_right = 227.0
-offset_bottom = 102.0
+offset_left = 242.0
+offset_top = 94.0
+offset_right = 293.0
+offset_bottom = 125.0
 flat = true
+alignment = 2
 selected = 0
-fit_to_longest_item = false
 allow_reselect = true
-item_count = 7
-popup/item_0/text = "1"
-popup/item_0/id = 1
-popup/item_1/text = "2"
-popup/item_1/id = 2
-popup/item_2/text = "3"
-popup/item_2/id = 3
-popup/item_3/text = "4"
-popup/item_3/id = 4
-popup/item_4/text = "5"
-popup/item_4/id = 5
-popup/item_5/text = "11"
+item_count = 8
+popup/item_0/text = "0"
+popup/item_0/id = 0
+popup/item_1/text = "1"
+popup/item_1/id = 1
+popup/item_2/text = "2"
+popup/item_2/id = 2
+popup/item_3/text = "3"
+popup/item_3/id = 3
+popup/item_4/text = "4"
+popup/item_4/id = 4
+popup/item_5/text = "5"
 popup/item_5/id = 5
-popup/item_6/text = "12"
-popup/item_6/id = 6
+popup/item_6/text = "11"
+popup/item_6/id = 5
+popup/item_7/text = "12"
+popup/item_7/id = 6
+
+[node name="HairLabel" type="Label" parent="Control/Hair"]
+layout_mode = 0
+offset_left = -101.563
+offset_top = 4.125
+offset_right = -11.5625
+offset_bottom = 27.125
+scale = Vector2(0.9, 0.9)
+text = "Hair style"
 
 [node name="HairColor" type="ColorPickerButton" parent="Control/Hair"]
-layout_mode = 0
-offset_left = 71.0
-offset_top = 1.0
-offset_right = 156.0
-offset_bottom = 30.0
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.048
+anchor_top = -1.226
+anchor_right = -0.048
+anchor_bottom = -1.226
+offset_left = 71.0418
+offset_top = 37.2872
+offset_right = 150.042
+offset_bottom = 78.2872
+scale = Vector2(0.468745, 1)
+flat = true
 color = Color(1, 1, 1, 1)
 edit_alpha = false
 
 [node name="Eye" type="OptionButton" parent="Control"]
 layout_mode = 0
-offset_left = 185.0
-offset_top = 110.0
-offset_right = 227.0
-offset_bottom = 141.0
+offset_left = 250.781
+offset_top = 132.031
+offset_right = 292.781
+offset_bottom = 163.031
+flat = true
 selected = 0
 allow_reselect = true
 item_count = 4
@@ -102,6 +155,15 @@ popup/item_2/id = 2
 popup/item_3/text = "4"
 popup/item_3/id = 3
 
+[node name="EyeLabel" type="Label" parent="Control/Eye"]
+layout_mode = 0
+offset_left = -107.813
+offset_top = 7.03125
+offset_right = -17.8125
+offset_bottom = 30.0312
+scale = Vector2(0.9, 0.9)
+text = "Eye type"
+
 [node name="EyeColor" type="ColorPickerButton" parent="Control/Eye"]
 layout_mode = 1
 anchors_preset = -1
@@ -109,50 +171,229 @@ anchor_left = -0.048
 anchor_top = -1.226
 anchor_right = -0.048
 anchor_bottom = -1.226
-offset_left = 74.016
-offset_top = 37.006
-offset_right = 153.016
-offset_bottom = 68.006
+offset_left = 62.0161
+offset_top = 36.006
+offset_right = 141.016
+offset_bottom = 78.006
+scale = Vector2(0.468745, 1)
+flat = true
 color = Color(1, 1, 1, 1)
 edit_alpha = false
 
 [node name="Pattern" type="OptionButton" parent="Control"]
 layout_mode = 0
-offset_left = 186.0
-offset_top = 153.0
-offset_right = 228.0
-offset_bottom = 184.0
+offset_left = 250.781
+offset_top = 170.313
+offset_right = 292.781
+offset_bottom = 201.313
+flat = true
 selected = 0
 allow_reselect = true
-item_count = 1
-popup/item_0/text = "1"
+item_count = 4
+popup/item_0/text = "0"
 popup/item_0/id = 0
+popup/item_1/text = "1"
+popup/item_1/id = 1
+popup/item_2/text = "2"
+popup/item_2/id = 2
+popup/item_3/text = "3"
+popup/item_3/id = 3
+
+[node name="pattern Label" type="Label" parent="Control/Pattern"]
+layout_mode = 0
+offset_left = -107.813
+offset_top = 1.5625
+offset_right = -17.8125
+offset_bottom = 24.5625
+scale = Vector2(0.9, 0.9)
+text = "Pattern/
+Tattoo"
 
 [node name="PatternColor" type="ColorPickerButton" parent="Control/Pattern"]
 layout_mode = 0
-offset_left = 68.0
-offset_top = 2.0
-offset_right = 151.0
-offset_bottom = 32.0
+offset_left = 60.0001
+offset_top = -2.0
+offset_right = 139.0
+offset_bottom = 40.0
+scale = Vector2(0.468745, 1)
+flat = true
 color = Color(1, 1, 1, 1)
 edit_alpha = false
 
-[node name="Name" type="TextEdit" parent="Control"]
+[node name="Name" type="LineEdit" parent="Control"]
 layout_mode = 0
-offset_left = 32.0
-offset_top = 7.0
-offset_right = 144.0
-offset_bottom = 49.0
+offset_left = 24.2187
+offset_top = 3.125
+offset_right = 136.219
+offset_bottom = 45.125
 placeholder_text = "Insert Name"
+
+[node name="Class" type="OptionButton" parent="Control"]
+texture_filter = 5
+layout_mode = 0
+offset_left = -169.531
+offset_top = 53.125
+offset_right = -65.5313
+offset_bottom = 94.125
+selected = 0
+allow_reselect = true
+item_count = 5
+popup/item_0/text = "Select a Class"
+popup/item_0/id = 0
+popup/item_1/text = "Guardian"
+popup/item_1/id = 1
+popup/item_2/text = "Sentinel"
+popup/item_2/id = 2
+popup/item_3/text = "Consular"
+popup/item_3/id = 3
+popup/item_4/text = "Ascetic"
+popup/item_4/id = 4
+
+[node name="ClassDescription" type="Label" parent="Control/Class"]
+layout_mode = 0
+offset_left = -353.0
+offset_top = 43.0
+offset_right = 160.0
+offset_bottom = 274.0
+scale = Vector2(0.9, 0.9)
+horizontal_alignment = 2
+autowrap_mode = 3
 
 [node name="Confirm" type="CheckBox" parent="Control"]
 layout_mode = 0
-offset_left = 191.0
-offset_top = 214.0
-offset_right = 215.0
-offset_bottom = 238.0
+offset_left = 32.0313
+offset_top = 486.719
+offset_right = 130.031
+offset_bottom = 517.719
+text = "Confirm?"
 
+[node name="Label5" type="Label" parent="Control/Confirm"]
+layout_mode = 0
+offset_left = -82.0313
+offset_top = 32.0313
+offset_right = 239.969
+offset_bottom = 107.031
+scale = Vector2(0.9, 0.9)
+text = "(This will progress you to the main game.
+Be certain of your choices.)"
+horizontal_alignment = 1
+
+[node name="Stat Randomizer" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 168.75
+offset_top = 242.188
+offset_right = 305.75
+offset_bottom = 273.188
+text = "Randomize Stats"
+
+[node name="Strength" type="Label" parent="Control/Stat Randomizer"]
+layout_mode = 0
+offset_left = -59.375
+offset_top = 36.7188
+offset_right = 20.625
+offset_bottom = 59.7188
+text = "Strength : "
+
+[node name="Stat+Mod-S" type="Label" parent="Control/Stat Randomizer/Strength"]
+layout_mode = 0
+offset_left = 85.9375
+offset_right = 165.938
+offset_bottom = 23.0
+text = "10 (+0)"
+
+[node name="Dexterity" type="Label" parent="Control/Stat Randomizer"]
+layout_mode = 0
+offset_left = -59.375
+offset_top = 64.8438
+offset_right = 20.625
+offset_bottom = 87.8438
+text = "Dexterity : "
+horizontal_alignment = 2
+autowrap_mode = 2
+
+[node name="Stat+Mod-D" type="Label" parent="Control/Stat Randomizer/Dexterity"]
+layout_mode = 0
+offset_left = 85.9375
+offset_top = 2.34375
+offset_right = 165.938
+offset_bottom = 25.3438
+text = "10 (+0)"
+
+[node name="Constituiton" type="Label" parent="Control/Stat Randomizer"]
+layout_mode = 0
+offset_left = -59.375
+offset_top = 92.9688
+offset_right = 20.625
+offset_bottom = 115.969
+text = "Constituion : "
+horizontal_alignment = 2
+autowrap_mode = 2
+
+[node name="Stat+Mod-Con" type="Label" parent="Control/Stat Randomizer/Constituiton"]
+layout_mode = 0
+offset_left = 85.9375
+offset_right = 165.938
+offset_bottom = 23.0
+text = "10 (+0)"
+
+[node name="Intelligence" type="Label" parent="Control/Stat Randomizer"]
+layout_mode = 0
+offset_left = -59.375
+offset_top = 118.75
+offset_right = 20.625
+offset_bottom = 141.75
+text = "Intelligence : "
+horizontal_alignment = 2
+autowrap_mode = 2
+
+[node name="Stat+Mod-Int" type="Label" parent="Control/Stat Randomizer/Intelligence"]
+layout_mode = 0
+offset_left = 85.9375
+offset_top = 2.34375
+offset_right = 165.938
+offset_bottom = 25.3438
+text = "10 (+0)"
+
+[node name="Wisdom" type="Label" parent="Control/Stat Randomizer"]
+layout_mode = 0
+offset_left = -59.375
+offset_top = 142.969
+offset_right = 20.625
+offset_bottom = 165.969
+text = "Wisdom : "
+horizontal_alignment = 2
+autowrap_mode = 2
+
+[node name="Stat+Mod-Wis" type="Label" parent="Control/Stat Randomizer/Wisdom"]
+layout_mode = 0
+offset_left = 85.9375
+offset_top = 2.34375
+offset_right = 165.938
+offset_bottom = 25.3438
+text = "10 (+0)"
+
+[node name="Charisma" type="Label" parent="Control/Stat Randomizer"]
+layout_mode = 0
+offset_left = -59.375
+offset_top = 166.406
+offset_right = 20.625
+offset_bottom = 189.406
+text = "Charisma : "
+horizontal_alignment = 2
+autowrap_mode = 2
+
+[node name="Stat+Mod-Cha" type="Label" parent="Control/Stat Randomizer/Charisma"]
+layout_mode = 0
+offset_left = 85.9375
+offset_top = 1.5625
+offset_right = 165.938
+offset_bottom = 24.5625
+text = "10 (+0)"
+
+[connection signal="Freeze" from="Control" to="Player" method="Freezer"]
 [connection signal="PDat" from="Control" to="Player" method="PDatTaker"]
+[connection signal="PStats" from="Control" to="Player" method="StatTaker"]
+[connection signal="PositionSet" from="Control" to="Player" method="PositionSetTaker"]
 [connection signal="item_selected" from="Control/Species" to="Control" method="SpeciesSelect"]
 [connection signal="color_changed" from="Control/Species/SkinColor" to="Control" method="SkinColor"]
 [connection signal="item_selected" from="Control/Hair" to="Control" method="HairSelect"]
@@ -161,5 +402,8 @@ offset_bottom = 238.0
 [connection signal="color_changed" from="Control/Eye/EyeColor" to="Control" method="EyeColor"]
 [connection signal="item_selected" from="Control/Pattern" to="Control" method="PatternSelect"]
 [connection signal="color_changed" from="Control/Pattern/PatternColor" to="Control" method="PatternColor"]
-[connection signal="text_set" from="Control/Name" to="Control" method="NameSet"]
+[connection signal="text_submitted" from="Control/Name" to="Control" method="NameSet"]
+[connection signal="item_selected" from="Control/Class" to="Control" method="ClassSelect"]
+
 [connection signal="pressed" from="Control/Confirm" to="Control" method="Continue"]
+[connection signal="pressed" from="Control/Stat Randomizer" to="Control" method="Randomizer"]

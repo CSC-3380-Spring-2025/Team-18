@@ -18,7 +18,7 @@ public partial class MainMenu : CanvasLayer
 	///set the visibility of the main menu screen to true, as well as call the GetTree.Paused to pause the game when 'esc' is pressed.
 	public override void _Process(double delta){
 
-		if(Input.IsActionJustPressed("ui_cancel")){
+		if(Input.IsActionJustPressed("ui_cancel") && !Visible){
 			TogglePauseScreen();
 			GetTree().Paused = !GetTree().Paused;
 		}

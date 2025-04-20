@@ -3,13 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://bq761okmjj805" path="res://Assets/Images/Stats-QT.png" id="1_an3q6"]
 [ext_resource type="PackedScene" uid="uid://dycymydk1237u" path="res://Scenes/HUD.tscn" id="2_xtw31"]
 
-[node name="Stats" type="Control"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="Stats" type="CanvasLayer"]
 
 [node name="Stats-qt" type="Sprite2D" parent="."]
 top_level = true
