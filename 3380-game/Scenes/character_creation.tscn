@@ -390,6 +390,14 @@ offset_right = 165.938
 offset_bottom = 24.5625
 text = "10 (+0)"
 
+[node name="Outfit Randomizer" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 325.781
+offset_top = 242.188
+offset_right = 462.781
+offset_bottom = 273.188
+text = "Randomize Outfit"
+
 [connection signal="Freeze" from="Control" to="Player" method="Freezer"]
 [connection signal="PDat" from="Control" to="Player" method="PDatTaker"]
 [connection signal="PStats" from="Control" to="Player" method="StatTaker"]
@@ -404,6 +412,6 @@ text = "10 (+0)"
 [connection signal="color_changed" from="Control/Pattern/PatternColor" to="Control" method="PatternColor"]
 [connection signal="text_submitted" from="Control/Name" to="Control" method="NameSet"]
 [connection signal="item_selected" from="Control/Class" to="Control" method="ClassSelect"]
-
 [connection signal="pressed" from="Control/Confirm" to="Control" method="Continue"]
 [connection signal="pressed" from="Control/Stat Randomizer" to="Control" method="Randomizer"]
+[connection signal="pressed" from="Control/Outfit Randomizer" to="Control" method="RandomizeOutfit"]
