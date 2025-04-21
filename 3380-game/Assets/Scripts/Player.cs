@@ -239,7 +239,7 @@ public void LoadSprite(){
 			
 			file.StoreVar(statHolder);
 	}
-	
-	private bool IsGamePaused() => GetTree().GetRoot().GetChildren().Any(child => child is PauseScreen { Visible: false });
+
+	private bool IsGamePaused() => GetTree().Paused;
 //end of code <- keep right before final bracket
 }
