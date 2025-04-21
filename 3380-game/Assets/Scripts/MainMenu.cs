@@ -19,8 +19,8 @@ public partial class MainMenu : CanvasLayer
 	public override void _Process(double delta){
 
 		if(Input.IsActionJustPressed("ui_cancel") && !Visible){
-			TogglePauseScreen();
 			GetTree().Paused = !GetTree().Paused;
+			TogglePauseScreen();
 		}
 	}
 	
