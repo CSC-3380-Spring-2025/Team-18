@@ -18,7 +18,8 @@ public partial class MainMenu : CanvasLayer
 	///set the visibility of the main menu screen to true, as well as call the GetTree.Paused to pause the game when 'esc' is pressed.
 	public override void _Process(double delta){
 
-		if(Input.IsActionJustPressed("ui_cancel") && !Visible){
+		if(Input.IsActionJustPressed("ui_cancel") && !Visible)
+		{
 			TogglePauseScreen();
 			GetTree().Paused = !GetTree().Paused;
 		}
@@ -76,7 +77,8 @@ public partial class MainMenu : CanvasLayer
 	}
 	
 	//functionality for new game button
-	public void OnNewGamePressed(){
+	public void OnNewGamePressed()
+	{
 		GetTree().ChangeSceneToFile("res://Scenes/character_creation.tscn");
 	}
 	

@@ -162,6 +162,13 @@ public partial class Character_Select : Control
 		EmitSignal(SignalName.PDat, playerData);
 		EmitSignal(SignalName.PStats, stats);
 		Save();
+		foreach (var child in GetTree().GetRoot().GetChildren())
+		{
+			if (child is MainMenu mainMenu)
+			{
+				mainMenu.Visible = false;
+			}
+		}
 		GetTree().ChangeSceneToFile("res://Scenes/main.tscn");
 	}
 
