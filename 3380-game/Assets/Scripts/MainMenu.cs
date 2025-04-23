@@ -21,8 +21,7 @@ public partial class MainMenu : CanvasLayer
 		if(Input.IsActionJustPressed("ui_cancel") && !Visible)
 		{
 			TogglePauseScreen();
-			GetTree().Paused = !GetTree().Paused;
-		}
+ 
 	}
 	
 	private void TogglePauseScreen(){
