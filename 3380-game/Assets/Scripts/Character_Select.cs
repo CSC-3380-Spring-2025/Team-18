@@ -85,9 +85,9 @@ public partial class Character_Select : Control
 		playerData.FacialMarkings = color;
 		EmitSignal(SignalName.PDat, playerData);
 	}
-	public void NameTextChanged(){
-		var textBox = (TextEdit)GetNode("Name");
-		name = textBox.Text;
+	public void NameTextChanged(String newText)
+	{
+		name = newText;
 		playerData.Name = name;
 		EmitSignal(SignalName.PDat, playerData);
 	}
