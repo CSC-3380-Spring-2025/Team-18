@@ -84,8 +84,10 @@ public partial class Character_Select : Control
 		playerData.FacialMarkings = color;
 		EmitSignal(SignalName.PDat, playerData);
 	}
-	public void NameSet(string name){
-		//name = "Placeholder";
+
+	public void NameTextChanged(String newText)
+	{
+		name = newText;
 		playerData.Name = name;
 		EmitSignal(SignalName.PDat, playerData);
 	}
@@ -142,11 +144,38 @@ public partial class Character_Select : Control
 		Cha.SetText(stats.Charisma+ "("+((stats.Charisma - 10)/2)+")");
 	}
 	
+	public void RandomizeOutfit()
+	{
+		var random = new Random();
+		SkinColor(RandomColor());
+		HairColor(RandomColor());
+		EyeColor(RandomColor());
+		PatternColor(RandomColor());
+		HairSelect(random.Next(1, 7));
+		EyeSelect(random.Next(0, 4));
+		PatternSelect(random.Next(0, 4));
+	}
+
+	private Color RandomColor()
+	{
+		var random = new Random();
+		return new Color((float)random.NextDouble(), (float)random.NextDouble(), (float)random.NextDouble());
+	}
+	
 	public void Continue(){
+		if (playerData.Class.Equals("No Input") || playerData.Name.Equals("No Input")) return;
 		EmitSignal(SignalName.PDat, playerData);
 		EmitSignal(SignalName.PStats, stats);
 		SaveLoad SL = new SaveLoad();
 		SL.Save(stats, Position, playerData);
+
+		foreach (var child in GetTree().GetRoot().GetChildren())
+		{
+			if (child is MainMenu mainMenu)
+			{
+				mainMenu.Visible = false;
+			}
+		}
 		GetTree().ChangeSceneToFile("res://Scenes/main.tscn");
 	}
 
