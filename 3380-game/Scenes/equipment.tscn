@@ -13,44 +13,47 @@ font_size = 52
 
 [node name="Equipment" type="CanvasLayer"]
 process_mode = 3
-metadata/_edit_lock_ = true
 
-[node name="Icon" type="ColorRect" parent="."]
+[node name="Equipment" type="Control" parent="." node_paths=PackedStringArray("CurrentHP", "MaxHP", "AC", "levelUp")]
+process_mode = 3
+layout_mode = 3
+anchor_left = 0.512
+anchor_top = 0.522
+anchor_right = 0.512
+anchor_bottom = 0.522
+offset_left = -19.2
+offset_top = -19.8
+offset_right = 20.8
+offset_bottom = 20.2
+script = ExtResource("3_85gve")
+CurrentHP = NodePath("Current HP")
+MaxHP = NodePath("Max HP")
+AC = NodePath("AC")
+levelUp = NodePath("Button")
+
+[node name="Icon" type="ColorRect" parent="Equipment"]
 clip_children = 2
 light_mask = 1023
 visibility_layer = 13
-offset_left = 102.0
-offset_top = 159.0
-offset_right = 332.0
-offset_bottom = 389.0
+layout_mode = 0
+offset_left = -698.0
+offset_top = -291.0
+offset_right = -468.0
+offset_bottom = -61.0
 scale = Vector2(1.62309, 1.80651)
 color = Color(0.00392157, 0.188235, 0.321569, 1)
+metadata/_edit_use_anchors_ = true
 
-[node name="Player" parent="." instance=ExtResource("2_arhw4")]
+[node name="Player" parent="Equipment" instance=ExtResource("2_arhw4")]
 process_mode = 1
-position = Vector2(260, 396)
+position = Vector2(-540, -54)
 scale = Vector2(4.004, 4)
 Speed = 0
 
-[node name="3380Equipment" type="Sprite2D" parent="."]
+[node name="3380Equipment" type="Sprite2D" parent="Equipment"]
 top_level = true
 position = Vector2(800, 450)
 texture = ExtResource("1_4hm6e")
-metadata/_edit_lock_ = true
-
-[node name="HUD" parent="." instance=ExtResource("2_y2a5c")]
-process_mode = 3
-metadata/_edit_lock_ = true
-
-[node name="Equipment" type="Control" parent="."]
-process_mode = 3
-layout_mode = 3
-anchors_preset = 0
-offset_left = 800.0
-offset_top = 450.0
-offset_right = 840.0
-offset_bottom = 490.0
-script = ExtResource("3_85gve")
 
 [node name="Equipment Buttons" type="Control" parent="Equipment"]
 layout_mode = 3
@@ -190,7 +193,7 @@ offset_left = -633.0
 offset_top = 111.0
 offset_right = -517.0
 offset_bottom = 150.0
-text = "999  /  999"
+text = "0  /  0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -205,5 +208,25 @@ label_settings = SubResource("LabelSettings_arhw4")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[connection signal="Freeze" from="Equipment" to="Player" method="Freezer"]
-[connection signal="PositionSet" from="Equipment" to="Player" method="PositionSetTaker"]
+[node name="Button" type="Button" parent="Equipment"]
+layout_mode = 0
+offset_left = 211.0
+offset_top = -153.0
+offset_right = 340.0
+offset_bottom = -74.0
+text = "Level up button
+"
+
+[node name="HUD" parent="Equipment" instance=ExtResource("2_y2a5c")]
+process_mode = 3
+metadata/_edit_lock_ = true
+
+[node name="3380Equipment" type="Sprite2D" parent="."]
+top_level = true
+position = Vector2(800, 450)
+texture = ExtResource("1_4hm6e")
+metadata/_edit_lock_ = true
+
+[connection signal="Freeze" from="Equipment" to="Equipment/Player" method="Freezer"]
+[connection signal="PositionSet" from="Equipment" to="Equipment/Player" method="PositionSetTaker"]
+[connection signal="pressed" from="Equipment/Button" to="Equipment" method="LevelUp"]

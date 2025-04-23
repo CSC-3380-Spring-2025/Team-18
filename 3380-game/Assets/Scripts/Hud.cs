@@ -4,11 +4,11 @@ using System;
 public partial class Hud : Control
 {
 	
-
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		ProcessMode = ProcessModeEnum.Always;
+
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -18,7 +18,6 @@ public partial class Hud : Control
 	
 	public void OnEquipPressed(){
 		GetTree().ChangeSceneToFile("res://Scenes/equipment.tscn");
-		
 	}
 	
 	public void OnInvenPressed(){
@@ -38,8 +37,16 @@ public partial class Hud : Control
 	}
 	public void OnMapPressed(){
 		GetTree().ChangeSceneToFile("res://Scenes/Map.tscn");
+		
 	}
 	public void OnSettingsPressed(){
 		GetTree().ChangeSceneToFile("res://Scenes/settings.tscn");
 	}
+	
+	public void OnResumePressed(){
+		Node node = GetTree().Root.GetChild(-1);
+		node.QueueFree();
+	}
+
+	//end HUD
 }

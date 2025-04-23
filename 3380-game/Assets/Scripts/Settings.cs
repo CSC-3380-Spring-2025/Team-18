@@ -20,7 +20,8 @@ public partial class Settings : CanvasLayer
 		{
 			if (child is Savable savable)
 			{
-				savable.Save();
+				SaveLoad SL = new SaveLoad();
+				SL.Save();
 			}
 		}
 		GetTree().Quit();

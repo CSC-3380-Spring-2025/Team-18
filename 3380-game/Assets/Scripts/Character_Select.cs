@@ -34,7 +34,6 @@ public partial class Character_Select : Control
 		EmitSignal(SignalName.PDat, playerData);
 		EmitSignal(SignalName.PStats, stats);
 		EmitSignal(SignalName.PositionSet, new Vector2(x: (800),y: (220)));
-		EmitSignal(SignalName.Freeze);
 
 	}
 	
@@ -85,9 +84,8 @@ public partial class Character_Select : Control
 		playerData.FacialMarkings = color;
 		EmitSignal(SignalName.PDat, playerData);
 	}
-	public void NameTextChanged(){
-		var textBox = (TextEdit)GetNode("Name");
-		name = textBox.Text;
+	public void NameSet(string name){
+		//name = "Placeholder";
 		playerData.Name = name;
 		EmitSignal(SignalName.PDat, playerData);
 	}
@@ -107,31 +105,35 @@ public partial class Character_Select : Control
 				"Tankiest class. Half-caster, Paladin/Cleric equivalent in DND terms.\n"+
 				"Strength and Charisma++. At first level, 10 Health, 5 powers, 2 force points.\n"+
 				"+2 FP, +2 powers, +10 HP per level.");
+				StatSetter(10,2,5);
 				break;
 			case "Sentinel":
 				ClassDescription.SetText("Sentinel: \n Stealth supremacist, striking hard and fast before bolting out. \n"+
 				". Less Magic than Consular, more than Guardian. Mash up of a bard and a rogue.\n"+
 				"Dexterity and Charisma++. At first level, 8 Health, 7 powers, 3 force points.\n"+
 				"+3 FP, +2 powers, +8 HP per level.");
+				StatSetter(8,3,7);
 				break;
 			case "Ascetic":
 				ClassDescription.SetText("Ascetic: \n Hand-to-hand combat specialist. \n"+
 				"Most versatile class. Least magic, but recovers quicker. Quarter-caster. Monk in DND terms, with a twist.\n"+
 				"Dexterity and Strength++. At first level, 8 Health, 3 powers, 1 force point.\n"+
 				"+1 FP, +2 powers, +8 HP per level.");
+				StatSetter(8,1,3);
 				break;
 			case "Consular":
 				ClassDescription.SetText("Consular: \n Ranged DPS/Support \n"+
 				"Squishiest class, but most Magic. Full-caster. Blend of Sorceror and Wizard.\n"+
-				"Strength and Charisma++. At first level, 6 Health, 9 powers, 4 force points.\n"+
+				"Wisdom and Charisma++. At first level, 6 Health, 9 powers, 4 force points.\n"+
 				"+4 FP, +2 powers, +6 HP per level.");
+				StatSetter(6,4,9);
 				break;
 			}
 		
 	}
 	
 	public void Randomizer(){
-		RandomizeStats(7, 40);
+		RandomizeStats(7, 35);
 		Str.SetText(stats.Strength + "("+((stats.Strength - 10)/2)+")");
 		Dex.SetText(stats.Dexterity+ "("+((stats.Dexterity - 10)/2)+")");
 		Int.SetText(stats.Intelligence+ "("+((stats.Intelligence - 10)/2)+")");
@@ -143,53 +145,19 @@ public partial class Character_Select : Control
 	public void Continue(){
 		EmitSignal(SignalName.PDat, playerData);
 		EmitSignal(SignalName.PStats, stats);
-		Save();
+		SaveLoad SL = new SaveLoad();
+		SL.Save(stats, Position, playerData);
 		GetTree().ChangeSceneToFile("res://Scenes/main.tscn");
 	}
 
-	public void Save(){
-		using var file = FileAccess.Open("user://playerSprite0.dat", FileAccess.ModeFlags.Write);
-		var holder = new Godot.Collections.Array();
-		holder.Add(playerData.Name);
-		holder.Add(playerData.Class);
-		holder.Add(playerData.Race);
-		holder.Add(playerData.Hair);
-		holder.Add(playerData.Eye);
-		holder.Add(playerData.Pattern);
-		holder.Add(playerData.SkinColor);
-		holder.Add(playerData.EyeColor);
-		holder.Add(playerData.HairColor);
-		holder.Add(playerData.FacialMarkings);
-		
-		file.StoreVar(holder, true);
-		SaveStats();
-	}
 
-	public void SaveStats(){
-		using var file = FileAccess.Open("user://playerStats.dat", FileAccess.ModeFlags.Write);
-			var statHolder = new Godot.Collections.Array();
-			statHolder.Add(stats.CharacterClass);
-			statHolder.Add(stats.Level);
-			statHolder.Add(stats.XP);
-			statHolder.Add(stats.MaxHealth);
-			statHolder.Add(stats.CurrentHealth);
-			statHolder.Add(stats.Armor);
-			statHolder.Add(stats.Strength);
-			statHolder.Add(stats.Dexterity);
-			statHolder.Add(stats.Constitution);
-			statHolder.Add(stats.Intelligence);
-			statHolder.Add(stats.Wisdom);
-			statHolder.Add(stats.Charisma);
-		file.StoreVar(statHolder, true);
-	}
 	
 			/// <summary>
 	/// Randomizes the stats for a character given a minimum amount of points per stat and a number of points to distribute
 	/// </summary>
 	/// <param name="minimumPerStat">The minimum number of points each stat should start with</param>
 	/// <param name="points">The total number of points that should be randomly distributed</param>
-public void RandomizeStats(int minimumPerStat, int points)
-	{
+public void RandomizeStats(int minimumPerStat, int points){
 		var statDictionary = new Dictionary<string, int>
 		{
 			{"strength", minimumPerStat},
@@ -215,6 +183,32 @@ public void RandomizeStats(int minimumPerStat, int points)
 		stats.Intelligence = statDictionary["intelligence"];
 		stats.Wisdom = statDictionary["wisdom"];
 		stats.Charisma = statDictionary["charisma"];
+	}
+	
+public void StatSetter(int health, int FP, int powersKnown){
+		stats.MaxHealth = health;
+		stats.CurrentHealth = health;
+		stats.ClassFP = FP;
+		stats.FP = FP;
+		stats.PwrsKnown = powersKnown;
+		EmitSignal(SignalName.PStats, stats);
+
+	}
+	
+	public string StatMod(int stat){
+		string mod;
+		bool positive = false;
+		if(((stat - 10)/2) > 0){
+			positive = true;
+		}
+		
+		if(positive){
+			mod = (" (+ "+((stat-10)/2)+")");
+		} else {
+			mod = (" ("+((stat-10)/2)+")"); 
+			}
+		
+		return mod;
 	}
 	
 //end Character_select

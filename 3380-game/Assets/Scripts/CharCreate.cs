@@ -18,7 +18,6 @@ public partial class PlayerData : GodotObject
 	public Color HairColor { get; set; }
 	public Color FacialMarkings { get; set; }
 
-
 	public int Strength { get; set; }
 	public int Dexterity { get; set; }
 	public int Intelligence { get; set; }
@@ -43,7 +42,6 @@ public partial class PlayerData : GodotObject
 		HairColor = hairColor;
 		FacialMarkings = facialMarkings;
 	}
-	// player.RandomizeStats(3, 20);
 
 	//end PlayerData
 }
