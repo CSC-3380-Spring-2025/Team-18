@@ -140,10 +140,35 @@ public partial class Character_Select : Control
 		Cha.SetText(stats.Charisma+ "("+((stats.Charisma - 10)/2)+")");
 	}
 	
+	public void RandomizeOutfit()
+	{
+		var random = new Random();
+		SkinColor(RandomColor());
+		HairColor(RandomColor());
+		EyeColor(RandomColor());
+		PatternColor(RandomColor());
+		HairSelect(random.Next(1, 7));
+		EyeSelect(random.Next(0, 4));
+		PatternSelect(random.Next(0, 4));
+	}
+
+	private Color RandomColor()
+	{
+		var random = new Random();
+		return new Color((float)random.NextDouble(), (float)random.NextDouble(), (float)random.NextDouble());
+	}
+	
 	public void Continue(){
 		EmitSignal(SignalName.PDat, playerData);
 		EmitSignal(SignalName.PStats, stats);
 		Save();
+		foreach (var child in GetTree().GetRoot().GetChildren())
+		{
+			if (child is MainMenu mainMenu)
+			{
+				mainMenu.Visible = false;
+			}
+		}
 		GetTree().ChangeSceneToFile("res://Scenes/main.tscn");
 	}
 
