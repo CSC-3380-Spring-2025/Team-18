@@ -141,6 +141,7 @@ public partial class Character_Select : Control
 	}
 	
 	public void Continue(){
+		if (playerData.Class.Equals("No Input") || playerData.Name.Equals("No Input")) return;
 		EmitSignal(SignalName.PDat, playerData);
 		EmitSignal(SignalName.PStats, stats);
 		Save();
