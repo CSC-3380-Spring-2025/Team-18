@@ -169,7 +169,7 @@ public partial class Character_Select : Control
 		EmitSignal(SignalName.Freeze);
 		
 		SaveLoad SL = new SaveLoad();
-		SL.Save(stats, Position, playerData);
+		//SL.Save(stats, Position, playerData);
 
 		foreach (var child in GetTree().GetRoot().GetChildren())
 		{

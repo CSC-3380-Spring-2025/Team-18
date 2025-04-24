@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://bakypyj2gb38p"]
 
 [ext_resource type="Texture2D" uid="uid://bp3vwvlkb6trw" path="res://Assets/Images/3380 Settings.png" id="1_avrk1"]
-[ext_resource type="Script" uid="uid://ct2edhcgm7svx" path="res://Assets/Scripts/Settings.cs" id="1_b5yji"]
+[ext_resource type="Script" path="res://Assets/Scripts/Settings.cs" id="1_b5yji"]
 [ext_resource type="PackedScene" uid="uid://dycymydk1237u" path="res://Scenes/HUD.tscn" id="2_8w0oq"]
 
 [node name="Settings" type="CanvasLayer"]

@@ -1,0 +1,83 @@
+[gd_scene load_steps=8 format=3 uid="uid://bmxui3m0y384n"]
+
+[ext_resource type="PackedScene" uid="uid://m81cq124ltn8" path="res://Scenes/Player.tscn" id="1_gpgi0"]
+[ext_resource type="Script" path="res://Scenes/HealthBar.cs" id="2_qylva"]
+[ext_resource type="PackedScene" uid="uid://duajbv36udxmr" path="res://Scenes/Enemy.tscn" id="2_uau57"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kfc0q"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lcu26"]
+bg_color = Color(0.821766, 0, 0.278051, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7tvvc"]
+bg_color = Color(0.103744, 0.103744, 0.103743, 1)
+expand_margin_left = 1.0
+expand_margin_top = 1.0
+expand_margin_right = 1.0
+expand_margin_bottom = 1.0
+shadow_color = Color(0, 0, 0, 0.27451)
+shadow_offset = Vector2(0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xqnup"]
+bg_color = Color(0.796243, 0.796243, 0.796243, 1)
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="Player" parent="." instance=ExtResource("1_gpgi0")]
+position = Vector2(458, 63)
+
+[node name="HealthBar" type="ProgressBar" parent="Player"]
+offset_left = -85.0
+offset_top = 72.0
+offset_right = 155.0
+offset_bottom = 92.0
+theme_override_styles/background = SubResource("StyleBoxEmpty_kfc0q")
+theme_override_styles/fill = SubResource("StyleBoxFlat_lcu26")
+value = 100.0
+show_percentage = false
+script = ExtResource("2_qylva")
+metadata/_edit_use_anchors_ = true
+
+[node name="Timer" type="Timer" parent="Player/HealthBar"]
+wait_time = 0.4
+
+[node name="DamageBar" type="ProgressBar" parent="Player/HealthBar"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_7tvvc")
+theme_override_styles/fill = SubResource("StyleBoxFlat_xqnup")
+value = 100.0
+show_percentage = false
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("2_uau57")]
+position = Vector2(892, 74)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchor_right = 0.751
+anchor_bottom = 0.691
+offset_left = 576.0
+offset_top = 160.0
+offset_right = -389.6
+offset_bottom = -409.9
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -2.432
+anchor_top = -3.0
+anchor_right = 4.216
+anchor_bottom = 9.75
+offset_left = 663.952
+offset_top = 170.0
+offset_right = -864.976
+offset_bottom = -453.0
+tooltip_text = "
+"
+
+[connection signal="timeout" from="Player/HealthBar/Timer" to="Player/HealthBar" method="OnTimerTimeout"]

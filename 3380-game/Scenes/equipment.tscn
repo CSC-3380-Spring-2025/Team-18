@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://cbxduelaswpe4" path="res://Assets/Images/3380 Equipment.png" id="1_4hm6e"]
 [ext_resource type="PackedScene" uid="uid://m81cq124ltn8" path="res://Scenes/Player.tscn" id="2_arhw4"]
 [ext_resource type="PackedScene" uid="uid://dycymydk1237u" path="res://Scenes/HUD.tscn" id="2_y2a5c"]
-[ext_resource type="Script" uid="uid://bmoh44hp6guu6" path="res://Assets/Scripts/Equipment.cs" id="3_85gve"]
+[ext_resource type="Script" path="res://Assets/Scripts/Equipment.cs" id="3_85gve"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_uc00j"]
 font_size = 28
@@ -14,7 +14,7 @@ font_size = 52
 [node name="Equipment" type="CanvasLayer"]
 process_mode = 3
 
-[node name="Equipment" type="Control" parent="." node_paths=PackedStringArray("CurrentHP", "MaxHP", "AC", "levelUp")]
+[node name="Equipment" type="Control" parent="."]
 process_mode = 3
 layout_mode = 3
 anchor_left = 0.512
@@ -26,10 +26,6 @@ offset_top = -19.8
 offset_right = 20.8
 offset_bottom = 20.2
 script = ExtResource("3_85gve")
-CurrentHP = NodePath("Current HP")
-MaxHP = NodePath("Max HP")
-AC = NodePath("AC")
-levelUp = NodePath("Button")
 
 [node name="Icon" type="ColorRect" parent="Equipment"]
 show_behind_parent = true
