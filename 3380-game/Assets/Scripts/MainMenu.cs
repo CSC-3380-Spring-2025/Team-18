@@ -18,30 +18,30 @@ public partial class MainMenu : CanvasLayer
 	///set the visibility of the main menu screen to true, as well as call the GetTree.Paused to pause the game when 'esc' is pressed.
 	public override void _Process(double delta){
 
-
-		if(Input.IsActionJustPressed("ui_cancel") && !Visible)
-		{
-			TogglePauseScreen();
- 
+		//if(Input.IsActionJustPressed("ui_cancel") && !Visible){
+//
+			//GetTree().Paused = !GetTree().Paused;
+			//TogglePauseScreen();
+		//}
 	}
 	
-	private void TogglePauseScreen(){
-		if(pauseScreen == null){
-			PackedScene pauseScene = GD.Load<PackedScene>("res://Scenes//pauseScreen.tscn");
-		if(pauseScene != null){
-			pauseScreen = (PauseScreen)pauseScene.Instantiate();
-			GetParent().AddChild(pauseScreen);
-			pauseScreen.Visible = false;
-		} 
-		else{ 
-			GD.PrintErr("Failed to load PauseScreen");
-			return;
-			}
-		}
-		
-		if(GetTree().Paused){pauseScreen.Visible = true;}
-		if(GetTree().Paused == false){pauseScreen.Visible = false;}
-	}
+	//private void TogglePauseScreen(){
+		//if(pauseScreen == null){
+			//PackedScene pauseScene = GD.Load<PackedScene>("res://Scenes//pauseScreen.tscn");
+		//if(pauseScene != null){
+			//pauseScreen = (PauseScreen)pauseScene.Instantiate();
+			//GetParent().AddChild(pauseScreen);
+			//pauseScreen.Visible = false;
+		//} 
+		//else{ 
+			//GD.PrintErr("Failed to load PauseScreen");
+			//return;
+			//}
+		//}
+		//
+		//if(GetTree().Paused){pauseScreen.Visible = true;}
+		//if(GetTree().Paused == false){pauseScreen.Visible = false;}
+	//}
 	
 	///Creates the functionality of the Play button when pressed
 	public void OnPlayPressed(){

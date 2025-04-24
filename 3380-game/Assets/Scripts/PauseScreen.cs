@@ -4,9 +4,10 @@ using Game.Assets.Scripts.Saving;
 
 public partial class PauseScreen : CanvasLayer
 {
-	private PauseScreen pauseScreen;
+	public PauseScreen pauseScreen;
 
 	[Export] private Button resume, quit, inventory, stats, settings;
+	[Signal] public delegate void SaveEventHandler();
 	
 	private Node currentMenu = null;
 	// Called when the node enters the scene tree for the first time.
@@ -16,7 +17,6 @@ public partial class PauseScreen : CanvasLayer
 	}
 	
 	public override void _Process(double delta){
-		
 		
 		if(Input.IsActionJustPressed("ui_cancel") && !Visible){
 			GetTree().Paused = !GetTree().Paused;
@@ -30,15 +30,13 @@ public partial class PauseScreen : CanvasLayer
 			PackedScene pauseScene = GD.Load<PackedScene>("res://Scenes//pauseScreen.tscn");
 		if(pauseScene != null){
 			pauseScreen = (PauseScreen)pauseScene.Instantiate();
-			GetParent().AddChild(pauseScreen);
-			pauseScreen.Visible = false;
+			GetNode("/root/Main/Screens").AddChild(pauseScreen);
 		} 
 		else{ 
 			GD.PrintErr("Failed to load PauseScreen");
 			return;
 			}
 		}
-		
 		if(GetTree().Paused){pauseScreen.Visible = true;}
 		if(GetTree().Paused == false){pauseScreen.Visible = false;}
 	}
@@ -48,7 +46,6 @@ public partial class PauseScreen : CanvasLayer
 			currentMenu.QueueFree();
 			currentMenu = null;
 		}
-
 			Visible = false;
 			GetTree().Paused = false;
 			}
@@ -65,7 +62,9 @@ public partial class PauseScreen : CanvasLayer
 					savable.Save();
 				}
 			}
+			
 		}
+		EmitSignal(SignalName.Save);
 		GetTree().Quit();
 	}
 	public void InventoryPressed(){
@@ -86,7 +85,8 @@ public partial class PauseScreen : CanvasLayer
 		PackedScene scene = GD.Load<PackedScene>(scenePath);
 		if(scene != null){
 			currentMenu = scene.Instantiate();
-			GetTree().ChangeSceneToFile(scenePath);
+			GetNode("/root/Main/Screens").AddChild(currentMenu);
+			Visible = false;
 		} else { 
 			GD.PrintErr($"Failed to load scene: {scenePath}");
 		}

@@ -3,7 +3,7 @@ using System;
 
 public partial class AddItem : Button
 {
-	[Export] inventory inv; 
+	[Export] Inventory inv; 
 	[Export] int id; 
 	[Export] string name; 
 	[Export] Texture2D itmIcon;

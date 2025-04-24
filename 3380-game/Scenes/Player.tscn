@@ -1293,14 +1293,14 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5h54m"]
-size = Vector2(49.5, 97.5)
+size = Vector2(34, 35)
 
-[node name="Player" type="Area2D"]
+[node name="Player" type="CharacterBody2D"]
 physics_interpolation_mode = 1
 texture_filter = 1
 disable_mode = 2
 collision_layer = 2
-collision_mask = 13
+collision_mask = 253
 script = ExtResource("1_ovr1q")
 
 [node name="Hair_Back" type="AnimatedSprite2D" parent="."]
@@ -1332,5 +1332,5 @@ sprite_frames = SubResource("SpriteFrames_dfueb")
 animation = &"0"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 4.75)
+position = Vector2(0, 36.5)
 shape = SubResource("RectangleShape2D_5h54m")

@@ -5,6 +5,8 @@ using Game.Assets.Scripts.Saving;
 
 public partial class Settings : CanvasLayer
 {
+	[Signal] public delegate void SaveEventHandler();
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -16,14 +18,8 @@ public partial class Settings : CanvasLayer
 	}
 	
 	private void OnQuit(){
-		foreach (var child in GetParent().GetChildren())
-		{
-			if (child is Savable savable)
-			{
-				SaveLoad SL = new SaveLoad();
-				SL.Save();
-			}
-		}
+
+		EmitSignal(SignalName.Save);
 		GetTree().Quit();
 	}
 	

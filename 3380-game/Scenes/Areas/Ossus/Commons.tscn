@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://bd0n83opf2vke"]
+
+[ext_resource type="Texture2D" uid="uid://bt25i3viqls2e" path="res://Assets/Images/Maps/Ossus/commons template.png" id="1_e1d5e"]
+[ext_resource type="Script" uid="uid://cyb4t8nbhyiih" path="res://Assets/Scripts/World.cs" id="1_ub7o3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ub7o3"]
+size = Vector2(64, 108)
+
+[node name="Commons" type="Node"]
+script = ExtResource("1_ub7o3")
+
+[node name="CommonsTemplate" type="Sprite2D" parent="."]
+position = Vector2(-589, -681)
+texture = ExtResource("1_e1d5e")
+
+[node name="Commons" type="Area2D" parent="."]
+position = Vector2(-1387, -547)
+collision_mask = 15
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Commons"]
+position = Vector2(1446, 540)
+shape = SubResource("RectangleShape2D_ub7o3")
+
+[node name="TrainingArea" type="Area2D" parent="."]
+position = Vector2(-1387, -547)
+collision_mask = 15
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TrainingArea"]
+position = Vector2(77, 437)
+shape = SubResource("RectangleShape2D_ub7o3")
+
+[connection signal="body_entered" from="Commons" to="." method="LeaveHouse"]
+[connection signal="body_entered" from="TrainingArea" to="." method="TrainingArea"]

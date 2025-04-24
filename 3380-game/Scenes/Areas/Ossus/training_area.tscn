@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://bqae7vbrfyvsg"]
+
+[ext_resource type="Script" uid="uid://cyb4t8nbhyiih" path="res://Assets/Scripts/World.cs" id="1_p7yfw"]
+[ext_resource type="Texture2D" uid="uid://q4vm8bltipvx" path="res://Assets/Images/Maps/Ossus/training grounds template.png" id="2_8dwyj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p7yfw"]
+size = Vector2(64, 108)
+
+[node name="Training area" type="Node"]
+script = ExtResource("1_p7yfw")
+
+[node name="TrainingGroundsTemplate" type="Sprite2D" parent="."]
+position = Vector2(-1231, -546)
+texture = ExtResource("2_8dwyj")
+
+[node name="Commons" type="Area2D" parent="."]
+position = Vector2(-1387, -547)
+collision_mask = 15
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Commons"]
+position = Vector2(1441, 548)
+shape = SubResource("RectangleShape2D_p7yfw")
+
+[connection signal="body_entered" from="Commons" to="." method="Commons"]
