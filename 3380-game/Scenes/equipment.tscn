@@ -32,9 +32,8 @@ AC = NodePath("AC")
 levelUp = NodePath("Button")
 
 [node name="Icon" type="ColorRect" parent="Equipment"]
-clip_children = 2
+show_behind_parent = true
 light_mask = 1023
-visibility_layer = 13
 layout_mode = 0
 offset_left = -698.0
 offset_top = -291.0
@@ -46,20 +45,19 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Player" parent="Equipment" instance=ExtResource("2_arhw4")]
 process_mode = 1
+visibility_layer = 3
 position = Vector2(-540, -54)
 scale = Vector2(4.004, 4)
 Speed = 0
 
 [node name="3380Equipment" type="Sprite2D" parent="Equipment"]
-top_level = true
-position = Vector2(800, 450)
+visibility_layer = 7
 texture = ExtResource("1_4hm6e")
 
 [node name="Equipment Buttons" type="Control" parent="Equipment"]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 3.0
-metadata/_edit_lock_ = true
 
 [node name="Augment1" type="TextureButton" parent="Equipment/Equipment Buttons"]
 layout_mode = 0
@@ -209,6 +207,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Button" type="Button" parent="Equipment"]
+visible = false
 layout_mode = 0
 offset_left = 211.0
 offset_top = -153.0
@@ -219,13 +218,6 @@ text = "Level up button
 
 [node name="HUD" parent="Equipment" instance=ExtResource("2_y2a5c")]
 process_mode = 3
-metadata/_edit_lock_ = true
-
-[node name="3380Equipment" type="Sprite2D" parent="."]
-top_level = true
-position = Vector2(800, 450)
-texture = ExtResource("1_4hm6e")
-metadata/_edit_lock_ = true
 
 [connection signal="Freeze" from="Equipment" to="Equipment/Player" method="Freezer"]
 [connection signal="PositionSet" from="Equipment" to="Equipment/Player" method="PositionSetTaker"]

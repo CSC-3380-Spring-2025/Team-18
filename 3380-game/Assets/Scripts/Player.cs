@@ -5,85 +5,97 @@ using Game.Assets.Scripts;
 using Game.Assets.Scripts.Loading;
 using Game.Assets.Scripts.Saving;
 
-public partial class Player : Area2D, Savable, Loadable
+public partial class Player : CharacterBody2D, Savable, Loadable
 {
-	[Export]
-	public int Speed { get; set; } = 150; // How fast the player will move (pixels/sec).
-	
+	[Export]public int Speed { get; set; } = 150; // How fast the player will move (pixels/sec).
+	[Export] public Camera2D camera;
 	[Signal]public delegate void HitEventHandler();
 	[Signal] public delegate void DamageEventHandler(int dmgTaken);
-	
+
 	public Vector2 screenSize;
+	public bool Frozen = false;
 	public PlayerData playerData = new PlayerData();
 	public Attributes stats = new Attributes();
 	public string bodyType = "1";
+	public string Location;
 
 	public void PDatTaker(PlayerData PDat){
 		playerData = new PlayerData(PDat.Name, PDat.Class, PDat.Race, PDat.Hair, PDat.Eye, PDat.Pattern,
 		PDat.SkinColor, PDat.EyeColor, PDat.HairColor, PDat.FacialMarkings);
 	}
+	public void CameraChange(){
+		camera.Enabled = true;
+	}
 	
-	
+	public void LocationTaker(string place){
+		Location = place;
+	}
 	public void PositionSetTaker(Vector2 newPos){
 		Position = new Vector2(x: (newPos.X), y: (newPos.Y) );
+		//SetPosition(new Vector2(x: (newPos.X), y: (newPos.Y)) );
+		Save();
 	}
 	
 	public void Freezer(){
-		velocity.X = 0; velocity.Y = 0; Speed = 0;
+		Frozen = !Frozen;
 	}
 //animation variables
 	public AnimatedSprite2D body, head, eye, hair, hairBack, pattern;
-	public Vector2 velocity;
+	public Vector2 Velocity;
 	public string direction;
 	
-public override void _Ready() //called on start
-{
-	screenSize = GetViewportRect().Size;
-	Load();
-	direction = "front";
-	body = GetNode<AnimatedSprite2D>("Body");
-	head = GetNode<AnimatedSprite2D>("Head");
-	eye = GetNode<AnimatedSprite2D>("Eyes");
-	hair = GetNode<AnimatedSprite2D>("Hair");
-	hairBack = GetNode<AnimatedSprite2D>("Hair_Back");
-	pattern = GetNode<AnimatedSprite2D>("Head/Pattern");
+	public override void _Ready() //called on start
+	{
+		screenSize = GetViewportRect().Size;
+		Load();
+		direction = "front";
+		body = GetNode<AnimatedSprite2D>("Body");
+		head = GetNode<AnimatedSprite2D>("Head");
+		eye = GetNode<AnimatedSprite2D>("Eyes");
+		hair = GetNode<AnimatedSprite2D>("Hair");
+		hairBack = GetNode<AnimatedSprite2D>("Hair_Back");
+		pattern = GetNode<AnimatedSprite2D>("Head/Pattern");
+		//end _Ready
+	}
+	public void GetInput()
+	{
+		if (!IsGamePaused() && !Frozen)
+		{Vector2 inputDir = Input.GetVector("move_left", "move_right", "move_up", "move_down");
+		Velocity = inputDir * Speed;}
+	}
 	
-	
-	
-	
-	//end _Ready
-}
+	public override void _PhysicsProcess(double delta)
+	{
+		GetInput();
+		MoveAndCollide(Velocity * (float)delta);
+	}
 
 public override void _Process(double delta) //called in real time
 {
-	velocity = Vector2.Zero; // The player's movement vector.
-	if (!IsGamePaused())
-	{
-		if (Input.IsActionPressed("move_right")){velocity.X += 1; direction = "side";}
-		if (Input.IsActionPressed("move_left")){velocity.X -= 1; direction = "side";}
-		if (Input.IsActionPressed("move_down")){velocity.Y += 1; direction = "front";}
-		if (Input.IsActionPressed("move_up")){velocity.Y -= 1; direction = "back";}
-	}
-//input handlers
-
+//direction handlers
+		if (Input.IsActionPressed("move_right")){direction = "side";}
+		if (Input.IsActionPressed("move_left")){direction = "side";}
+		if (Input.IsActionPressed("move_down")){direction = "front";}
+		if (Input.IsActionPressed("move_up")){direction = "back";}
+	
 //movement and animation controls
-	AnimationTurn(body, velocity, bodyType, "body");
+	AnimationTurn(body, Velocity, bodyType, "body");
 	body.SelfModulate = (playerData.SkinColor);
-	AnimationTurn(head, velocity);
+	AnimationTurn(head, Velocity);
 	head.SelfModulate = (playerData.SkinColor);
-	AnimationTurn(eye, velocity, playerData.Eye, "eye");
+	AnimationTurn(eye, Velocity, playerData.Eye, "eye");
 	eye.SelfModulate = (playerData.EyeColor);
 	eye.Play();
 	
 	if(playerData.Race == "Human" && playerData.Hair != "0"){
 		if(StringExtensions.ToInt(playerData.Hair) > 10){
-			AnimationTurn(hairBack, velocity, playerData.Hair, "hair");
+			AnimationTurn(hairBack, Velocity, playerData.Hair, "hair");
 			hairBack.SelfModulate = (playerData.HairColor);
 			hairBack.Show();
 		} else {
 			hairBack.Hide();
 		}
-		AnimationTurn(hair, velocity, playerData.Hair, "hair");
+		AnimationTurn(hair, Velocity, playerData.Hair, "hair");
 		hair.SelfModulate = (playerData.HairColor);		
 		hair.Show();
 	} else {
@@ -94,13 +106,13 @@ public override void _Process(double delta) //called in real time
 			pattern.Hide();
 		} else {
 			pattern.Show();
-			AnimationTurn(pattern, velocity, playerData.Pattern);
+			AnimationTurn(pattern, Velocity, playerData.Pattern);
 			pattern.SelfModulate = (playerData.FacialMarkings);
 		}
 		}
 	
-	if (velocity.Length() > 0){
-		velocity = velocity.Normalized() * Speed;
+	if (Velocity.Length() > 0){
+		MoveAndSlide();
 		body.Play();
 		head.Play();
 		pattern.Play();
@@ -120,7 +132,7 @@ public override void _Process(double delta) //called in real time
 		hair.Show(); hair.Animation = ("hair_"+playerData.Hair+"_"+direction);} else{hair.Hide(); hair.Animation = "0";}
 	}
 	//actual thing that makes movement work
-	Position += velocity * (float)delta;
+	Position += Velocity * (float)delta;
 	Position = new Vector2(
 	x: (Position.X),
 	y: (Position.Y)
@@ -161,11 +173,11 @@ public void AnimationTurn(AnimatedSprite2D node, Vector2 velocity, string choice
 
 public void Save(){
 	SaveLoad SL = new SaveLoad();
-	SL.Save(stats, Position, playerData);
+	SL.Save(stats, Position, playerData, Location);
 }
 public void Load(){
 	SaveLoad SL = new SaveLoad();
-	SL.Load(stats, Position, playerData);
+	SL.Load(stats, Position, playerData, Location);
 }
 
 	private bool IsGamePaused() => GetTree().Paused;

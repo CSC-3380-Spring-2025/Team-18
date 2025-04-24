@@ -3,12 +3,14 @@ using System;
 
 public partial class Hud : Control
 {
-	
+	private Node currentMenu = null;
+	public Node screens;
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		ProcessMode = ProcessModeEnum.Always;
-
+		screens = GetNode("/root/Main/Screens");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -17,36 +19,49 @@ public partial class Hud : Control
 	}
 	
 	public void OnEquipPressed(){
-		GetTree().ChangeSceneToFile("res://Scenes/equipment.tscn");
+		SwitchScene("res://Scenes/equipment.tscn");
 	}
 	
 	public void OnInvenPressed(){
-		GetTree().ChangeSceneToFile("res://Scenes/inventory.tscn");
+		SwitchScene("res://Scenes/Inventory.tscn");
 	}
 	public void OnStatsPressed(){
-		GetTree().ChangeSceneToFile("res://Scenes/stats.tscn");
+		SwitchScene("res://Scenes/stats.tscn");
 	}
 	public void OnAbilPressed(){
-		GetTree().ChangeSceneToFile("res://Scenes/abilities.tscn");
+		SwitchScene("res://Scenes/abilities.tscn");
 	}
 	public void OnDialogPressed(){
-		GetTree().ChangeSceneToFile("res://Scenes/dialogue.tscn");
+		SwitchScene("res://Scenes/dialogue.tscn");
 	}
 	public void OnQuestPressed(){
-		GetTree().ChangeSceneToFile("res://Scenes/QuestBook.tscn");
+		SwitchScene("res://Scenes/QuestBook.tscn");
 	}
 	public void OnMapPressed(){
-		GetTree().ChangeSceneToFile("res://Scenes/Map.tscn");
+		SwitchScene("res://Scenes/Map.tscn");
 		
 	}
 	public void OnSettingsPressed(){
-		GetTree().ChangeSceneToFile("res://Scenes/settings.tscn");
+		SwitchScene("res://Scenes/settings.tscn");
 	}
 	
 	public void OnResumePressed(){
-		Node node = GetTree().Root.GetChild(-1);
+		Node node = GetNode("/root/Main/Screens").GetChild(-1);
 		node.QueueFree();
 	}
 
+public void SwitchScene(string scenePath){
+
+		screens.RemoveChild(screens.GetChild(-1));
+		
+		PackedScene scene = GD.Load<PackedScene>(scenePath);
+		if(scene != null){
+			currentMenu = scene.Instantiate();
+			screens.AddChild(currentMenu);
+		} else { 
+			GD.PrintErr($"Failed to load scene: {scenePath}");
+		}
+		
+	}
 	//end HUD
 }

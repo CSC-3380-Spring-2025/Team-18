@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class inventory : ItemList
+public partial class Inventory : ItemList
 {
 	[Export] int inventorySize = 60;
 	[Export] Texture2D blankIcon;

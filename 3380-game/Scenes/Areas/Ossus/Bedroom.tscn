@@ -1,0 +1,45 @@
+[gd_scene load_steps=6 format=3 uid="uid://rbpl4w2tdyw8"]
+
+[ext_resource type="Script" uid="uid://cyb4t8nbhyiih" path="res://Assets/Scripts/World.cs" id="1_7k0p0"]
+[ext_resource type="Texture2D" uid="uid://c0mxdqbfjmxl2" path="res://Assets/Images/Maps/Base.png" id="1_nvpa3"]
+[ext_resource type="Texture2D" uid="uid://cdqysvhcsdb1l" path="res://Assets/Images/Maps/Ossus/bedroom template.png" id="2_7k0p0"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_o07qx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nvpa3"]
+size = Vector2(100.5, 96)
+
+[node name="Bedroom" type="Node"]
+script = ExtResource("1_7k0p0")
+
+[node name="Grid" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("1_nvpa3")
+
+[node name="BedroomTemplate" type="Sprite2D" parent="."]
+position = Vector2(33, 125)
+texture = ExtResource("2_7k0p0")
+
+[node name="Polygon2D" type="Polygon2D" parent="BedroomTemplate"]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-76, -156, -279, -152, -277, -102, -327, -102, -328, 202, -280, 202, -279, 303, 226, 304, 228, 254, 279, 254, 279, 200, 328, 203, 329, -151, 22, -154, 17, -245, -67, -245, -80, -791, 1159, -801, 1168, 757, -833, 740, -900, -787, -86, -796, -55, -236)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="BedroomTemplate"]
+position = Vector2(-75, -100)
+disable_mode = 1
+physics_material_override = SubResource("PhysicsMaterial_o07qx")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="BedroomTemplate/StaticBody2D"]
+position = Vector2(76, 101)
+build_mode = 1
+polygon = PackedVector2Array(-125, -150, -125, -100, -275, -100, -275, 50, -326, 50, -326, 157, -283, 157, -283, 191, -318, 191, -318, 157, -326, 157, -326, 200, -226, 200, -225, 250, -125, 250, -125, 299, -75, 299, -75, 216, -75, 199, 175, 199, 175, 299, 225, 299, 225, 250, 275, 250, 275, 99, 326, 99, 326, -50, 274, -50, 275, -100, 175, -100, 175, -91, 216, -91, 216, -91, 216, -59, 184, -59, 184, -91, 175, -91, 175, -50, 125, -50, 125, -151, 31, -151, 30, -252, 381, -241, 350, 66, 378, 312, 67, 338, -348, 324, -362, 66, -427, -231, -224, -295, 12, -314, 18, -257, -81, -257, -81, -151)
+
+[node name="MoveArea" type="Area2D" parent="."]
+position = Vector2(-1, 2)
+collision_mask = 15
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MoveArea"]
+position = Vector2(10, -80)
+shape = SubResource("RectangleShape2D_nvpa3")
+
+[connection signal="body_entered" from="MoveArea" to="." method="LeaveHouse"]

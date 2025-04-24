@@ -1,0 +1,80 @@
+[gd_scene load_steps=7 format=3 uid="uid://bomh5cdpqnhdp"]
+
+[ext_resource type="Script" uid="uid://cyb4t8nbhyiih" path="res://Assets/Scripts/World.cs" id="1_37qrq"]
+[ext_resource type="Texture2D" uid="uid://b23w5ov1uh4h5" path="res://Assets/Images/Maps/Ossus/housing area template.png" id="2_khy1m"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ysfs7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ymkvi"]
+size = Vector2(125.5, 100)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3a2nx"]
+size = Vector2(125, 124)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_37qrq"]
+size = Vector2(69, 69)
+
+[node name="Housing" type="Node"]
+script = ExtResource("1_37qrq")
+
+[node name="HousingAreaTemplate" type="Sprite2D" parent="."]
+position = Vector2(-616, -332)
+texture = ExtResource("2_khy1m")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="HousingAreaTemplate"]
+position = Vector2(-75, -100)
+disable_mode = 1
+physics_material_override = SubResource("PhysicsMaterial_ysfs7")
+
+[node name="outside" type="CollisionPolygon2D" parent="HousingAreaTemplate/StaticBody2D"]
+position = Vector2(76, 101)
+build_mode = 1
+polygon = PackedVector2Array(428, 352, 428, 402, 51, 400, 51, 323, -55, 323, -55, 402, -330, 402, -332, 350, -351, 350, -351, 249, -451, 250, -450, 349, -527, 349, -528, 300, -579, 301, -577, 202, -665, 202, -676, 199, -678, 150, -602, 150, -601, 23, -728, 22, -728, -126, -809, -123, -804, -203, -728, -201, -728, -256, -678, -254, -676, -354, -577, -354, -578, -404, 527, -403, 527, -354, 677, -353, 676, -303, 726, -303, 728, -255, 777, -254, 777, 302, 727, 302, 727, 349, 672, 351, 675, 421, 574, 426, 575, 350, 435, 352, 481, 628, 959, 450, 914, -629, -965, -614, -848, 433, 414, 478, 438, 380, 435, 352)
+
+[node name="house" type="CollisionShape2D" parent="HousingAreaTemplate/StaticBody2D"]
+position = Vector2(-387.75, -226)
+shape = SubResource("RectangleShape2D_ymkvi")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="HousingAreaTemplate/StaticBody2D"]
+position = Vector2(-140, -200)
+shape = SubResource("RectangleShape2D_ymkvi")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="HousingAreaTemplate/StaticBody2D"]
+position = Vector2(813, 224)
+shape = SubResource("RectangleShape2D_ymkvi")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="HousingAreaTemplate/StaticBody2D"]
+position = Vector2(712.5, -88)
+shape = SubResource("RectangleShape2D_3a2nx")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="HousingAreaTemplate/StaticBody2D"]
+position = Vector2(500, -225)
+scale = Vector2(0.8, 0.8)
+shape = SubResource("RectangleShape2D_3a2nx")
+
+[node name="fountain" type="CollisionPolygon2D" parent="HousingAreaTemplate/StaticBody2D"]
+position = Vector2(75, 100)
+build_mode = 1
+polygon = PackedVector2Array(-50, 25, -25, 25, -25, 50, 0, 50, 0, 75, 125, 75, 125, 50, 150, 50, 150, 25, 175, 25, 175, -101, 150, -100, 150, -125, 125, -125, 125, -150, 0, -150, 0, -125, -25, -125, -25, -100, -50, -100)
+
+[node name="home" type="Area2D" parent="HousingAreaTemplate"]
+collision_mask = 15
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HousingAreaTemplate/home"]
+position = Vector2(619, 386)
+shape = SubResource("RectangleShape2D_37qrq")
+
+[node name="Commons" type="Area2D" parent="HousingAreaTemplate"]
+position = Vector2(-1387, -547)
+collision_mask = 15
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HousingAreaTemplate/Commons"]
+position = Vector2(628, 387)
+shape = SubResource("RectangleShape2D_37qrq")
+
+[node name="outside" type="Polygon2D" parent="HousingAreaTemplate"]
+position = Vector2(1, 1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(428, 352, 428, 402, 51, 400, 53, 426, -55, 428, -55, 402, -330, 402, -332, 350, -351, 350, -366, 352, -401, 353, -450, 349, -527, 349, -528, 300, -579, 301, -577, 202, -665, 202, -680, 202, -678, 150, -728, 152, -728, 32, -728, 22, -728, -126, -777, -126, -776, -201, -728, -201, -728, -256, -678, -254, -676, -354, -577, -354, -578, -404, 527, -403, 527, -354, 677, -353, 676, -303, 726, -303, 728, -255, 777, -254, 777, 302, 727, 302, 727, 349, 672, 351, 672, 399, 575, 399, 575, 350, 435, 352, 666, 709, 1437, 761, 1168, -930, -1023, -810, -1035, 769, 694, 749, 454, 381, 435, 352)
+
+[connection signal="body_entered" from="HousingAreaTemplate/home" to="." method="GoHomeP"]

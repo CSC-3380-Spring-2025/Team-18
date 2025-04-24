@@ -166,6 +166,8 @@ public partial class Character_Select : Control
 		if (playerData.Class.Equals("No Input") || playerData.Name.Equals("No Input")) return;
 		EmitSignal(SignalName.PDat, playerData);
 		EmitSignal(SignalName.PStats, stats);
+		EmitSignal(SignalName.Freeze);
+		
 		SaveLoad SL = new SaveLoad();
 		SL.Save(stats, Position, playerData);
 
@@ -176,7 +178,9 @@ public partial class Character_Select : Control
 				mainMenu.Visible = false;
 			}
 		}
-		GetTree().ChangeSceneToFile("res://Scenes/main.tscn");
+
+		SL.Save(stats, Position, playerData, "res://Scenes/story.tscn");
+		GetTree().ChangeSceneToFile("res://Scenes/story.tscn");
 	}
 
 

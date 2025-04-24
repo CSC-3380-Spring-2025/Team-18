@@ -10,6 +10,7 @@ public partial class SaveLoad : Node, Savable, Loadable
 	public PlayerData playerData;
 	public Attributes stats;
 	public Vector2 Position;
+	public string Location;
 	
 	public void Save(){
 		
@@ -17,23 +18,28 @@ public partial class SaveLoad : Node, Savable, Loadable
 	public void Load(){
 		
 	}
-	public void Save(Attributes stats, Vector2 Position, PlayerData playerData)
+	public void Save(Attributes stats, Vector2 Position, PlayerData playerData, String Location)
 	{
 		SaveStats(stats);
 		SaveSprite(playerData);
 		using var file = FileAccess.Open("user://playerData_v3.dat", FileAccess.ModeFlags.Write);
-		file.StoreVar(Position);
-		file.Store32(stats.XP.Points);
+		var holder = new Godot.Collections.Array();
+		holder.Add(Position.X);
+		holder.Add(Position.Y);
+		holder.Add(Location);
+		file.StoreVar(holder);
 	}
 	
-	public void Load(Attributes stats, Vector2 Position, PlayerData playerData)
+	public void Load(Attributes stats, Vector2 Position, PlayerData playerData, String Location)
 	{   //for some reason once i run the bitch enough times it breaks. for no reason. if that happens to you,
 		//just change the file name to something that hasnt been used yet and it should be fine.
 		using var file = FileAccess.Open("user://playerData_v3.dat", FileAccess.ModeFlags.Read);
 		if (file is not null)
 		{	
-			Position = (Vector2)file.GetVar();
-			stats.XP.AddPoints(file.Get32());
+			var holder = file.GetVar(true).As<Godot.Collections.Array>();
+			Position = new Vector2(holder[0].As<int>(),holder[1].As<int>());
+			Location = holder[2].AsString();
+			GD.Print(Location);
 		}
 		LoadSprite(playerData);
 		LoadStats(stats);
@@ -70,9 +76,8 @@ public partial class SaveLoad : Node, Savable, Loadable
 			playerData.EyeColor= holder[7].As<Color>();
 			playerData.HairColor= holder[8].As<Color>();
 			playerData.FacialMarkings= holder[9].As<Color>();
-
+		}
 	}
-}
 	public void SaveStats(Attributes stats){
 		using var file = FileAccess.Open("user://playerStats.dat", FileAccess.ModeFlags.Write);
 			var statHolder = new Godot.Collections.Array();
@@ -105,7 +110,7 @@ public void LoadStats(Attributes stats){
 			
 			stats.CharacterClass = statsHolder[0].AsString();
 			stats.Level = statsHolder[1].As<int>();
-//			stats.XP= statsHolder[2].As<int>();
+			stats.XP.AddPoints(statsHolder[2].As<uint>());
 			
 			stats.MaxHealth = statsHolder[3].As<int>();
 			stats.CurrentHealth = statsHolder[4].As<int>();
