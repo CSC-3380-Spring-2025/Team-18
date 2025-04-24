@@ -5,9 +5,18 @@
 [node name="HUD" type="Control"]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
 script = ExtResource("1_bjag5")
+
+[node name="Resume" type="Button" parent="."]
+top_level = true
+layout_mode = 0
+offset_left = 789.0
+offset_top = 117.0
+offset_right = 806.0
+offset_bottom = 148.0
+scale = Vector2(1.25, 1.25)
+text = "ll"
+flat = true
 
 [node name="Equipment" type="TextureButton" parent="."]
 layout_mode = 0
@@ -65,6 +74,7 @@ offset_top = 78.0
 offset_right = 1435.0
 offset_bottom = 151.0
 
+[connection signal="pressed" from="Resume" to="." method="OnResumePressed"]
 [connection signal="pressed" from="Equipment" to="." method="OnEquipPressed"]
 [connection signal="pressed" from="Inventory" to="." method="OnInvenPressed"]
 [connection signal="pressed" from="Stats" to="." method="OnStatsPressed"]

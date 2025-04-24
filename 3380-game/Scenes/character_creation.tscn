@@ -390,6 +390,15 @@ offset_right = 165.938
 offset_bottom = 24.5625
 text = "10 (+0)"
 
+[node name="ItemList" type="ItemList" parent="Control"]
+layout_mode = 0
+offset_left = 380.0
+offset_top = 273.0
+offset_right = 612.0
+offset_bottom = 441.0
+select_mode = 2
+allow_reselect = true
+
 [node name="Outfit Randomizer" type="Button" parent="Control"]
 layout_mode = 0
 offset_left = 325.781

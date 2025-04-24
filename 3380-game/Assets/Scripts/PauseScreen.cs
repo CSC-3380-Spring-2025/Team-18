@@ -4,15 +4,45 @@ using Game.Assets.Scripts.Saving;
 
 public partial class PauseScreen : CanvasLayer
 {
+	private PauseScreen pauseScreen;
 
 	[Export] private Button resume, quit, inventory, stats, settings;
-
+	
 	private Node currentMenu = null;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready(){
 		ProcessMode = ProcessModeEnum.Always;
 		
 	}
+	
+	public override void _Process(double delta){
+		
+		
+		if(Input.IsActionJustPressed("ui_cancel") && !Visible){
+			GetTree().Paused = !GetTree().Paused;
+			TogglePauseScreen();
+		}
+		
+	}
+	
+	private void TogglePauseScreen(){
+		if(pauseScreen == null){
+			PackedScene pauseScene = GD.Load<PackedScene>("res://Scenes//pauseScreen.tscn");
+		if(pauseScene != null){
+			pauseScreen = (PauseScreen)pauseScene.Instantiate();
+			GetParent().AddChild(pauseScreen);
+			pauseScreen.Visible = false;
+		} 
+		else{ 
+			GD.PrintErr("Failed to load PauseScreen");
+			return;
+			}
+		}
+		
+		if(GetTree().Paused){pauseScreen.Visible = true;}
+		if(GetTree().Paused == false){pauseScreen.Visible = false;}
+	}
+	
 	public void ResumePressed(){
 		if(currentMenu != null){
 			currentMenu.QueueFree();
@@ -39,7 +69,6 @@ public partial class PauseScreen : CanvasLayer
 		GetTree().Quit();
 	}
 	public void InventoryPressed(){
-
 		SwitchScene("res://Scenes//inventory.tscn");
 	}
 	public void StatsPressed(){
@@ -57,16 +86,11 @@ public partial class PauseScreen : CanvasLayer
 		PackedScene scene = GD.Load<PackedScene>(scenePath);
 		if(scene != null){
 			currentMenu = scene.Instantiate();
-			GetParent().AddChild(currentMenu);
+			GetTree().ChangeSceneToFile(scenePath);
 		} else { 
 			GD.PrintErr($"Failed to load scene: {scenePath}");
 		}
-		//GetTree().Paused = false;
-		//GetTree().ChangeSceneToFile(scenePath);
+		
 	}
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
 
-	}
 }

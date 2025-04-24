@@ -16,10 +16,12 @@ scale = Vector2(2, 2)
 visible = false
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
+visibility_layer = 2
 position = Vector2(-100, 110)
 polygon = PackedVector2Array(100, 490, 100, 390, 200, 390, 200, 490)
 
 [node name="tile(5x5 ft)" type="Polygon2D" parent="."]
+visibility_layer = 2
 position = Vector2(100, 10)
 polygon = PackedVector2Array(100, 590, 100, 390, 300, 390, 300, 590)
 

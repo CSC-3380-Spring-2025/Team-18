@@ -18,9 +18,9 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-CharacterSelect="*res://Assets/Scripts/Character_Select.cs"
 MainMenu="*res://Assets/Scripts/MainMenu.cs"
 PauseScreen="*res://Assets/Scripts/PauseScreen.cs"
+CharacterSelect="*res://Assets/Scripts/Character_Select.cs"
 
 [display]
 

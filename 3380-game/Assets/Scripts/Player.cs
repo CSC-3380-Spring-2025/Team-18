@@ -5,13 +5,13 @@ using Game.Assets.Scripts;
 using Game.Assets.Scripts.Loading;
 using Game.Assets.Scripts.Saving;
 
-public partial class Player : Area2D, Loadable, Savable
+public partial class Player : Area2D, Savable, Loadable
 {
 	[Export]
 	public int Speed { get; set; } = 150; // How fast the player will move (pixels/sec).
 	
-	[Signal]
-	public delegate void HitEventHandler();
+	[Signal]public delegate void HitEventHandler();
+	[Signal] public delegate void DamageEventHandler(int dmgTaken);
 	
 	public Vector2 screenSize;
 	public PlayerData playerData = new PlayerData();
@@ -23,11 +23,6 @@ public partial class Player : Area2D, Loadable, Savable
 		PDat.SkinColor, PDat.EyeColor, PDat.HairColor, PDat.FacialMarkings);
 	}
 	
-	public void StatTaker(Attributes PStats){
-		stats = new Attributes(PStats.CharacterClass, PStats.Level, PStats.XP, PStats.MaxHealth, 
-		PStats.CurrentHealth, PStats.Strength, PStats.Dexterity, PStats.Constitution, PStats.Intelligence,
-		 PStats.Wisdom, PStats.Charisma);
-	}
 	
 	public void PositionSetTaker(Vector2 newPos){
 		Position = new Vector2(x: (newPos.X), y: (newPos.Y) );
@@ -44,7 +39,6 @@ public partial class Player : Area2D, Loadable, Savable
 public override void _Ready() //called on start
 {
 	screenSize = GetViewportRect().Size;
-	LoadSprite();
 	Load();
 	direction = "front";
 	body = GetNode<AnimatedSprite2D>("Body");
@@ -53,6 +47,9 @@ public override void _Ready() //called on start
 	hair = GetNode<AnimatedSprite2D>("Hair");
 	hairBack = GetNode<AnimatedSprite2D>("Hair_Back");
 	pattern = GetNode<AnimatedSprite2D>("Head/Pattern");
+	
+	
+	
 	
 	//end _Ready
 }
@@ -78,7 +75,7 @@ public override void _Process(double delta) //called in real time
 	eye.SelfModulate = (playerData.EyeColor);
 	eye.Play();
 	
-	if(playerData.Race == "Human" || playerData.Race == "Pureblood"){
+	if(playerData.Race == "Human" && playerData.Hair != "0"){
 		if(StringExtensions.ToInt(playerData.Hair) > 10){
 			AnimationTurn(hairBack, velocity, playerData.Hair, "hair");
 			hairBack.SelfModulate = (playerData.HairColor);
@@ -92,9 +89,7 @@ public override void _Process(double delta) //called in real time
 	} else {
 		hair.Hide();
 		hairBack.Hide();
-		AnimationTurn(pattern, velocity, playerData.Pattern);
-		pattern.SelfModulate = (playerData.FacialMarkings);
-
+		
 		if(playerData.Pattern.ToInt() == 0){
 			pattern.Hide();
 		} else {
@@ -104,26 +99,26 @@ public override void _Process(double delta) //called in real time
 		}
 		}
 	
-if (velocity.Length() > 0){
-	velocity = velocity.Normalized() * Speed;
-	body.Play();
-	head.Play();
-	pattern.Play();
-} else {
-	body.Stop();
-	head.Stop();
-	pattern.Stop();
+	if (velocity.Length() > 0){
+		velocity = velocity.Normalized() * Speed;
+		body.Play();
+		head.Play();
+		pattern.Play();
+	} else {
+		body.Stop();
+		head.Stop();
+		pattern.Stop();
 	
 	head.Animation = (playerData.Race+"_"+direction);
 	body.Animation = ("body_"+bodyType+"_"+direction);
 	if(direction == "back"){ eye.Hide();} else{eye.Show(); eye.Animation = ("eye_"+playerData.Eye+"_"+direction);}
-	if(playerData.Pattern.ToInt() != 0){ pattern.Show();
-		pattern.Animation = (playerData.Race+"_"+playerData.Pattern+"_"+direction);} else {pattern.Animation = "0";}
+	if(playerData.Pattern != "0"){ pattern.Show();
+		pattern.Animation = (playerData.Race+"_"+playerData.Pattern+"_"+direction);} else {pattern.Hide(); pattern.Animation = "0";}
 	if(StringExtensions.ToInt(playerData.Hair) > 10){
 		hairBack.Animation = ("hair_"+playerData.Hair+"_"+direction);}
 	if(playerData.Hair != "0" && playerData.Race == "Human" ){
-		hair.Show(); hair.Animation = ("hair_"+playerData.Hair+"_"+direction);} else{hair.Animation = "0";}
-}
+		hair.Show(); hair.Animation = ("hair_"+playerData.Hair+"_"+direction);} else{hair.Hide(); hair.Animation = "0";}
+	}
 	//actual thing that makes movement work
 	Position += velocity * (float)delta;
 	Position = new Vector2(
@@ -163,83 +158,17 @@ public void AnimationTurn(AnimatedSprite2D node, Vector2 velocity, string choice
 		}
 	}
 }
-public void Load()
-	{   //for some reason once i run the bitch enough times it breaks. for no reason. if that happens to you,
-		//just change the file name to something that hasnt been used yet and it should be fine.
-		using var file = FileAccess.Open("user://playerData_v3.dat", FileAccess.ModeFlags.Read);
-		if (file is not null)
-		{	
-			Position = (Vector2)file.GetVar();
-		}
-		LoadSprite();
-		LoadStats();
-	}
 
-//i KNOW this is stupid shut up ive been trying to interface with the existing load for a WEEK
-public void LoadStats(){
-	using var file = FileAccess.Open("user://playerStats.dat", FileAccess.ModeFlags.Read);
-	if (file is not null){
-			var statsHolder = file.GetVar(true).As<Godot.Collections.Array>();
-			stats.CharacterClass = statsHolder[0].AsString();
-			stats.Level = statsHolder[1].As<int>();
-			stats.XP= statsHolder[2].As<int>();
-			stats.MaxHealth = statsHolder[3].As<int>();
-			stats.CurrentHealth = statsHolder[4].As<int>();
-			stats.Armor = statsHolder[5].As<int>();
-			stats.Strength = statsHolder[6].As<int>();
-			stats.Dexterity = statsHolder[7].As<int>();
-			stats.Constitution = statsHolder[8].As<int>();
-			stats.Intelligence = statsHolder[9].As<int>();
-			stats.Wisdom= statsHolder[10].As<int>();
-			stats.Charisma= statsHolder[11].As<int>();
-	}
+public void Save(){
+	SaveLoad SL = new SaveLoad();
+	SL.Save(stats, Position, playerData);
 }
-
-public void LoadSprite(){
-	using var file = FileAccess.Open("user://playerSprite0.dat", FileAccess.ModeFlags.Read);
-	if (file is not null)
-	{	
-		var holder = file.GetVar(true).As<Godot.Collections.Array>();
-		playerData = new PlayerData();
-			playerData.Name = holder[0].AsString();
-			playerData.Class= holder[1].AsString();
-			playerData.Race= holder[2].AsString();
-			playerData.Hair= holder[3].AsString();
-			playerData.Eye= holder[4].AsString();
-			playerData.Pattern= holder[5].AsString();
-			playerData.SkinColor= holder[6].As<Color>();
-			playerData.EyeColor= holder[7].As<Color>();
-			playerData.HairColor= holder[8].As<Color>();
-			playerData.FacialMarkings= holder[9].As<Color>();
-	}
+public void Load(){
+	SaveLoad SL = new SaveLoad();
+	SL.Load(stats, Position, playerData);
 }
-
-	public void Save()
-	{
-		using var file = FileAccess.Open("user://playerData_v3.dat", FileAccess.ModeFlags.Write);
-		file.StoreVar(Position);
-		SaveStats();
-	}
-	
-	public void SaveStats(){
-			using var file = FileAccess.Open("user://playerStats.dat", FileAccess.ModeFlags.Write);
-			var statHolder = new Godot.Collections.Array();
-			statHolder.Add(stats.CharacterClass);
-			statHolder.Add(stats.Level);
-			statHolder.Add(stats.XP);
-			statHolder.Add(stats.MaxHealth);
-			statHolder.Add(stats.CurrentHealth);
-			statHolder.Add(stats.Armor);
-			statHolder.Add(stats.Strength);
-			statHolder.Add(stats.Dexterity);
-			statHolder.Add(stats.Constitution);
-			statHolder.Add(stats.Intelligence);
-			statHolder.Add(stats.Wisdom);
-			statHolder.Add(stats.Charisma);
-			
-			file.StoreVar(statHolder);
-	}
 
 	private bool IsGamePaused() => GetTree().Paused;
+
 //end of code <- keep right before final bracket
 }
