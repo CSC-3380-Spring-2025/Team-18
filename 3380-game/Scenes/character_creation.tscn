@@ -407,6 +407,7 @@ offset_right = 462.781
 offset_bottom = 273.188
 text = "Randomize Outfit"
 
+
 [connection signal="Freeze" from="Control" to="Player" method="Freezer"]
 [connection signal="PDat" from="Control" to="Player" method="PDatTaker"]
 [connection signal="PStats" from="Control" to="Player" method="StatTaker"]

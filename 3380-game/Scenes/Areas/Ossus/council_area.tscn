@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://bhudmpac468r8"]
+
+[ext_resource type="Texture2D" uid="uid://uv86e4l8cnpn" path="res://Assets/Images/Maps/Ossus/Council area outside.png" id="1_cr351"]
+[ext_resource type="Script" uid="uid://cyb4t8nbhyiih" path="res://Assets/Scripts/World.cs" id="1_ddyej"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ddyej"]
+size = Vector2(112, 46)
+
+[node name="Council Area" type="Node"]
+script = ExtResource("1_ddyej")
+
+[node name="CouncilAreaOutside" type="Sprite2D" parent="."]
+position = Vector2(-2179, -2503)
+texture = ExtResource("1_cr351")
+
+[node name="Commons" type="Area2D" parent="."]
+position = Vector2(-2488, -1814)
+collision_mask = 15
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Commons"]
+position = Vector2(-5, -26)
+shape = SubResource("RectangleShape2D_ddyej")

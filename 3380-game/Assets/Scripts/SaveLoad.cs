@@ -6,12 +6,7 @@ using Game.Assets.Scripts.Loading;
 using Game.Assets.Scripts.Saving;
 
 public partial class SaveLoad : Node, Savable, Loadable
-{
-	public PlayerData playerData;
-	public Attributes stats;
-	public Vector2 Position;
-	public string Location;
-	
+{	
 	public void Save(){
 		
 	}
@@ -39,10 +34,31 @@ public partial class SaveLoad : Node, Savable, Loadable
 			var holder = file.GetVar(true).As<Godot.Collections.Array>();
 			Position = new Vector2(holder[0].As<int>(),holder[1].As<int>());
 			Location = holder[2].AsString();
-			GD.Print(Location);
+			GD.Print("SaveLoad Load:"+Location);
 		}
 		LoadSprite(playerData);
 		LoadStats(stats);
+	}
+	
+	public void SavePosition(Vector2 Position, String Location){
+		using var file = FileAccess.Open("user://playerData_v3.dat", FileAccess.ModeFlags.Write);
+		var holder = new Godot.Collections.Array();
+		holder.Add(Position.X);
+		holder.Add(Position.Y);
+		holder.Add(Location);
+		GD.Print("SavePosition: "+holder);
+		file.StoreVar(holder);
+	}
+	
+	public void LoadPosition(Vector2 Position, String Location){
+		using var file = FileAccess.Open("user://playerData_v3.dat", FileAccess.ModeFlags.Read);
+		if (file is not null)
+		{	
+			var holder = file.GetVar(true).As<Godot.Collections.Array>();
+			Position = new Vector2(x: (holder[0].As<int>()),y: (holder[1].As<int>()));
+			Location = holder[2].AsString();
+			GD.Print("LoadPosition: "+holder);
+		}
 	}
 	
 	public void SaveSprite(PlayerData playerData){
@@ -130,6 +146,5 @@ public void LoadStats(Attributes stats){
 			stats.Charisma= statsHolder[16].As<int>();
 	}
 }
-
 
 }

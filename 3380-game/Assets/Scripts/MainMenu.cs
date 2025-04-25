@@ -60,6 +60,7 @@ public partial class MainMenu : CanvasLayer
 		}
 		
 		//Once the button is clicked, it moves the current scene (main menu) to the Player scene
+		
 		sceneSwap("main");
 	}
 	
@@ -77,8 +78,7 @@ public partial class MainMenu : CanvasLayer
 	}
 	
 	//functionality for new game button
-	public void OnNewGamePressed()
-	{
+	public void OnNewGamePressed(){
 		GetTree().ChangeSceneToFile("res://Scenes/character_creation.tscn");
 	}
 	
@@ -86,6 +86,8 @@ public partial class MainMenu : CanvasLayer
 		var gameScene = GD.Load<PackedScene>("res://Scenes//"+scene+".tscn");
 		var gameSceneNode = gameScene.Instantiate();
 		GetParent().AddChild(gameSceneNode);
+		
+		
 		
 		if (_isFirstLoad)
 		{

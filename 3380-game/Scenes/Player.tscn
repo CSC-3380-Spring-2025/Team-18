@@ -1309,7 +1309,7 @@ animation = &"0"
 
 [node name="Body" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_g5nao")
-animation = &"body_1_back"
+animation = &"body_1_front"
 
 [node name="Head" type="AnimatedSprite2D" parent="."]
 clip_children = 2

@@ -1,12 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://djtk3bv52bmy0"]
+[gd_scene load_steps=4 format=3 uid="uid://djtk3bv52bmy0"]
 
 [ext_resource type="Script" uid="uid://cu04padrd4fpr" path="res://Assets/Scripts/Story.cs" id="1_pwpkg"]
+[ext_resource type="PackedScene" uid="uid://m81cq124ltn8" path="res://Scenes/Player.tscn" id="1_y0hhn"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_8gbba"]
 font_size = 20
 
 [node name="Story" type="CanvasLayer"]
 follow_viewport_enabled = true
+
+[node name="Player" parent="." instance=ExtResource("1_y0hhn")]
 
 [node name="Story" type="ColorRect" parent="." node_paths=PackedStringArray("Text", "camera")]
 top_level = true

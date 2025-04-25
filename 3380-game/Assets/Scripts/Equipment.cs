@@ -18,7 +18,7 @@ public partial class Equipment : Control
 	public override void _Ready()
 	{
 		ProcessMode = ProcessModeEnum.Always;
-		EmitSignal(SignalName.PositionSet, new Vector2(x: (260),y: (396) ) );
+		EmitSignal(SignalName.PositionSet, new Vector2(x: (-540),y: (-54) ) );
 		EmitSignal(SignalName.Freeze);
 		StatLoad();
 	}
