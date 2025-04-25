@@ -6,7 +6,7 @@ public partial class World : Node
 	public Node Land;
 	public Node child = null;
 	public SaveLoad SL = new SaveLoad();
-//	public Vector2 PlayerPosition;
+	public Vector2 PlayerPosition;
 	public String location;
 	[Signal] public delegate void PositionSetEventHandler(Vector2 position);
 	[Signal] public delegate void LocationEventHandler(string place);
