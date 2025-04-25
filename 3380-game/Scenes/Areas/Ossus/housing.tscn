@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bomh5cdpqnhdp"]
+[gd_scene load_steps=7 format=3 uid="uid://crclo0t6p70uk"]
 
 [ext_resource type="Script" uid="uid://cyb4t8nbhyiih" path="res://Assets/Scripts/World.cs" id="1_37qrq"]
 [ext_resource type="Texture2D" uid="uid://b23w5ov1uh4h5" path="res://Assets/Images/Maps/Ossus/housing area template.png" id="2_khy1m"]
@@ -78,3 +78,4 @@ color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(428, 352, 428, 402, 51, 400, 53, 426, -55, 428, -55, 402, -330, 402, -332, 350, -351, 350, -366, 352, -401, 353, -450, 349, -527, 349, -528, 300, -579, 301, -577, 202, -665, 202, -680, 202, -678, 150, -728, 152, -728, 32, -728, 22, -728, -126, -777, -126, -776, -201, -728, -201, -728, -256, -678, -254, -676, -354, -577, -354, -578, -404, 527, -403, 527, -354, 677, -353, 676, -303, 726, -303, 728, -255, 777, -254, 777, 302, 727, 302, 727, 349, 672, 351, 672, 399, 575, 399, 575, 350, 435, 352, 666, 709, 1437, 761, 1168, -930, -1023, -810, -1035, 769, 694, 749, 454, 381, 435, 352)
 
 [connection signal="body_entered" from="HousingAreaTemplate/home" to="." method="GoHomeP"]
+[connection signal="body_entered" from="HousingAreaTemplate/Commons" to="." method="Commons"]

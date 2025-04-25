@@ -10,14 +10,17 @@ public partial class Player : CharacterBody2D, Savable, Loadable
 	[Export]public int Speed { get; set; } = 150; // How fast the player will move (pixels/sec).
 	[Export] public Camera2D camera;
 	[Signal]public delegate void HitEventHandler();
+	[Signal] public delegate void LocationChangeEventHandler(String location);
 	[Signal] public delegate void DamageEventHandler(int dmgTaken);
-
+	[Signal] public delegate void PositionSendEventHandler(Vector2 position);
+	
 	public Vector2 screenSize;
 	public bool Frozen = false;
 	public PlayerData playerData = new PlayerData();
 	public Attributes stats = new Attributes();
+	public SaveLoad SL = new SaveLoad();
 	public string bodyType = "1";
-	public string Location;
+	public string Location = "res://Scenes/Areas/Ossus/Bedroom.tscn";
 
 	public void PDatTaker(PlayerData PDat){
 		playerData = new PlayerData(PDat.Name, PDat.Class, PDat.Race, PDat.Hair, PDat.Eye, PDat.Pattern,
@@ -29,11 +32,14 @@ public partial class Player : CharacterBody2D, Savable, Loadable
 	
 	public void LocationTaker(string place){
 		Location = place;
+		
+		SL.SavePosition(Position, Location);
+		GD.Print("Player LocationTaker: "+Location);
 	}
 	public void PositionSetTaker(Vector2 newPos){
-		Position = new Vector2(x: (newPos.X), y: (newPos.Y) );
-		//SetPosition(new Vector2(x: (newPos.X), y: (newPos.Y)) );
-		Save();
+		Position = new Vector2( x: (newPos.X), y: (newPos.Y) );
+		SL.SavePosition(Position, Location);
+		GD.Print("Player PositionTaker:"+Position);
 	}
 	
 	public void Freezer(){
@@ -172,12 +178,21 @@ public void AnimationTurn(AnimatedSprite2D node, Vector2 velocity, string choice
 }
 
 public void Save(){
-	SaveLoad SL = new SaveLoad();
+	GD.Print("Player Save:"+Location);
+	EmitSignal(SignalName.PositionSend, Position);
+	GD.Print("Player Save:"+Position);
+	EmitSignal(SignalName.LocationChange, Location);
 	SL.Save(stats, Position, playerData, Location);
 }
 public void Load(){
-	SaveLoad SL = new SaveLoad();
 	SL.Load(stats, Position, playerData, Location);
+	
+	PositionSetTaker(Position);
+	EmitSignal(SignalName.LocationChange, Location);
+	GD.Print("Player Load:"+Location);
+	EmitSignal(SignalName.PositionSend, Position);
+	GD.Print("Player Load:"+Position);
+
 }
 
 	private bool IsGamePaused() => GetTree().Paused;

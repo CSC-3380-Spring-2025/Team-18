@@ -3,6 +3,7 @@ using System;
 
 public partial class Hud : Control
 {
+	
 	private Node currentMenu = null;
 	public Node screens;
 
@@ -23,7 +24,7 @@ public partial class Hud : Control
 	}
 	
 	public void OnInvenPressed(){
-		SwitchScene("res://Scenes/Inventory.tscn");
+		SwitchScene("res://Scenes/inventory.tscn");
 	}
 	public void OnStatsPressed(){
 		SwitchScene("res://Scenes/stats.tscn");
@@ -51,7 +52,6 @@ public partial class Hud : Control
 	}
 
 public void SwitchScene(string scenePath){
-
 		screens.RemoveChild(screens.GetChild(-1));
 		
 		PackedScene scene = GD.Load<PackedScene>(scenePath);

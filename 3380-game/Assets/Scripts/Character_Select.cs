@@ -84,7 +84,7 @@ public partial class Character_Select : Control
 		playerData.FacialMarkings = color;
 		EmitSignal(SignalName.PDat, playerData);
 	}
-
+	
 	public void NameTextChanged(String newText)
 	{
 		name = newText;
@@ -143,8 +143,8 @@ public partial class Character_Select : Control
 		Wis.SetText(stats.Wisdom+ "("+((stats.Wisdom - 10)/2)+")");
 		Cha.SetText(stats.Charisma+ "("+((stats.Charisma - 10)/2)+")");
 	}
-	
-	public void RandomizeOutfit()
+
+public void RandomizeOutfit()
 	{
 		var random = new Random();
 		SkinColor(RandomColor());
@@ -169,16 +169,6 @@ public partial class Character_Select : Control
 		EmitSignal(SignalName.Freeze);
 		
 		SaveLoad SL = new SaveLoad();
-		SL.Save(stats, Position, playerData);
-
-		foreach (var child in GetTree().GetRoot().GetChildren())
-		{
-			if (child is MainMenu mainMenu)
-			{
-				mainMenu.Visible = false;
-			}
-		}
-
 		SL.Save(stats, Position, playerData, "res://Scenes/story.tscn");
 		GetTree().ChangeSceneToFile("res://Scenes/story.tscn");
 	}
