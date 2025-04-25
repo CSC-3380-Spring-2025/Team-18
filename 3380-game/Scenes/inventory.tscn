@@ -2,7 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://dwutpj63i31w3" path="res://Assets/Images/3380 Inventory.png" id="1_vnlv7"]
 [ext_resource type="PackedScene" uid="uid://dycymydk1237u" path="res://Scenes/HUD.tscn" id="2_2dgjs"]
-[ext_resource type="Script" uid="uid://mc5hr5wg7kjq" path="res://Assets/Scripts/Inventory.cs" id="3_j14vy"]
+[ext_resource type="Script" uid="uid://mc5hr5wg7kjq" path="res://Assets/Scripts/inventory.cs" id="3_j14vy"]
+
 
 [node name="Inventory" type="CanvasLayer"]
 
