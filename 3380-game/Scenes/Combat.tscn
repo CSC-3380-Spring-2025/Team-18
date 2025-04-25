@@ -128,6 +128,12 @@ offset_bottom = -485.632
 
 [node name="Enemy" parent="." instance=ExtResource("2_uau57")]
 position = Vector2(882, 111)
+MaxHealth = null
+Damage = null
+Speed = null
+ChaseRadius = null
+AttackRange = null
+PatrolPointsPaths = null
 
 [node name="CombatStats" type="Node" parent="Enemy" node_paths=PackedStringArray("healthBar")]
 script = ExtResource("4_0dhp0")
