@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://cbxduelaswpe4" path="res://Assets/Images/3380 Equipment.png" id="1_4hm6e"]
 [ext_resource type="PackedScene" uid="uid://m81cq124ltn8" path="res://Scenes/Player.tscn" id="2_arhw4"]
 [ext_resource type="PackedScene" uid="uid://dycymydk1237u" path="res://Scenes/HUD.tscn" id="2_y2a5c"]
-[ext_resource type="Script" path="res://Assets/Scripts/Equipment.cs" id="3_85gve"]
+[ext_resource type="Script" uid="uid://bmoh44hp6guu6" path="res://Assets/Scripts/Equipment.cs" id="3_85gve"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_uc00j"]
 font_size = 28

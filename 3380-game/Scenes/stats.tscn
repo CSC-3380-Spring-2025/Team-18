@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://bq761okmjj805" path="res://Assets/Images/Stats-QT.png" id="1_an3q6"]
 [ext_resource type="PackedScene" uid="uid://m81cq124ltn8" path="res://Scenes/Player.tscn" id="2_i6gfd"]
 [ext_resource type="PackedScene" uid="uid://dycymydk1237u" path="res://Scenes/HUD.tscn" id="2_xtw31"]
-[ext_resource type="Script" path="res://Assets/Scripts/StatScreen.cs" id="3_lwp2e"]
+[ext_resource type="Script" uid="uid://cdgc5t6vsuj72" path="res://Assets/Scripts/StatScreen.cs" id="3_lwp2e"]
 
 [node name="Stats" type="CanvasLayer"]
 process_mode = 3

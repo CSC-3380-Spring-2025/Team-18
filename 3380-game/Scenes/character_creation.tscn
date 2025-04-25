@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://ckltea74vko7w"]
 
-[ext_resource type="Script" path="res://Assets/Scripts/Character_Select.cs" id="1_d8uaa"]
+[ext_resource type="Script" uid="uid://bwev3ob55cf1b" path="res://Assets/Scripts/Character_Select.cs" id="1_d8uaa"]
 [ext_resource type="PackedScene" uid="uid://m81cq124ltn8" path="res://Scenes/Player.tscn" id="2_clebg"]
 
 [node name="Character_Creation" type="CanvasLayer"]

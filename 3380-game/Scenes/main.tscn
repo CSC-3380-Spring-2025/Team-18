@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dsfceq70calvm"]
 
 [ext_resource type="PackedScene" uid="uid://m81cq124ltn8" path="res://Scenes/Player.tscn" id="1_f5fn6"]
-[ext_resource type="Script" path="res://Assets/Scripts/World.cs" id="1_jjvhh"]
+[ext_resource type="Script" uid="uid://cyb4t8nbhyiih" path="res://Assets/Scripts/World.cs" id="1_jjvhh"]
 [ext_resource type="PackedScene" uid="uid://liq25vhrxyqs" path="res://Scenes/pauseScreen.tscn" id="2_82p86"]
 [ext_resource type="PackedScene" uid="uid://rbpl4w2tdyw8" path="res://Scenes/Areas/Ossus/Bedroom.tscn" id="2_kry3j"]
 
