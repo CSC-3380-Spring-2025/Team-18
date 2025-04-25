@@ -29,3 +29,12 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+
+
+[connection signal="Location" from="World" to="Player" method="LocationTaker"]
+[connection signal="PositionSet" from="World" to="Player" method="PositionSetTaker"]
+[connection signal="Location" from="World/Bedroom" to="Player" method="LocationTaker"]
+[connection signal="PositionSet" from="World/Bedroom" to="Player" method="PositionSetTaker"]
+[connection signal="Save" from="Pause Screen" to="Player" method="Save"]
+[connection signal="LocationChange" from="Player" to="World" method="PositionChecker"]
+[connection signal="PositionSend" from="Player" to="World" method="PositionTaker"]
