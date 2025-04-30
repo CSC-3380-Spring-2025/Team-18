@@ -1,12 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://bd0n83opf2vke"]
+[gd_scene load_steps=9 format=3 uid="uid://bd0n83opf2vke"]
 
 [ext_resource type="Texture2D" uid="uid://bt25i3viqls2e" path="res://Assets/Images/Maps/Ossus/commons template.png" id="1_e1d5e"]
 [ext_resource type="Script" uid="uid://cyb4t8nbhyiih" path="res://Assets/Scripts/World.cs" id="1_ub7o3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ub7o3"]
 size = Vector2(64, 108)
-
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ub7o3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mhdtg"]
 size = Vector2(99, 98)
@@ -57,7 +55,6 @@ shape = SubResource("RectangleShape2D_ub7o3")
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(-75, -100)
 disable_mode = 1
-physics_material_override = SubResource("PhysicsMaterial_ub7o3")
 
 [node name="outside" type="CollisionPolygon2D" parent="StaticBody2D"]
 position = Vector2(-1690, -1047)
@@ -93,6 +90,10 @@ polygon = PackedVector2Array(-83, 61, -57, 61, -58, 85, -33, 85, -33, 110, 167, 
 [node name="CollisionShape2D6" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(-927, -1050)
 shape = SubResource("RectangleShape2D_ves1f")
+
+[node name="Library" type="CollisionPolygon2D" parent="StaticBody2D"]
+build_mode = 1
+polygon = PackedVector2Array(-1954, -1113, -1954, -988, -1904, -988, -1904, -938, -1879, -938, -1879, -863, -1829, -863, -1829, -813, -1779, -813, -1779, -788, -1704, -788, -1704, -813, -1654, -813, -1654, -863, -1629, -863, -1629, -1114, -1704, -1114, -1704, -1163, -1729, -1163, -1729, -1188, -1829, -1188, -1829, -1163, -1879, -1163, -1879, -1138, -1904, -1138, -1904, -1113)
 
 [node name="outside2" type="Polygon2D" parent="."]
 position = Vector2(-1765, -1147)
