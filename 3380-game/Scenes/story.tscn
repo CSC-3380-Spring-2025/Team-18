@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://djtk3bv52bmy0"]
+[gd_scene load_steps=5 format=3 uid="uid://djtk3bv52bmy0"]
 
 [ext_resource type="Script" uid="uid://cu04padrd4fpr" path="res://Assets/Scripts/Story.cs" id="1_pwpkg"]
 [ext_resource type="PackedScene" uid="uid://m81cq124ltn8" path="res://Scenes/Player.tscn" id="1_y0hhn"]
@@ -6,12 +6,16 @@
 [sub_resource type="LabelSettings" id="LabelSettings_8gbba"]
 font_size = 20
 
+[sub_resource type="LabelSettings" id="LabelSettings_y0hhn"]
+font_size = 20
+
 [node name="Story" type="CanvasLayer"]
 follow_viewport_enabled = true
 
-[node name="Player" parent="." instance=ExtResource("1_y0hhn")]
+[node name="Player" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("1_y0hhn")]
+camera = NodePath("../Story/Camera2D")
 
-[node name="Story" type="ColorRect" parent="." node_paths=PackedStringArray("Text", "camera")]
+[node name="Story" type="ColorRect" parent="." node_paths=PackedStringArray("Text", "Lore", "Warning", "Explained", "LoreButton", "SkipButton", "ExplainButton", "camera")]
 top_level = true
 offset_left = -640.0
 offset_top = -330.0
@@ -20,6 +24,12 @@ offset_bottom = 630.0
 color = Color(0, 0, 0, 1)
 script = ExtResource("1_pwpkg")
 Text = NodePath("Text")
+Lore = NodePath("Lore")
+Warning = NodePath("Warning")
+Explained = NodePath("Explained")
+LoreButton = NodePath("Lore dump")
+SkipButton = NodePath("Skip")
+ExplainButton = NodePath("Explain")
 camera = NodePath("Camera2D")
 
 [node name="Text" type="Label" parent="Story"]
@@ -46,35 +56,229 @@ horizontal_alignment = 3
 vertical_alignment = 1
 autowrap_mode = 2
 
+[node name="Lore" type="Label" parent="Story"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -326.0
+offset_top = -386.0
+offset_right = 327.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "In the early light of morning, your memories are fuzzy, but, with a little concentration, blurry images resolve into crisp lines and vivid colors.
+
+The great order that  you call home, cast into division. A war. Stretching across hundreds of planets, over thousands of lightyears. A schism, between those who wish to bend the universe to their will, and those who only desire peace. 
+
+Kept away from the fighting, you are. Safe and sequestered in the heart of the order, learning and living side by side with your bretheren. But a day will come when you are, when you face your trials and ascend to knighthood, deemed strong enough to survive the shifting currents of the Galaxy at large.
+
+That day, where you venture into the chaos beyond the lush trees and rocky cliffs of your homeworld, is finally here. 
+"
+label_settings = SubResource("LabelSettings_8gbba")
+horizontal_alignment = 3
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="The Force" type="Label" parent="Story/Lore"]
+layout_mode = 0
+offset_left = -447.0
+offset_top = -26.0
+offset_right = -28.0
+offset_bottom = 224.0
+text = "The Force flows through all things; Binding the largest of beasts to the smallest of insects, the core of a planet to the vaccuum of space, what comes before and what languishes after.
+
+The lifesblood of the Galaxy. The great hum of all things, living and unliving.
+And you can hear it's song."
+label_settings = SubResource("LabelSettings_y0hhn")
+horizontal_alignment = 3
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="The Order" type="Label" parent="Story/Lore"]
+layout_mode = 0
+offset_left = 677.0
+offset_top = -26.0
+offset_right = 1096.0
+offset_bottom = 250.0
+text = "A padawan learner you are, an initiate you once were, and a Knight you will be. Once you prove your mastery over yourself--over fear, over the darkness that hides within us all, over the pains of the flesh and the violence that comes with it--
+
+Then you will be ready. Then you will be allowed to leave the cradle of your home."
+label_settings = SubResource("LabelSettings_y0hhn")
+horizontal_alignment = 3
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Force Sensitivity" type="Label" parent="Story/Lore"]
+layout_mode = 0
+offset_left = -447.0
+offset_top = 312.0
+offset_right = -28.0
+offset_bottom = 743.0
+text = "Those who can hear the heartbeat of the universe are few. Fewer still who realize what gift they've been blessed with. 
+
+That is what your people do. The Jedi. A home, a haven, a training ground for those able to reach out to the Force with open arms.
+
+An Order that teaches peace, and diplomacy, and temperance...
+
+And above all, what to do when an open palm fails. When to pick up the blade, and when to set it aside."
+label_settings = SubResource("LabelSettings_y0hhn")
+horizontal_alignment = 3
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Explained" type="Label" parent="Story"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -792.0
+offset_top = -569.0
+offset_right = -43.0
+offset_bottom = -169.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Okay. You know fuck all about StarWars? Here's the broad strokes.
+"
+label_settings = SubResource("LabelSettings_8gbba")
+vertical_alignment = 1
+uppercase = true
+
+[node name="The Force" type="Label" parent="Story/Explained"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -352.5
+offset_top = 15.0
+offset_right = 188.5
+offset_bottom = 370.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "There's this thing called THE FORCE, it's an energy-field type thing that connects everything in the Galaxy to each other. Living, Unliving, Past, Future, all of it. Some people are born with access to it, called \"Force Sensitives.\" 
+
+Different Force Sensitives can use the Force to impact the world around them to varying degrees.
+
+Essentially, it's this universe's magic system."
+label_settings = SubResource("LabelSettings_8gbba")
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="The Plot" type="Label" parent="Story/Explained"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 206.5
+offset_top = 413.0
+offset_right = 1181.5
+offset_bottom = 627.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "In this game, YOU are a padawan that is about to take their trials. In the wider galaxy, there's a war going on between Jedi who think they should be able to commit war crimes, dubbed \"Dark Jedi\", and the rest of the order who is trying to beat the stupid out of them. "
+label_settings = SubResource("LabelSettings_8gbba")
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="The Jedi" type="Label" parent="Story/Explained"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 209.5
+offset_top = -22.0
+offset_right = 1198.5
+offset_bottom = 409.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Magic users running amok without any kind of coordination or training would be awful. Imagine a toddler that can throw plates with its mind. An edgy teenager in such a bad mood, they start literally giving off bad vibes-- making everyone around them as angry and impulsive as they are. 
+
+Awful, right? That's where THE JEDI ORDER comes in. They go around to people they think have magic babies and go \"Hey I see your magic baby is more than you, regular person, can reasonably handle. Want us to train said magic baby? If no, we'll give you some coping skills. If yes, we do have to take your baby to train it. Sorry. They'll be treated well, taught to use their power for good, but they won't be able to see you for a very long time, if ever again. Its your choice.\" 
+
+A lot of people, unsuprisingly, give up said magic baby for the hopes their child gets a better life raised around people like them."
+label_settings = SubResource("LabelSettings_8gbba")
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="The Order" type="Label" parent="Story/Explained"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -363.5
+offset_top = 328.0
+offset_right = 177.5
+offset_bottom = 821.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Even though all Jedi, old and young, can wield the Force, as with most things, there's a steep learning curve. 
+
+To keep things organized, Jedi call members of their order by different names depending on how much of their training has been completed.
+
+Initiates = untrained children. 
+Padawan = In training.
+Knight = Padawan that has completed their training and passed their Knighthood trials.
+Master = Knight that has raised a padawan to the level of Knight."
+label_settings = SubResource("LabelSettings_8gbba")
+vertical_alignment = 1
+autowrap_mode = 2
+
 [node name="Lore dump" type="Button" parent="Story"]
 layout_mode = 0
-offset_left = 350.0
-offset_top = 740.0
-offset_right = 634.0
-offset_bottom = 778.0
+offset_left = 546.0
+offset_top = 763.0
+offset_right = 830.0
+offset_bottom = 840.0
 text = "Dwell on your dreams a little longer. Perhaps there is knowledge to be found."
 autowrap_mode = 2
 
 [node name="Skip" type="Button" parent="Story"]
 layout_mode = 0
-offset_left = 904.0
-offset_top = 774.0
-offset_right = 1188.0
-offset_bottom = 812.0
+offset_left = 872.0
+offset_top = 763.0
+offset_right = 1156.0
+offset_bottom = 817.0
 text = "Wake up and greet the world. The Trials await."
 autowrap_mode = 2
 
-[node name="Label" type="Label" parent="Story"]
+[node name="Explain" type="Button" parent="Story"]
+visible = false
 layout_mode = 0
-offset_left = 1210.0
-offset_top = 788.0
-offset_right = 1492.0
-offset_bottom = 863.0
-text = "(<-- Skip Story set up)
-(Not reccomended for those unfamiliar with Star Wars)"
+offset_left = 652.0
+offset_top = 750.0
+offset_right = 850.0
+offset_bottom = 839.0
+text = "What the fuck are you talking about?"
 autowrap_mode = 2
 
 [node name="Camera2D" type="Camera2D" parent="Story"]
 position = Vector2(860, 491)
 
+[node name="Warning" type="Label" parent="Story"]
+layout_mode = 0
+offset_left = 1175.0
+offset_top = 787.0
+offset_right = 1388.0
+offset_bottom = 888.0
+text = "( <-- Skip story set up. 
+Not reccomended for those
+with little to no knowledge 
+of Star Wars)"
+
+[connection signal="pressed" from="Story/Lore dump" to="Story" method="LoreDump"]
 [connection signal="pressed" from="Story/Skip" to="Story" method="Skip"]
+[connection signal="pressed" from="Story/Explain" to="Story" method="ExplainPls"]

@@ -4,49 +4,40 @@ using System;
 public partial class World : Node
 {
 	public Node Land;
+	public Node2D player;
+	public Node Main;
 	public Node child = null;
 	public SaveLoad SL = new SaveLoad();
-	public Vector2 PlayerPosition;
 	public String location;
-	[Signal] public delegate void PositionSetEventHandler(Vector2 position);
 	[Signal] public delegate void LocationEventHandler(string place);
-	
+	[Signal] public delegate void PositionSendEventHandler(Vector2 position);
+
 	public override void _Ready(){
-		 Land = GetNode("/root/Main/World");
-		
-		
+		Land = GetNode("/root/Main/World");
 	}
 	
 	public void PositionChecker(String location){
-		Node node = GetNode(location);
-		if(node == Land.GetChild(0)){
-			GD.Print("PositionChecker says node exists already");
-		}else {
+		String place;
+		int index = location.LastIndexOf('/');
+		String store = location.Remove(0,index+1);
+		int period = store.IndexOf('.');
+		if(period >= 0){
+			place = store.Remove(period);
+			} else { place = store;}
 			
 			SwitchLand(location);
-		}
-	}
-	
-	public void PositionTaker(Vector2 position){
-		PlayerPosition = new Vector2(x: position.X, y: position.Y);
-		GD.Print("World PositionTaker:"+ PlayerPosition);
-		SL.SavePosition(PlayerPosition, location);
+		
 	}
 	
 	public void GoHomeP(Node2D player){
-		//EmitSignal(SignalName.PositionSet, new Vector2(x: 43,y: -27 ));
 		SwitchLand("res://Scenes/Areas/Ossus/Bedroom.tscn");
-		
 	}
 	
 	public void LeaveHouse(Node2D player){
-		SwitchLand("res://Scenes/Areas/Ossus/housing.tscn");
-		//EmitSignal(SignalName.PositionSet, new Vector2(x: 1440,y: 600 ));
-		
+		SwitchLand("res://Scenes/Areas/Ossus/housing.tscn");		
 	}
 	
 	public void Commons(Node2D player){
-		//EmitSignal(SignalName.PositionSet, new Vector2(x: 43,y: -27 ));
 		SwitchLand("res://Scenes/Areas/Ossus/Commons.tscn");
 	}
 	
@@ -58,14 +49,34 @@ public partial class World : Node
 		SwitchLand("res://Scenes/Areas/Ossus/council_area.tscn");
 	}
 	
+	public void CouncilChambers(Node2D player){
+		SwitchLand("res://Scenes/Areas/Ossus/council_hall.tscn");
+	}
 	
+	public void TrialStart(Node2D player){
+		SwitchLand("res://Scenes/Areas/Ossus/trial_start.tscn");
+	}
 	
+	public void Courage(Node2D player){
+		SwitchLand("res://Scenes/Areas/Ossus/trial_of_courage.tscn");
+	}
+	public void Flesh(Node2D player){
+		SwitchLand("res://Scenes/Areas/Ossus/trial_of_flesh.tscn");
+	}
+	public void Insight(Node2D player){
+		SwitchLand("res://Scenes/Areas/Ossus/trial_of_insight.tscn");
+	}
+	public void Spirit(Node2D player){
+		//EmitSignal(SignalName.PositionSend, new Vector2(x: -3353, y: -4852));
+		player.Position = new Vector2(x: -3297, y: -4907);
+		//SL.SavePosition(new Vector2(x: -3297, y: -4907));
+		SwitchLand("res://Scenes/Areas/Ossus/trial_of_spirit.tscn");
+		
+	}
 	public void SwitchLand(string scenePath){
 		EmitSignal(SignalName.Location, scenePath);
 		location = scenePath;
-		SL.LoadPosition(PlayerPosition, location);
-		GD.Print("World PP:"+PlayerPosition);
-		GD.Print("World location:"+location);
+		
 		PackedScene scene = GD.Load<PackedScene>(scenePath);
 		child = Land.GetChild(0);
 		
@@ -76,8 +87,8 @@ public partial class World : Node
 		if(scene != null){
 			child = scene.Instantiate();
 			Land.AddChild(child);
-			SL.SavePosition(PlayerPosition, scenePath);
+			EmitSignal(SignalName.Location, scenePath);
+			SL.SaveScene(scenePath);
 		}
-			
 	}
 }

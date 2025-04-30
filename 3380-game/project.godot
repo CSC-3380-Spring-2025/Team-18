@@ -21,6 +21,7 @@ config/icon="res://icon.svg"
 PauseScreen="*res://Assets/Scripts/PauseScreen.cs"
 CharacterSelect="*res://Assets/Scripts/Character_Select.cs"
 World="*res://Assets/Scripts/World.cs"
+SaveLoad="*res://Assets/Scripts/SaveLoad.cs"
 
 [display]
 

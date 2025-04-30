@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://crclo0t6p70uk"]
+[gd_scene load_steps=7 format=3 uid="uid://bomh5cdpqnhdp"]
 
 [ext_resource type="Script" uid="uid://cyb4t8nbhyiih" path="res://Assets/Scripts/World.cs" id="1_37qrq"]
 [ext_resource type="Texture2D" uid="uid://b23w5ov1uh4h5" path="res://Assets/Images/Maps/Ossus/housing area template.png" id="2_khy1m"]

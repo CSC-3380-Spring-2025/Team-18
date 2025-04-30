@@ -49,6 +49,7 @@ public partial class Hud : Control
 	public void OnResumePressed(){
 		Node node = GetNode("/root/Main/Screens").GetChild(-1);
 		node.QueueFree();
+		GetTree().Paused = false;
 	}
 
 public void SwitchScene(string scenePath){

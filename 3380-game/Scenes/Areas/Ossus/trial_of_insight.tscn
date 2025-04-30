@@ -1,0 +1,101 @@
+[gd_scene load_steps=7 format=3 uid="uid://di4c03x0tss3l"]
+
+[ext_resource type="Script" uid="uid://cyb4t8nbhyiih" path="res://Assets/Scripts/World.cs" id="1_ikra6"]
+[ext_resource type="Texture2D" uid="uid://bdj55p0o5njt5" path="res://Assets/Images/Maps/Ossus/trial of insight template.png" id="1_yake7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ikra6"]
+size = Vector2(68.5, 100)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qbao3"]
+size = Vector2(49.5, 51)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_11t8a"]
+size = Vector2(100, 100)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oia2p"]
+size = Vector2(100.5, 101)
+
+[node name="TrialOfInsight" type="Node"]
+script = ExtResource("1_ikra6")
+
+[node name="TrialOfInsightTemplate2" type="Sprite2D" parent="."]
+position = Vector2(-6256, -2629)
+texture = ExtResource("1_yake7")
+
+[node name="Spirit" type="Area2D" parent="."]
+position = Vector2(-4907, -3863)
+collision_mask = 15
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spirit"]
+position = Vector2(-25.75, -49)
+shape = SubResource("RectangleShape2D_ikra6")
+
+[node name="Walls" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Walls"]
+build_mode = 1
+polygon = PackedVector2Array(-7657, -1403, -7682, -1255, -7413, -1254, -7430, -1400, -7405, -1404, -7405, -1426, -7380, -1429, -7379, -1478, -7280, -1475, -7280, -1529, -7257, -1529, -7256, -1601, -7281, -1602, -7281, -1579, -7331, -1579, -7331, -1629, -7281, -1629, -7281, -1605, -7256, -1604, -7256, -1628, -7204, -1628, -7204, -1652, -7079, -1653, -7079, -1677, -7052, -1677, -7054, -1877, -6979, -1879, -6977, -2027, -6932, -2054, -7006, -2054, -7006, -2129, -6802, -2129, -6803, -2176, -6727, -2177, -6728, -2202, -6704, -2203, -6704, -2253, -6677, -2251, -6678, -2452, -6654, -2451, -6654, -2526, -6435, -2527, -6433, -2504, -6383, -2503, -6383, -2477, -6156, -2477, -6153, -2504, -6127, -2503, -6128, -2551, -6079, -2551, -6079, -2603, -6003, -2603, -6003, -2630, -5906, -2628, -5904, -2654, -5577, -2652, -5580, -2675, -5450, -2675, -5452, -2701, -5401, -2701, -5402, -2754, -5379, -2752, -5379, -2802, -5355, -2802, -5353, -2853, -5326, -2853, -5328, -3432, -5355, -3432, -5353, -3455, -5378, -3456, -5378, -3481, -5403, -3480, -5402, -3528, -5451, -3532, -5451, -3632, -5527, -3631, -5526, -3680, -5553, -3682, -5553, -3705, -5603, -3706, -5601, -3752, -5506, -3751, -5504, -3776, -5455, -3777, -5454, -3803, -5205, -3803, -5204, -3829, -5053, -3828, -5053, -3854, -4895, -3852, -4891, -3986, -5332, -3982, -5334, -3969, -5433, -3966, -5433, -3934, -5482, -3932, -5483, -3907, -5534, -3904, -5534, -3883, -5557, -3882, -5558, -3856, -5584, -3856, -5583, -3834, -5633, -3830, -5633, -3805, -5783, -3805, -5782, -3780, -5808, -3781, -5808, -3757, -6507, -3757, -6507, -3730, -6583, -3730, -6583, -3705, -6657, -3706, -6657, -3682, -6783, -3681, -6784, -3657, -6860, -3657, -6858, -3632, -6983, -3632, -6984, -3602, -7085, -3604, -7083, -3581, -7107, -3581, -7107, -3481, -7135, -3482, -7133, -3381, -7157, -3380, -7158, -3357, -7182, -3356, -7182, -3331, -7208, -3331, -7208, -3308, -7261, -3308, -7258, -2926, -7183, -2925, -7182, -2824, -7133, -2827, -7133, -2601, -7082, -2601, -7082, -2549, -7058, -2550, -7061, -2406, -7083, -2406, -7083, -2354, -7130, -2354, -7104, -2329, -7057, -2329, -7057, -2279, -7106, -2278, -7105, -2329, -7131, -2354, -7133, -2229, -7183, -2230, -7182, -2107, -7208, -2106, -7209, -1908, -7257, -1908, -7259, -1882, -7381, -1882, -7381, -1854, -7380, -1829, -7331, -1829, -7331, -1779, -7381, -1780, -7381, -1829, -7382, -1854, -7433, -1854, -7433, -1806, -7457.33, -1805.02, -7456, -1654, -7485, -1654, -7483, -1582, -7509, -1581, -7509, -1560, -7540, -1559, -7540, -1530, -7582, -1531, -7582, -1486, -7617, -1484, -7616, -1457, -7634, -1457, -7633, -1405)
+
+[node name="CollisionPolygon2D2" type="Polygon2D" parent="Walls"]
+color = Color(0, 0, 0, 1)
+invert_enabled = true
+invert_border = 300.0
+polygon = PackedVector2Array(-7657, -1403, -7658, -1344, -7552, -1281, -7425, -1348, -7430, -1400, -7405, -1404, -7405, -1426, -7380, -1429, -7379, -1478, -7280, -1475, -7280, -1529, -7257, -1529, -7256, -1626, -7204, -1625, -7204, -1652, -7079, -1653, -7079, -1677, -7052, -1677, -7054, -1877, -6979, -1879, -6977, -2027, -6903, -2026, -6903, -2124, -6802, -2129, -6803, -2176, -6727, -2177, -6728, -2202, -6704, -2203, -6704, -2253, -6677, -2251, -6678, -2452, -6654, -2451, -6654, -2526, -6435, -2527, -6433, -2504, -6383, -2503, -6383, -2477, -6156, -2477, -6153, -2504, -6127, -2503, -6128, -2551, -6079, -2551, -6079, -2603, -6003, -2603, -6003, -2630, -5906, -2628, -5904, -2654, -5577, -2652, -5580, -2675, -5450, -2675, -5452, -2701, -5401, -2701, -5402, -2754, -5379, -2752, -5379, -2802, -5355, -2802, -5353, -2853, -5326, -2853, -5328, -3432, -5355, -3432, -5353, -3455, -5378, -3456, -5378, -3481, -5403, -3480, -5402, -3528, -5451, -3532, -5451, -3632, -5527, -3631, -5526, -3680, -5553, -3682, -5553, -3705, -5603, -3706, -5601, -3752, -5506, -3751, -5504, -3776, -5455, -3777, -5454, -3803, -5205, -3803, -5204, -3829, -5053, -3828, -5053, -3854, -4904, -3853, -4904, -3982, -5332, -3982, -5334, -3969, -5433, -3966, -5433, -3934, -5482, -3932, -5483, -3907, -5534, -3904, -5534, -3883, -5557, -3882, -5558, -3856, -5584, -3856, -5583, -3834, -5633, -3830, -5633, -3805, -5783, -3805, -5782, -3780, -5808, -3781, -5808, -3757, -6507, -3757, -6507, -3730, -6583, -3730, -6583, -3705, -6657, -3706, -6657, -3682, -6783, -3681, -6784, -3657, -6860, -3657, -6858, -3632, -6983, -3632, -6984, -3602, -7085, -3604, -7083, -3581, -7107, -3581, -7107, -3481, -7135, -3482, -7133, -3381, -7157, -3380, -7158, -3357, -7182, -3356, -7182, -3331, -7208, -3331, -7208, -3308, -7261, -3308, -7258, -2926, -7183, -2925, -7182, -2824, -7133, -2827, -7133, -2601, -7082, -2601, -7082, -2549, -7058, -2550, -7061, -2406, -7083, -2406, -7083, -2354, -7134, -2354, -7133, -2229, -7183, -2230, -7182, -2107, -7208, -2106, -7209, -1908, -7257, -1908, -7259, -1882, -7381, -1882, -7381, -1854, -7433, -1854, -7433, -1806, -7457.33, -1805.02, -7456, -1654, -7485, -1654, -7483, -1582, -7509, -1581, -7509, -1560, -7540, -1559, -7540, -1530, -7582, -1531, -7582, -1486, -7617, -1484, -7616, -1457, -7634, -1457, -7633, -1405)
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="Walls"]
+position = Vector2(-5699, -3713)
+rotation = 3.14159
+polygon = PackedVector2Array(-94, 15.5, -20, 40.5, 80, 65.5, 105, 64.5, 104, 41, 32, 41, 32, 16, -67, 16, -68, -9, -93, -9)
+one_way_collision = true
+
+[node name="Hint" type="CollisionShape2D" parent="Walls"]
+position = Vector2(-6980.75, -2502.5)
+shape = SubResource("RectangleShape2D_qbao3")
+
+[node name="Instructions" type="CollisionShape2D" parent="Walls"]
+position = Vector2(-6231, -3229)
+shape = SubResource("RectangleShape2D_11t8a")
+
+[node name="Sockets" type="StaticBody2D" parent="."]
+
+[node name="Emotion" type="CollisionShape2D" parent="Sockets"]
+position = Vector2(-6730.25, -3203.5)
+shape = SubResource("RectangleShape2D_oia2p")
+
+[node name="Peace" type="CollisionShape2D" parent="Sockets"]
+position = Vector2(-6608, -3480)
+shape = SubResource("RectangleShape2D_oia2p")
+
+[node name="Ignorance" type="CollisionShape2D" parent="Sockets"]
+position = Vector2(-6355, -3580)
+shape = SubResource("RectangleShape2D_oia2p")
+
+[node name="Knowledge" type="CollisionShape2D" parent="Sockets"]
+position = Vector2(-6081, -3579)
+shape = SubResource("RectangleShape2D_oia2p")
+
+[node name="Passion" type="CollisionShape2D" parent="Sockets"]
+position = Vector2(-5831, -3354)
+shape = SubResource("RectangleShape2D_oia2p")
+
+[node name="Serenity" type="CollisionShape2D" parent="Sockets"]
+position = Vector2(-5832, -3027)
+shape = SubResource("RectangleShape2D_oia2p")
+
+[node name="Chaos" type="CollisionShape2D" parent="Sockets"]
+position = Vector2(-5980, -2829)
+shape = SubResource("RectangleShape2D_oia2p")
+
+[node name="Harmony" type="CollisionShape2D" parent="Sockets"]
+position = Vector2(-6281, -2729)
+shape = SubResource("RectangleShape2D_oia2p")
+
+[node name="Death" type="CollisionShape2D" parent="Sockets"]
+position = Vector2(-6530, -2826)
+shape = SubResource("RectangleShape2D_oia2p")
+
+[node name="The Force" type="CollisionShape2D" parent="Sockets"]
+position = Vector2(-6706, -3003)
+shape = SubResource("RectangleShape2D_oia2p")
+
+[connection signal="body_entered" from="Spirit" to="." method="Spirit"]
