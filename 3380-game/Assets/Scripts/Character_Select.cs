@@ -169,6 +169,17 @@ public void RandomizeOutfit()
 		EmitSignal(SignalName.Freeze);
 		
 		SaveLoad SL = new SaveLoad();
+		//SL.Save(stats, Position, playerData);
+
+		foreach (var child in GetTree().GetRoot().GetChildren())
+		{
+			if (child is MainMenu mainMenu)
+			{
+				mainMenu.Visible = false;
+			}
+		}
+
+
 		SL.Save(stats, Position, playerData, "res://Scenes/story.tscn");
 		GetTree().ChangeSceneToFile("res://Scenes/story.tscn");
 	}

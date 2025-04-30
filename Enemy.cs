@@ -8,8 +8,6 @@ public partial class Enemy : Area2D
 	[Export] public float Speed { get; set; } = 100f;
 	[Export] public float ChaseRadius { get; set; } = 200f;
 	[Export] public float AttackRange { get; set; } = 20f;
-	[Export] public String EnemyType {get; set; } = "Default";
-
 	[Export] public NodePath[] PatrolPointsPaths { get; set; } = new NodePath[0];
 
 	private Vector2[] patrolPoints = new Vector2[0];
@@ -18,14 +16,10 @@ public partial class Enemy : Area2D
 	private Node2D player;
 	private float attackCooldown = 1.5f;
 	private float attackTimer = 0f;
-	public AnimatedSprite2D enemy;
-	
+
 	public override void _Ready()
 	{
-		enemy =  GetNode<AnimatedSprite2D>("Appearance");
-		ChangeEnemy(EnemyType);
 		currentHealth = MaxHealth;
-		
 
 		patrolPoints = new Vector2[PatrolPointsPaths.Length];
 		for (int i = 0; i < PatrolPointsPaths.Length; i++)
@@ -34,8 +28,8 @@ public partial class Enemy : Area2D
 			patrolPoints[i] = pointNode.Position;
 		}
 
-		var rootScene = GetTree().Root;
-		player = rootScene?.GetNode<Node2D>("/root/Main/Player");
+		var rootScene = GetTree().CurrentScene;
+		player = rootScene?.GetNode<Node2D>("Player");
 		if (player == null)
 			GD.PrintErr("Enemy: Player node not found.");
 	}
@@ -87,23 +81,4 @@ public partial class Enemy : Area2D
 	{
 		currentHealth -= amt;
 	}
-
-	public void ChangeEnemy(String enemyType){
-		enemy.Animation = (enemyType);
-		
-		switch(enemyType){
-			case "Default":
-				break;
-			case "TrainingDummy":
-				MaxHealth = 10;
-				Damage = 1;
-				Speed = 0;
-				ChaseRadius = 0f;
-				AttackRange = 0f;
-				break;
-		}
-		
-		
-	}
-
 }
