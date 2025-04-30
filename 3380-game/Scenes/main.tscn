@@ -1,11 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://dsfceq70calvm"]
+[gd_scene load_steps=7 format=3 uid="uid://dsfceq70calvm"]
 
+[ext_resource type="Script" uid="uid://dcllxufbm0m3i" path="res://Assets/Scripts/Main.cs" id="1_8gbba"]
 [ext_resource type="PackedScene" uid="uid://m81cq124ltn8" path="res://Scenes/Player.tscn" id="1_f5fn6"]
 [ext_resource type="Script" uid="uid://cyb4t8nbhyiih" path="res://Assets/Scripts/World.cs" id="1_jjvhh"]
+[ext_resource type="Script" uid="uid://cbkukwwqhmcdp" path="res://Assets/Scripts/SaveLoad.cs" id="2_21xkr"]
 [ext_resource type="PackedScene" uid="uid://liq25vhrxyqs" path="res://Scenes/pauseScreen.tscn" id="2_82p86"]
 [ext_resource type="PackedScene" uid="uid://rbpl4w2tdyw8" path="res://Scenes/Areas/Ossus/Bedroom.tscn" id="2_kry3j"]
 
 [node name="Main" type="Node"]
+script = ExtResource("1_8gbba")
+
+[node name="SaveLoad" type="Node" parent="."]
+script = ExtResource("2_21xkr")
 
 [node name="World" type="Node2D" parent="."]
 unique_name_in_owner = true
@@ -31,10 +37,17 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
+[connection signal="Location" from="." to="World" method="PositionChecker"]
+[connection signal="Location" from="." to="Player" method="LocationTaker"]
+[connection signal="Position" from="." to="Player" method="PositionSetTaker"]
+[connection signal="Location" from="SaveLoad" to="." method="LocationSender"]
+[connection signal="Location" from="SaveLoad" to="World" method="PositionChecker"]
+[connection signal="PositionSet" from="SaveLoad" to="." method="PositionSender"]
+[connection signal="PositionSet" from="SaveLoad" to="Player" method="PositionSetTaker"]
+[connection signal="Location" from="World" to="." method="LocationSender"]
 [connection signal="Location" from="World" to="Player" method="LocationTaker"]
-[connection signal="PositionSet" from="World" to="Player" method="PositionSetTaker"]
-[connection signal="Location" from="World/Bedroom" to="Player" method="LocationTaker"]
-[connection signal="PositionSet" from="World/Bedroom" to="Player" method="PositionSetTaker"]
+[connection signal="PositionSend" from="World" to="Player" method="PositionSetTaker"]
 [connection signal="Save" from="Pause Screen" to="Player" method="Save"]
-[connection signal="LocationChange" from="Player" to="World" method="PositionChecker"]
+[connection signal="LocationChange" from="Player" to="." method="LocationSender"]
+[connection signal="PositionSend" from="Player" to="." method="PositionSender"]
 [connection signal="PositionSend" from="Player" to="World" method="PositionTaker"]

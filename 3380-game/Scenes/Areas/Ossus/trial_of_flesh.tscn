@@ -1,0 +1,56 @@
+[gd_scene load_steps=6 format=3 uid="uid://cieqq1nn0tftj"]
+
+[ext_resource type="Script" uid="uid://cyb4t8nbhyiih" path="res://Assets/Scripts/World.cs" id="1_24awp"]
+[ext_resource type="Texture2D" uid="uid://bks2qqxvtjsye" path="res://Assets/Images/Maps/Ossus/trial of flesh-skill template.png" id="1_in738"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_24awp"]
+size = Vector2(149, 149)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_belwb"]
+size = Vector2(75, 75)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_in738"]
+size = Vector2(116, 53)
+
+[node name="TrialOfFlesh" type="Node"]
+script = ExtResource("1_24awp")
+
+[node name="TrialOfFlesh-skillTemplate2" type="Sprite2D" parent="."]
+position = Vector2(-6805, -482)
+texture = ExtResource("1_in738")
+
+[node name="Trial" type="Node2D" parent="."]
+
+[node name="Walls" type="StaticBody2D" parent="Trial"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Trial/Walls"]
+build_mode = 1
+polygon = PackedVector2Array(-5727, -683, -5651, -691, -5648, -528, -5700, -531, -5703, -428, -5853, -429, -5853, -279, -5903, -279, -5902, -104, -5978, -103, -5978, 172, -6029, 171, -6026, 271, -6104, 270, -6103, 445, -6154, 444, -6154, 469, -6227, 472, -6228, 518, -7306, 519, -7308, 501, -7382, 496, -7382, 472, -7405, 471, -7406, 425, -7458, 424, -7458, 396, -7507, 396, -7506, 320, -7583, 321, -7583, 171, -7610, 169, -7608, 71, -7657, 70, -7658, -5, -7782, -4, -7783, -80, -7807, -80, -7807, -155, -7857, -155, -7858, -204, -7886, -206, -7885, -231, -7911, -231, -7908, -354, -7958, -355, -7958, -584, -7932, -584, -7932, -1259, -7910, -1259, -7908, -1309, -7757, -1310, -7758, -1335, -7694, -1334, -7693, -1451, -7606, -1450, -7480, -1450, -7479, -1358, -7477, -1334, -7433, -1334, -7432, -1385, -7302, -1384, -7302, -1309, -7252, -1309, -7252, -1110, -7179, -1110, -7178, -1035, -7127, -1033, -7127, -1011, -7104, -1009, -7102, -985, -7052, -985, -7052, -936, -7033, -935, -7032, -959, -6951, -959, -6953, -910, -6881, -911, -6881, -960, -6152, -958, -6153, -884, -6127, -884, -6128, -809, -6001, -809, -6003, -733, -5904, -733, -5902, -684)
+
+[node name="CollisionPolygon2D2" type="Polygon2D" parent="Trial/Walls"]
+color = Color(0, 0, 0, 1)
+invert_enabled = true
+invert_border = 300.0
+polygon = PackedVector2Array(-5727, -683, -5700, -531, -5703, -428, -5853, -429, -5853, -279, -5903, -279, -5902, -104, -5978, -103, -5978, 172, -6029, 171, -6026, 271, -6104, 270, -6103, 445, -6154, 444, -6154, 469, -6227, 472, -6228, 518, -7306, 519, -7308, 501, -7382, 496, -7382, 472, -7405, 471, -7406, 425, -7458, 424, -7458, 396, -7507, 396, -7506, 320, -7583, 321, -7583, 171, -7610, 169, -7608, 71, -7657, 70, -7658, -5, -7782, -4, -7783, -80, -7807, -80, -7807, -155, -7857, -155, -7858, -204, -7886, -206, -7885, -231, -7911, -231, -7908, -354, -7958, -355, -7958, -584, -7932, -584, -7932, -1259, -7910, -1259, -7908, -1309, -7757, -1310, -7758, -1335, -7694, -1334, -7693, -1451, -7606, -1450, -7479, -1358, -7477, -1334, -7433, -1334, -7432, -1385, -7302, -1384, -7302, -1309, -7252, -1309, -7252, -1110, -7179, -1110, -7178, -1035, -7127, -1033, -7127, -1011, -7104, -1009, -7102, -985, -7052, -985, -7052, -936, -7033, -935, -7032, -959, -6951, -959, -6953, -910, -6881, -911, -6881, -960, -6152, -958, -6153, -884, -6127, -884, -6128, -809, -6001, -809, -6003, -733, -5904, -733, -5902, -684)
+
+[node name="Sign" type="CollisionShape2D" parent="Trial/Walls"]
+position = Vector2(-6080.5, -632.5)
+shape = SubResource("RectangleShape2D_24awp")
+
+[node name="Sign2" type="CollisionShape2D" parent="Trial/Walls"]
+position = Vector2(-7392.5, -1244.5)
+shape = SubResource("RectangleShape2D_belwb")
+
+[node name="Polygon2D" type="Polygon2D" parent="Trial"]
+position = Vector2(-3, 3)
+polygon = PackedVector2Array(-7599, -1441, -7599, -1364, -7479, -1364, -7480, -1441)
+
+[node name="Insight" type="Area2D" parent="Trial"]
+position = Vector2(-7535, -1366)
+collision_mask = 15
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Trial/Insight"]
+position = Vector2(-8, -45.5)
+shape = SubResource("RectangleShape2D_in738")
+
+[connection signal="body_entered" from="Trial/Insight" to="." method="Insight"]

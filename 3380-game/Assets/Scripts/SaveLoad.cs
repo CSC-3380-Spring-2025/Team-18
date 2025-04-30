@@ -7,6 +7,9 @@ using Game.Assets.Scripts.Saving;
 
 public partial class SaveLoad : Node, Savable, Loadable
 {	
+	[Signal] public delegate void PositionSetEventHandler(Vector2 position);
+	[Signal] public delegate void LocationEventHandler(string place);
+	
 	public void Save(){
 		
 	}
@@ -17,48 +20,47 @@ public partial class SaveLoad : Node, Savable, Loadable
 	{
 		SaveStats(stats);
 		SaveSprite(playerData);
-		using var file = FileAccess.Open("user://playerData_v3.dat", FileAccess.ModeFlags.Write);
-		var holder = new Godot.Collections.Array();
-		holder.Add(Position.X);
-		holder.Add(Position.Y);
-		holder.Add(Location);
-		file.StoreVar(holder);
+		SaveScene(Location);
+		SavePosition(Position);
 	}
 	
-	public void Load(Attributes stats, Vector2 Position, PlayerData playerData, String Location)
-	{   //for some reason once i run the bitch enough times it breaks. for no reason. if that happens to you,
-		//just change the file name to something that hasnt been used yet and it should be fine.
-		using var file = FileAccess.Open("user://playerData_v3.dat", FileAccess.ModeFlags.Read);
+	public void SaveScene(String Location){
+		using var file = FileAccess.Open("user://PlayerScene.dat", FileAccess.ModeFlags.Write);
+		file.StoreString(Location);
+	}
+	
+	public void LoadScene(String location){
+		using var file = FileAccess.Open("user://PlayerScene.dat", FileAccess.ModeFlags.Read);
 		if (file is not null)
 		{	
-			var holder = file.GetVar(true).As<Godot.Collections.Array>();
-			Position = new Vector2(holder[0].As<int>(),holder[1].As<int>());
-			Location = holder[2].AsString();
-			GD.Print("SaveLoad Load:"+Location);
+			location = file.GetAsText();
 		}
+		EmitSignal(SignalName.Location, location);
+	}
+	public void Load(Attributes stats, Vector2 Position, PlayerData playerData, String Location)
+	{ 
+		LoadPosition(Position);
 		LoadSprite(playerData);
 		LoadStats(stats);
+		LoadScene(Location);
 	}
 	
-	public void SavePosition(Vector2 Position, String Location){
+	public void SavePosition(Vector2 Position){
 		using var file = FileAccess.Open("user://playerData_v3.dat", FileAccess.ModeFlags.Write);
 		var holder = new Godot.Collections.Array();
 		holder.Add(Position.X);
 		holder.Add(Position.Y);
-		holder.Add(Location);
-		GD.Print("SavePosition: "+holder);
 		file.StoreVar(holder);
 	}
 	
-	public void LoadPosition(Vector2 Position, String Location){
+	public void LoadPosition(Vector2 position){
 		using var file = FileAccess.Open("user://playerData_v3.dat", FileAccess.ModeFlags.Read);
 		if (file is not null)
 		{	
 			var holder = file.GetVar(true).As<Godot.Collections.Array>();
-			Position = new Vector2(x: (holder[0].As<int>()),y: (holder[1].As<int>()));
-			Location = holder[2].AsString();
-			GD.Print("LoadPosition: "+holder);
+			position = new Vector2(x: (holder[0].As<int>()),y: (holder[1].As<int>()));
 		}
+		EmitSignal(SignalName.PositionSet, position);
 	}
 	
 	public void SaveSprite(PlayerData playerData){
