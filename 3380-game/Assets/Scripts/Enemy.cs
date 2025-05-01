@@ -11,7 +11,10 @@ public partial class Enemy : Area2D
 	[Export] public String EnemyType {get; set; } = "Default";
 
 	[Export] public NodePath[] PatrolPointsPaths { get; set; } = new NodePath[0];
-
+	
+	[Signal] public delegate void EnemyChangedEventHandler();
+		
+	private Node currentMenu = null;
 	private Vector2[] patrolPoints = new Vector2[0];
 	private int currentPatrolIndex = 0;
 	private int currentHealth;
@@ -19,9 +22,14 @@ public partial class Enemy : Area2D
 	private float attackCooldown = 1.5f;
 	private float attackTimer = 0f;
 	public AnimatedSprite2D enemy;
-	
+	public Node screens;
+	public Node main;
 	public override void _Ready()
 	{
+		main = GetTree().Root.GetChild(-1);
+		screens = main.FindChild("Screens");
+		
+		
 		enemy =  GetNode<AnimatedSprite2D>("Appearance");
 		ChangeEnemy(EnemyType);
 		currentHealth = MaxHealth;
@@ -86,6 +94,18 @@ public partial class Enemy : Area2D
 	public void TakeDamage(int amt)
 	{
 		currentHealth -= amt;
+	}
+
+	public void SpawnCombat(Node2D player){
+		
+		int counter = screens.GetChildCount();
+		if( counter > 0){
+			GD.Print("Has Scene Already");
+		} else{
+			PackedScene scene = GD.Load<PackedScene>("res://Scenes/Combat.tscn");
+			currentMenu = scene.Instantiate();
+			screens.AddChild(currentMenu);
+		}
 	}
 
 	public void ChangeEnemy(String enemyType){

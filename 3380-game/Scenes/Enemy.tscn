@@ -1,18 +1,45 @@
-[gd_scene load_steps=3 format=3 uid="uid://duajbv36udxmr"]
+[gd_scene load_steps=6 format=3 uid="uid://8afrp6fcpqwf"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_hniq1"]
-size = Vector2(59, 26)
+[ext_resource type="Script" uid="uid://ce3lr81ve3cna" path="res://Assets/Scripts/Enemy.cs" id="1_1f0kj"]
+[ext_resource type="Texture2D" uid="uid://8o215loyhp8g" path="res://Scenes/red_block.png" id="2_1f0kj"]
+[ext_resource type="Texture2D" uid="uid://bl58bf3pqojdg" path="res://Assets/Sprites/EnemySprites/TrainingDummy.png" id="2_afpow"]
 
-[sub_resource type="CanvasTexture" id="CanvasTexture_c5osr"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1f0kj"]
+size = Vector2(65, 65)
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
-position = Vector2(67, 77)
+[sub_resource type="SpriteFrames" id="SpriteFrames_1f0kj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_1f0kj")
+}],
+"loop": true,
+"name": &"Default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_afpow")
+}],
+"loop": true,
+"name": &"TrainingDummy",
+"speed": 5.0
+}]
+
+[node name="Enemy" type="Area2D"]
+script = ExtResource("1_1f0kj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(38, -1)
-shape = SubResource("RectangleShape2D_hniq1")
+scale = Vector2(1.26104, 1.13546)
+shape = SubResource("RectangleShape2D_1f0kj")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(79, -2)
-scale = Vector2(-78, -36)
-texture = SubResource("CanvasTexture_c5osr")
+[node name="PatrolPoint1" type="Node2D" parent="."]
+
+[node name="PatrolPoint2" type="Node2D" parent="."]
+
+[node name="Appearance" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -21)
+sprite_frames = SubResource("SpriteFrames_1f0kj")
+animation = &"TrainingDummy"
+
+[connection signal="body_entered" from="." to="." method="SpawnCombat"]

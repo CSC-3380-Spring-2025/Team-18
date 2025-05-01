@@ -4,6 +4,9 @@ using System.Threading.Tasks;
 
 public partial class Combat : CanvasLayer
 {
+	[Signal] public delegate void FreezeEventHandler();
+	[Signal] public delegate void PositionSetEventHandler(Vector2 position);
+
 	[Export] public Node playerUnitRoot;
 	[Export] public Node enemyUnitRoot;
 
@@ -12,7 +15,6 @@ public partial class Combat : CanvasLayer
 	[Export] public Button forceAttackButton;
 	[Export] public Button itemsButton;
 	[Export] public Button fleeButton;
-
 	private Unit playerUnit;
 	private Unit enemyUnit;
 
@@ -21,9 +23,11 @@ public partial class Combat : CanvasLayer
 
 	public override void _Ready()
 	{
+		
 		playerUnit = playerUnitRoot.GetNode<Unit>("CombatStats");
 		enemyUnit = enemyUnitRoot.GetNode<Unit>("CombatStats");
-
+		EmitSignal(SignalName.Freeze);
+		EmitSignal(SignalName.PositionSet, new Vector2(x:458, y: 63));
 		state = BattleState.PlayerTurn;
 		combatLog.Text = "Enemy Attacks!\n";
 	}
@@ -63,6 +67,7 @@ public partial class Combat : CanvasLayer
 	{
 		combatLog.Text += "You've fled the battle!\n";
 		state = BattleState.Lose;
+		EndBattle();
 	}
 
 	private async Task ToEnemyTurn()
@@ -93,11 +98,20 @@ public partial class Combat : CanvasLayer
 		{
 			combatLog.Text += "You have fallen.\n";
 			state = BattleState.Lose;
+			EndBattle();
 		}
 		else if (enemyUnit.IsDead)
 		{
 			combatLog.Text += "Enemy defeated! You've won!\n";
 			state = BattleState.Win;
+			EndBattle();
 		}
+
 	}
+	
+	public void EndBattle(){
+			Node screens = GetTree().Root.GetChild(-1).FindChild("Screens");
+			screens.RemoveChild(screens.GetChild(-1));
+	}
+	
 }
