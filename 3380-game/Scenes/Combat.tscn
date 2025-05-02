@@ -1,9 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://bmxui3m0y384n"]
+[gd_scene load_steps=10 format=3 uid="uid://c4ygdm3x3j0wm"]
 
 [ext_resource type="PackedScene" uid="uid://m81cq124ltn8" path="res://Scenes/Player.tscn" id="1_gpgi0"]
 [ext_resource type="Script" uid="uid://nu6nstdwf25m" path="res://Assets/Scripts/Combat.cs" id="1_rq8dt"]
 [ext_resource type="Script" uid="uid://c8b5x764olfa1" path="res://Scenes/HealthBar.cs" id="2_qylva"]
-[ext_resource type="PackedScene" uid="uid://duajbv36udxmr" path="res://Scenes/Enemy.tscn" id="2_uau57"]
+[ext_resource type="PackedScene" uid="uid://8afrp6fcpqwf" path="res://Scenes/enemy.tscn" id="2_uau57"]
 [ext_resource type="Script" uid="uid://bwd4pmcf1tti4" path="res://Assets/Scripts/Unit.cs" id="4_0dhp0"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kfc0q"]
@@ -80,10 +80,10 @@ healthBar = NodePath("../HealthBar")
 layout_mode = 3
 anchor_right = 0.751
 anchor_bottom = 0.691
-offset_left = 576.0
-offset_top = 160.0
-offset_right = -389.6
-offset_bottom = -409.9
+offset_left = 773.0
+offset_top = 132.0
+offset_right = -192.6
+offset_bottom = -437.9
 
 [node name="GridContainer" type="GridContainer" parent="Control"]
 layout_mode = 1
@@ -127,23 +127,17 @@ offset_right = -686.092
 offset_bottom = -485.632
 
 [node name="Enemy" parent="." instance=ExtResource("2_uau57")]
-position = Vector2(882, 111)
-MaxHealth = null
-Damage = null
-Speed = null
-ChaseRadius = null
-AttackRange = null
-PatrolPointsPaths = null
+position = Vector2(829, 93)
 
 [node name="CombatStats" type="Node" parent="Enemy" node_paths=PackedStringArray("healthBar")]
 script = ExtResource("4_0dhp0")
 healthBar = NodePath("../HealthBar")
 
 [node name="HealthBar" type="ProgressBar" parent="Enemy" node_paths=PackedStringArray("TimerNode", "DamageBar")]
-offset_left = -58.0
-offset_top = 18.0
-offset_right = 182.0
-offset_bottom = 38.0
+offset_left = -71.0
+offset_top = 42.0
+offset_right = 169.0
+offset_bottom = 62.0
 theme_override_styles/background = SubResource("StyleBoxEmpty_kfc0q")
 theme_override_styles/fill = SubResource("StyleBoxFlat_lcu26")
 value = 100.0
@@ -175,6 +169,8 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_xqnup")
 value = 100.0
 show_percentage = false
 
+[connection signal="Freeze" from="." to="Player" method="Freezer"]
+[connection signal="PositionSet" from="." to="Player" method="PositionSetTaker"]
 [connection signal="timeout" from="Player/HealthBar/Timer" to="Player/HealthBar" method="OnTimerTimeout"]
 [connection signal="pressed" from="Control/GridContainer/Basic Attack" to="." method="OnBasicAttackPressed"]
 [connection signal="pressed" from="Control/GridContainer/Force Attack" to="." method="OnForceAttackPressed"]

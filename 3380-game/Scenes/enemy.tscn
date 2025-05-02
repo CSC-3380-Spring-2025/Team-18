@@ -4,7 +4,6 @@
 [ext_resource type="Texture2D" uid="uid://8o215loyhp8g" path="res://Scenes/red_block.png" id="2_1f0kj"]
 [ext_resource type="Texture2D" uid="uid://bl58bf3pqojdg" path="res://Assets/Sprites/EnemySprites/TrainingDummy.png" id="2_afpow"]
 
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1f0kj"]
 size = Vector2(65, 65)
 
@@ -31,7 +30,7 @@ animations = [{
 script = ExtResource("1_1f0kj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, -0.5)
+scale = Vector2(1.26104, 1.13546)
 shape = SubResource("RectangleShape2D_1f0kj")
 
 [node name="PatrolPoint1" type="Node2D" parent="."]
@@ -43,3 +42,4 @@ position = Vector2(0, -21)
 sprite_frames = SubResource("SpriteFrames_1f0kj")
 animation = &"TrainingDummy"
 
+[connection signal="body_entered" from="." to="." method="SpawnCombat"]

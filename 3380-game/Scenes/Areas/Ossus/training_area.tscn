@@ -4,8 +4,6 @@
 [ext_resource type="Texture2D" uid="uid://q4vm8bltipvx" path="res://Assets/Images/Maps/Ossus/training grounds template.png" id="2_8dwyj"]
 [ext_resource type="PackedScene" uid="uid://8afrp6fcpqwf" path="res://Scenes/enemy.tscn" id="3_8dwyj"]
 
-[ext_resource type="PackedScene" uid="uid://bmxui3m0y384n" path="res://Scenes/Combat.tscn" id="3_8dwyj"]
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p7yfw"]
 size = Vector2(18.5, 155.5)
 
@@ -61,16 +59,16 @@ polygons = [PackedInt32Array(5, 6, 7, 8), PackedInt32Array(3, 1, 0, 4)]
 internal_vertex_count = 4
 
 [node name="Enemy" parent="." instance=ExtResource("3_8dwyj")]
-top_level = true
-visibility_layer = 7
 y_sort_enabled = true
-position = Vector2(-4454, -942)
+position = Vector2(-4456, -949)
+collision_layer = 4
+collision_mask = 2
+MaxHealth = 10
+Damage = 1
 Speed = 0.0
 ChaseRadius = 0.0
+AttackRange = 0.0
 EnemyType = "TrainingDummy"
-
-[node name="CanvasLayer" parent="." instance=ExtResource("3_8dwyj")]
-
 
 [connection signal="body_entered" from="Commons" to="." method="Commons"]
 [connection signal="body_entered" from="Commons2" to="." method="Commons"]
