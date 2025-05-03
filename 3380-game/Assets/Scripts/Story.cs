@@ -11,7 +11,7 @@ public partial class Story : Control
 	
 	
 	public override void _Ready(){
-		SL.SavePosition(new Vector2(x: 165, y: 241));
+		SL.SavePosition(new Vector2(x: 130, y: 312));
 		SL.SaveScene("res://Scenes/Areas/Ossus/Bedroom.tscn");
 	}
 	

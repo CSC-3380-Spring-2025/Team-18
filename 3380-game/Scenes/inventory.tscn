@@ -2,8 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dwutpj63i31w3" path="res://Assets/Images/3380 Inventory.png" id="1_vnlv7"]
 [ext_resource type="PackedScene" uid="uid://dycymydk1237u" path="res://Scenes/HUD.tscn" id="2_2dgjs"]
-[ext_resource type="Script" uid="uid://mc5hr5wg7kjq" path="res://Assets/Scripts/inventory.cs" id="3_j14vy"]
-
+[ext_resource type="Script" uid="uid://mc5hr5wg7kjq" path="res://Assets/Scripts/Inventory.cs" id="3_j14vy"]
 
 [node name="Inventory" type="CanvasLayer"]
 
@@ -27,12 +26,12 @@ anchor_right = 0.012
 anchor_bottom = 0.022
 offset_left = 180.0
 offset_top = 185.0
-offset_right = 413.8
-offset_bottom = 579.2
+offset_right = 759.8
+offset_bottom = 737.2
+allow_reselect = true
 allow_rmb_select = true
 allow_search = false
 auto_height = true
-max_columns = 4
 same_column_width = true
 fixed_column_width = 55
 icon_mode = 0

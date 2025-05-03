@@ -8,7 +8,8 @@ public partial class PauseScreen : CanvasLayer
 
 	[Export] private Button resume, quit, inventory, stats, settings;
 	[Signal] public delegate void SaveEventHandler();
-	
+	public Node world = null;
+	public CharacterBody2D player = null;
 	private Node currentMenu = null;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready(){
@@ -64,7 +65,10 @@ public partial class PauseScreen : CanvasLayer
 			}
 			
 		}
-		EmitSignal(SignalName.Save);
+		
+		world = GetNode("/root/Main/World");
+		player = (CharacterBody2D)world.FindChild("Player");
+		SavePosition(player.GetPosition());
 		GetTree().Quit();
 	}
 	public void InventoryPressed(){
@@ -92,5 +96,15 @@ public partial class PauseScreen : CanvasLayer
 		}
 		
 	}
+
+	public void SavePosition(Vector2 Position){
+		using var file = FileAccess.Open("user://playerData_v3.dat", FileAccess.ModeFlags.Write);
+		var holder = new Godot.Collections.Array();
+		holder.Add(Position.X);
+		holder.Add(Position.Y);
+		file.StoreVar(holder);
+		
+	}
+
 
 }
