@@ -35,6 +35,7 @@ color = Color(0, 0.0156863, 0.0941176, 1)
 polygon = PackedVector2Array(-308, -222, -580, -222, -587, 183, 500, 200, 465, -262)
 
 [node name="Player" parent="Stat/Stats-qt" instance=ExtResource("2_i6gfd")]
+position = Vector2(0, 55)
 scale = Vector2(2, 2)
 
 [node name="HUD" parent="Stat" instance=ExtResource("2_xtw31")]

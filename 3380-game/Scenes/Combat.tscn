@@ -23,7 +23,8 @@ shadow_offset = Vector2(0, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xqnup"]
 bg_color = Color(0.796243, 0.796243, 0.796243, 1)
 
-[node name="CanvasLayer" type="CanvasLayer" node_paths=PackedStringArray("playerUnitRoot", "enemyUnitRoot", "combatLog", "basicAttackButton", "forceAttackButton", "itemsButton", "fleeButton")]
+[node name="Combat" type="CanvasLayer" node_paths=PackedStringArray("playerUnitRoot", "enemyUnitRoot", "combatLog", "basicAttackButton", "forceAttackButton", "itemsButton", "fleeButton")]
+process_mode = 3
 script = ExtResource("1_rq8dt")
 playerUnitRoot = NodePath("Player")
 enemyUnitRoot = NodePath("Enemy")
@@ -34,13 +35,13 @@ itemsButton = NodePath("Control/GridContainer/Items")
 fleeButton = NodePath("Control/GridContainer/Flee")
 
 [node name="Player" parent="." instance=ExtResource("1_gpgi0")]
-position = Vector2(458, 63)
+position = Vector2(520, 127)
 
 [node name="HealthBar" type="ProgressBar" parent="Player" node_paths=PackedStringArray("TimerNode", "DamageBar")]
-offset_left = -85.0
-offset_top = 72.0
-offset_right = 155.0
-offset_bottom = 92.0
+offset_left = -96.0
+offset_top = 10.0
+offset_right = 144.0
+offset_bottom = 30.0
 theme_override_styles/background = SubResource("StyleBoxEmpty_kfc0q")
 theme_override_styles/fill = SubResource("StyleBoxFlat_lcu26")
 value = 100.0
@@ -169,11 +170,14 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_xqnup")
 value = 100.0
 show_percentage = false
 
+[connection signal="End" from="." to="Enemy" method="Death"]
 [connection signal="Freeze" from="." to="Player" method="Freezer"]
 [connection signal="PositionSet" from="." to="Player" method="PositionSetTaker"]
+[connection signal="EnemySend" from="Player" to="." method="NodeHolder"]
 [connection signal="timeout" from="Player/HealthBar/Timer" to="Player/HealthBar" method="OnTimerTimeout"]
 [connection signal="pressed" from="Control/GridContainer/Basic Attack" to="." method="OnBasicAttackPressed"]
 [connection signal="pressed" from="Control/GridContainer/Force Attack" to="." method="OnForceAttackPressed"]
 [connection signal="pressed" from="Control/GridContainer/Items" to="." method="OnItemsPressed"]
 [connection signal="pressed" from="Control/GridContainer/Flee" to="." method="OnFleePressed"]
+[connection signal="EnemyNode" from="Enemy" to="." method="NodeHolder"]
 [connection signal="timeout" from="Enemy/HealthBar/Timer" to="Enemy/HealthBar" method="OnTimerTimeout"]

@@ -1,11 +1,37 @@
-[gd_scene load_steps=6 format=3 uid="uid://8afrp6fcpqwf"]
+[gd_scene load_steps=14 format=3 uid="uid://8afrp6fcpqwf"]
 
 [ext_resource type="Script" uid="uid://ce3lr81ve3cna" path="res://Assets/Scripts/Enemy.cs" id="1_1f0kj"]
 [ext_resource type="Texture2D" uid="uid://8o215loyhp8g" path="res://Scenes/red_block.png" id="2_1f0kj"]
 [ext_resource type="Texture2D" uid="uid://bl58bf3pqojdg" path="res://Assets/Sprites/EnemySprites/TrainingDummy.png" id="2_afpow"]
+[ext_resource type="Texture2D" uid="uid://bvlbk2pxj480n" path="res://Assets/Sprites/EnemySprites/swarm_1.png" id="3_0830c"]
+[ext_resource type="Texture2D" uid="uid://diuvneir7snvw" path="res://Assets/Sprites/EnemySprites/droid_front_1.png" id="4_ghaa6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1f0kj"]
 size = Vector2(65, 65)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1dp5w"]
+atlas = ExtResource("3_0830c")
+region = Rect2(0, 0, 140, 140)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_auwsv"]
+atlas = ExtResource("3_0830c")
+region = Rect2(140, 0, 140, 140)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8uf12"]
+atlas = ExtResource("3_0830c")
+region = Rect2(0, 140, 140, 140)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_po0sg"]
+atlas = ExtResource("3_0830c")
+region = Rect2(140, 140, 140, 140)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_haro7"]
+atlas = ExtResource("4_ghaa6")
+region = Rect2(0, 0, 140, 140)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_56vhr"]
+atlas = ExtResource("4_ghaa6")
+region = Rect2(140, 0, 140, 140)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_1f0kj"]
 animations = [{
@@ -16,6 +42,40 @@ animations = [{
 "loop": true,
 "name": &"Default",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1dp5w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_auwsv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8uf12")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_po0sg")
+}],
+"loop": true,
+"name": &"DroidSwarm",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_haro7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_56vhr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_haro7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_56vhr")
+}],
+"loop": true,
+"name": &"Droid_1",
+"speed": 3.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -30,6 +90,7 @@ animations = [{
 script = ExtResource("1_1f0kj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -36)
 scale = Vector2(1.26104, 1.13546)
 shape = SubResource("RectangleShape2D_1f0kj")
 
@@ -38,8 +99,9 @@ shape = SubResource("RectangleShape2D_1f0kj")
 [node name="PatrolPoint2" type="Node2D" parent="."]
 
 [node name="Appearance" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -21)
+position = Vector2(0, -50)
 sprite_frames = SubResource("SpriteFrames_1f0kj")
-animation = &"TrainingDummy"
+animation = &"DroidSwarm"
 
+[connection signal="Telephone" from="." to="." method="Sender"]
 [connection signal="body_entered" from="." to="." method="SpawnCombat"]

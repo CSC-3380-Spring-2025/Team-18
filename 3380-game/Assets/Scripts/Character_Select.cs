@@ -33,7 +33,7 @@ public partial class Character_Select : Control
 	 	stats = new Attributes();
 		EmitSignal(SignalName.PDat, playerData);
 		EmitSignal(SignalName.PStats, stats);
-		EmitSignal(SignalName.PositionSet, new Vector2(x: (800),y: (220)));
+		EmitSignal(SignalName.PositionSet, new Vector2(x: (800),y: (343)));
 
 	}
 	
