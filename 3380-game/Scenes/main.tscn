@@ -7,7 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://liq25vhrxyqs" path="res://Scenes/pauseScreen.tscn" id="2_82p86"]
 [ext_resource type="PackedScene" uid="uid://rbpl4w2tdyw8" path="res://Scenes/Areas/Ossus/Bedroom.tscn" id="2_kry3j"]
 
-[node name="Main" type="Node"]
+[node name="Main" type="Node2D"]
+process_mode = 1
+z_as_relative = false
 script = ExtResource("1_8gbba")
 
 [node name="SaveLoad" type="Node" parent="."]
@@ -15,20 +17,27 @@ script = ExtResource("2_21xkr")
 
 [node name="World" type="Node2D" parent="."]
 unique_name_in_owner = true
+z_index = -1
+z_as_relative = false
+y_sort_enabled = true
 script = ExtResource("1_jjvhh")
+
+[node name="Player" parent="World" node_paths=PackedStringArray("camera") instance=ExtResource("1_f5fn6")]
+process_mode = 1
+z_index = 1
+z_as_relative = false
+position = Vector2(130, 313)
+camera = NodePath("Camera2D")
+
+[node name="Camera2D" type="Camera2D" parent="World/Player"]
+position = Vector2(0, -69)
+zoom = Vector2(2, 2)
+process_callback = 0
 
 [node name="Bedroom" parent="World" instance=ExtResource("2_kry3j")]
 
 [node name="Pause Screen" parent="." instance=ExtResource("2_82p86")]
 visible = false
-
-[node name="Player" parent="." instance=ExtResource("1_f5fn6")]
-process_mode = 1
-position = Vector2(165, 241)
-
-[node name="Camera2D" type="Camera2D" parent="Player"]
-zoom = Vector2(2, 2)
-process_callback = 0
 
 [node name="Screens" type="Control" parent="."]
 layout_mode = 3
@@ -37,16 +46,16 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [connection signal="Location" from="." to="World" method="PositionChecker"]
-[connection signal="Location" from="." to="Player" method="LocationTaker"]
-[connection signal="Position" from="." to="Player" method="PositionSetTaker"]
+[connection signal="Location" from="." to="World/Player" method="LocationTaker"]
+[connection signal="Position" from="." to="World/Player" method="PositionSetTaker"]
 [connection signal="Location" from="SaveLoad" to="." method="LocationSender"]
 [connection signal="Location" from="SaveLoad" to="World" method="PositionChecker"]
 [connection signal="PositionSet" from="SaveLoad" to="." method="PositionSender"]
-[connection signal="PositionSet" from="SaveLoad" to="Player" method="PositionSetTaker"]
+[connection signal="PositionSet" from="SaveLoad" to="World/Player" method="PositionSetTaker"]
 [connection signal="Location" from="World" to="." method="LocationSender"]
-[connection signal="Location" from="World" to="Player" method="LocationTaker"]
-[connection signal="PositionSend" from="World" to="Player" method="PositionSetTaker"]
-[connection signal="Save" from="Pause Screen" to="Player" method="Save"]
-[connection signal="LocationChange" from="Player" to="." method="LocationSender"]
-[connection signal="PositionSend" from="Player" to="." method="PositionSender"]
-[connection signal="PositionSend" from="Player" to="World" method="PositionTaker"]
+[connection signal="Location" from="World" to="World/Player" method="LocationTaker"]
+[connection signal="PositionSend" from="World" to="World/Player" method="PositionSetTaker"]
+[connection signal="LocationChange" from="World/Player" to="." method="LocationSender"]
+[connection signal="PositionSend" from="World/Player" to="." method="PositionSender"]
+[connection signal="PositionSend" from="World/Player" to="World" method="PositionTaker"]
+[connection signal="Save" from="Pause Screen" to="World/Player" method="Save"]

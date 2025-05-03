@@ -6,7 +6,9 @@ public partial class Combat : CanvasLayer
 {
 	[Signal] public delegate void FreezeEventHandler();
 	[Signal] public delegate void PositionSetEventHandler(Vector2 position);
-
+	[Signal] public delegate void EndEventHandler(String enemyNode);
+	public Node screens;
+	public Node last;
 	[Export] public Node playerUnitRoot;
 	[Export] public Node enemyUnitRoot;
 
@@ -15,23 +17,30 @@ public partial class Combat : CanvasLayer
 	[Export] public Button forceAttackButton;
 	[Export] public Button itemsButton;
 	[Export] public Button fleeButton;
+	public String EnemyNode;
 	private Unit playerUnit;
 	private Unit enemyUnit;
-
+	private bool PauseWorld = false;
 	private enum BattleState { PlayerTurn, EnemyTurn, Win, Lose }
 	private BattleState state;
 
 	public override void _Ready()
 	{
-		
+		//GetTree().Paused = !GetTree().Paused;
 		playerUnit = playerUnitRoot.GetNode<Unit>("CombatStats");
 		enemyUnit = enemyUnitRoot.GetNode<Unit>("CombatStats");
 		EmitSignal(SignalName.Freeze);
-		EmitSignal(SignalName.PositionSet, new Vector2(x:458, y: 63));
+		EmitSignal(SignalName.PositionSet, new Vector2(x:520, y: 127));
 		state = BattleState.PlayerTurn;
 		combatLog.Text = "Enemy Attacks!\n";
 	}
 
+	public void NodeHolder(String enemyNode){
+		GD.Print(enemyNode+" recieved");
+		EnemyNode = enemyNode;
+		
+	}
+	
 	private void OnBasicAttackPressed()
 	{
 		if (state != BattleState.PlayerTurn)
@@ -110,8 +119,11 @@ public partial class Combat : CanvasLayer
 	}
 	
 	public void EndBattle(){
-			Node screens = GetTree().Root.GetChild(-1).FindChild("Screens");
-			screens.RemoveChild(screens.GetChild(-1));
+			screens = GetTree().Root.GetChild(-1).FindChild("Screens");
+			last = screens.GetChild(-1);
+			screens.RemoveChild(last);
+			//GetTree().Paused = !GetTree().Paused;
+			EmitSignal(SignalName.End, EnemyNode);
 	}
 	
 }

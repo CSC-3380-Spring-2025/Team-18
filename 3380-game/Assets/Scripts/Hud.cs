@@ -53,7 +53,7 @@ public partial class Hud : Control
 	}
 
 public void SwitchScene(string scenePath){
-		screens.RemoveChild(screens.GetChild(-1));
+		screens.GetChild(-1).QueueFree();
 		
 		PackedScene scene = GD.Load<PackedScene>(scenePath);
 		if(scene != null){

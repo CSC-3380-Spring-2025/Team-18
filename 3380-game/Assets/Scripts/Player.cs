@@ -13,6 +13,13 @@ public partial class Player : CharacterBody2D, Savable, Loadable
 	[Signal] public delegate void LocationChangeEventHandler(String location);
 	[Signal] public delegate void DamageEventHandler(int dmgTaken);
 	[Signal] public delegate void PositionSendEventHandler(Vector2 position);
+	[Signal] public delegate void EnemySendEventHandler(String enemyNode);
+	
+	public double holder = 0; //nodes to supplement interactions
+	public bool check = false;
+	public Label objLabel = null;
+	public Color labelColor = new Color(0,0,0,1);
+	
 	
 	public Vector2 screenSize;
 	public bool Frozen = false;
@@ -21,13 +28,19 @@ public partial class Player : CharacterBody2D, Savable, Loadable
 	public SaveLoad SL = new SaveLoad();
 	public string bodyType = "1";
 	public string Location;
-
+//takes in the variables from character select, so the player changes in real time.
 	public void PDatTaker(PlayerData PDat){
 		playerData = new PlayerData(PDat.Name, PDat.Class, PDat.Race, PDat.Hair, PDat.Eye, PDat.Pattern,
 		PDat.SkinColor, PDat.EyeColor, PDat.HairColor, PDat.FacialMarkings);
 	}
+	
 	public void CameraChange(){
 		camera.Enabled = true;
+	}
+	
+	public void EnemyTaker(String enemyPath){
+		GD.Print("Enemy Taken: "+enemyPath);
+		EmitSignal(SignalName.EnemySend, enemyPath);
 	}
 	
 	public void LocationTaker(string place){
@@ -63,13 +76,51 @@ public partial class Player : CharacterBody2D, Savable, Loadable
 	{
 		if (!IsGamePaused() && !Frozen)
 		{Vector2 inputDir = Input.GetVector("move_left", "move_right", "move_up", "move_down");
-		Velocity = inputDir * Speed;}
+		Velocity = inputDir * Speed;
+		}
 	}
 	
 	public override void _PhysicsProcess(double delta)
 	{
+		holder += delta;
+		float fDelta = (float)delta;
+		
 		GetInput();
-		MoveAndCollide(Velocity * (float)delta);
+		var collision = MoveAndCollide(Velocity * (float)delta);
+		if (collision != null){ 
+			/* What does this do? this lets the player interact with shit and have text pop up. 
+			*/
+			if( ((Node)collision.GetCollider()).IsInGroup("Interactable")){
+				//GD.Print(((Node)collision.GetCollider()).Name);
+				if(Input.IsActionPressed("interact"))
+				{
+					var collided = ((Node)collision.GetCollider());
+					objLabel = (Label)collided.FindChild("Label");
+					labelColor = objLabel.GetSelfModulate();
+					objLabel.Visible = true;
+					labelColor.A = 1;
+					objLabel.Modulate = (labelColor);
+					check = true;
+					holder = 0;
+				}
+			}
+			
+			if( ((Node)collision.GetCollider()).IsInGroup("Enemy")){
+				//GD.Print(((Node)collision.GetCollider()).Name);
+				EmitSignal(SignalName.EnemySend, ((Node)collision.GetCollider()).Name);
+				
+			}
+			//GetTree().GetNodesInGroup("Interactable");
+		}
+		
+		if(check == true && holder >= 2){
+			if(labelColor.A > 0){
+				labelColor.A -= fDelta;
+				objLabel.SelfModulate = (labelColor);
+			} else {check = false; objLabel.Visible = false;}
+		}
+		
+	//end phys process	
 	}
 
 public override void _Process(double delta) //called in real time
@@ -100,9 +151,6 @@ public override void _Process(double delta) //called in real time
 		AnimationTurn(hair, Velocity, playerData.Hair, "hair");
 		hair.SelfModulate = (playerData.HairColor);		
 		hair.Show();
-	} else {
-		hair.Hide();
-		hairBack.Hide();
 		
 		if(playerData.Pattern.ToInt() == 0){
 			pattern.Hide();
@@ -111,6 +159,11 @@ public override void _Process(double delta) //called in real time
 			AnimationTurn(pattern, Velocity, playerData.Pattern);
 			pattern.SelfModulate = (playerData.FacialMarkings);
 		}
+	} else {
+		hair.Hide();
+		hairBack.Hide();
+		pattern.SelfModulate = (playerData.FacialMarkings);
+		
 		}
 	
 	if (Velocity.Length() > 0){
@@ -174,8 +227,9 @@ public void AnimationTurn(AnimatedSprite2D node, Vector2 velocity, string choice
 }
 
 public void Save(){
-	EmitSignal(SignalName.PositionSend, Position);
-	SL.SavePosition(Position);
+	GD.Print(this.GetPosition());
+	EmitSignal(SignalName.PositionSend, this.GetPosition());
+	SL.SavePosition(this.GetPosition());
 	SL.SaveSprite(playerData);
 	SL.SaveStats(stats);
 }

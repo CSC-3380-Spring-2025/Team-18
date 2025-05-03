@@ -14,7 +14,7 @@ font_size = 52
 [node name="Equipment" type="CanvasLayer"]
 process_mode = 3
 
-[node name="Equipment" type="Control" parent="."]
+[node name="Equipment" type="Control" parent="." node_paths=PackedStringArray("CurrentHP", "MaxHP", "AC")]
 process_mode = 3
 layout_mode = 3
 anchor_left = 0.512
@@ -26,6 +26,9 @@ offset_top = -19.8
 offset_right = 20.8
 offset_bottom = 20.2
 script = ExtResource("3_85gve")
+CurrentHP = NodePath("Current HP")
+MaxHP = NodePath("Max HP")
+AC = NodePath("AC")
 
 [node name="Icon" type="ColorRect" parent="Equipment"]
 show_behind_parent = true
@@ -42,7 +45,7 @@ metadata/_edit_use_anchors_ = true
 [node name="Player" parent="Equipment" instance=ExtResource("2_arhw4")]
 process_mode = 3
 visibility_layer = 3
-position = Vector2(-540, -54)
+position = Vector2(-540, 150)
 scale = Vector2(4.004, 4)
 Speed = 0
 
@@ -214,6 +217,7 @@ text = "Level up button
 
 [node name="HUD" parent="Equipment" instance=ExtResource("2_y2a5c")]
 process_mode = 3
+top_level = true
 
 [connection signal="Freeze" from="Equipment" to="Equipment/Player" method="Freezer"]
 [connection signal="PositionSet" from="Equipment" to="Equipment/Player" method="PositionSetTaker"]

@@ -9,11 +9,19 @@ public partial class Enemy : Area2D
 	[Export] public float ChaseRadius { get; set; } = 200f;
 	[Export] public float AttackRange { get; set; } = 20f;
 	[Export] public String EnemyType {get; set; } = "Default";
+	[Export] public bool EnemyRandom {get; set;} = false; //Can enemy be random spawn?
+	[Export] public int RandIndex1 {get; set;} = 0; //Lowest enemy index for randomization
+	[Export] public int RandIndex2 {get; set;} = 0; //high end of indexes 
 
 	[Export] public NodePath[] PatrolPointsPaths { get; set; } = new NodePath[0];
 	
 	[Signal] public delegate void EnemyChangedEventHandler();
-		
+	[Signal] public delegate void EnemyNodeEventHandler(String enemyName); //sends to combat
+	[Signal] public delegate void TelephoneEventHandler(String enemyName); //sends to self
+
+	public Node area = null;
+	public Node specificGuy = null;
+
 	private Node currentMenu = null;
 	private Vector2[] patrolPoints = new Vector2[0];
 	private int currentPatrolIndex = 0;
@@ -29,9 +37,15 @@ public partial class Enemy : Area2D
 		main = GetTree().Root.GetChild(-1);
 		screens = main.FindChild("Screens");
 		
+
 		
 		enemy =  GetNode<AnimatedSprite2D>("Appearance");
-		ChangeEnemy(EnemyType);
+		if(EnemyRandom){
+			Randomize(RandIndex1, RandIndex2);
+		} else {
+			ChangeEnemy(EnemyType);
+		}
+		
 		currentHealth = MaxHealth;
 		
 
@@ -43,7 +57,7 @@ public partial class Enemy : Area2D
 		}
 
 		var rootScene = GetTree().Root;
-		player = rootScene?.GetNode<Node2D>("/root/Main/Player");
+		player = rootScene?.GetNode<Node2D>("/root/Main/World/Player");
 		if (player == null)
 			GD.PrintErr("Enemy: Player node not found.");
 	}
@@ -58,7 +72,9 @@ public partial class Enemy : Area2D
 
 		Vector2 me = Position;
 		Vector2 velocity = Vector2.Zero;
+		
 
+		
 		if (player != null && me.DistanceTo(player.Position) < ChaseRadius)
 		{
 			var toPlayer = player.Position - me;
@@ -78,16 +94,26 @@ public partial class Enemy : Area2D
 		}
 
 		Position += velocity * (float)delta;
+		
+		if (velocity.Length() > 0){
+			enemy.Play();
+		}
+		
 	}
 
 	private void Attack(float dt)
 	{
-		attackTimer -= dt;
-		if (attackTimer <= 0f && player is Player p)
-		{
-			if (p.Position.DistanceTo(Position) <= AttackRange)
-				p.stats.CurrentHealth -= Damage;
-			attackTimer = attackCooldown;
+		AttackRange = 0f;
+		Speed = 0;
+		ChaseRadius = 0f;
+		Node counter = screens.FindChild("Combat");
+		if( counter != null ){
+			GD.Print("Has Scene Already");
+		} else{
+			PackedScene scene = GD.Load<PackedScene>("res://Scenes/Combat.tscn");
+			currentMenu = scene.Instantiate();
+			screens.AddChild(currentMenu);
+			EmitSignal(SignalName.Telephone, this.Name);
 		}
 	}
 
@@ -97,33 +123,91 @@ public partial class Enemy : Area2D
 	}
 
 	public void SpawnCombat(Node2D player){
-		
-		int counter = screens.GetChildCount();
-		if( counter > 0){
+		AttackRange = 0f;
+		Speed = 0;
+		ChaseRadius = 0f;
+		Node counter = screens.FindChild("Combat");
+		if( counter != null ){
 			GD.Print("Has Scene Already");
 		} else{
 			PackedScene scene = GD.Load<PackedScene>("res://Scenes/Combat.tscn");
 			currentMenu = scene.Instantiate();
-			screens.AddChild(currentMenu);
+			screens.CallDeferred(Node.MethodName.AddChild, currentMenu);
+			//screens.AddChild(currentMenu);
+			counter = screens.FindChild("Combat");
+			EmitSignal(SignalName.Telephone, this.Name);
 		}
 	}
 
+//This statement allows for automatic switching of enemy stats and shit 
 	public void ChangeEnemy(String enemyType){
-		enemy.Animation = (enemyType);
 		
+		/*"hey what the fuck is this?" im so glad you asked. it allows for the randomization of enemies, 
+		using the second half of the when statements. :)
+		*/
 		switch(enemyType){
-			case "Default":
+			case String n when(enemyType == "Default" || enemyType == "1"): 
+				MaxHealth = 50;
+				Damage = 10;
+				Speed = 100;
+				ChaseRadius = 200f;
+				AttackRange = 20f;
+				enemy.Animation = ("Default");
 				break;
-			case "TrainingDummy":
+			case String n when(enemyType == "TrainingDummy" || enemyType == "2"):
 				MaxHealth = 10;
 				Damage = 1;
 				Speed = 0;
 				ChaseRadius = 0f;
 				AttackRange = 0f;
+				enemy.Animation = ("TrainingDummy");
+				break;
+			case String n when(enemyType == "Droid_1" || enemyType == "3"):
+				MaxHealth = 10;
+				Damage = 1;
+				Speed = 100;
+				ChaseRadius = 500f;
+				AttackRange = 20f;
+				enemy.Animation = ("Droid_1");
+				break;
+			case String n when(enemyType == "DroidSwarm" || enemyType == "4"):
+				MaxHealth = 10;
+				Damage = 10;
+				Speed = 300;
+				ChaseRadius = 300f;
+				AttackRange = 20f;
+				enemy.Animation = ("DroidSwarm");
 				break;
 		}
 		
 		
+	}
+
+public void Sender(String enemyPath){
+	GD.Print("Sent from Sender "+enemyPath);
+		EmitSignal(SignalName.EnemyNode, this.Name);
+
+}
+
+	public void Death(String enemyPath){
+		GD.Print("Killing "+enemyPath);
+		
+		area = GetTree().Root.FindChild("Main").FindChild("World").GetChild(-1);
+		specificGuy = area.FindChild(enemyPath);
+		specificGuy.QueueFree();
+		
+		foreach(Enemy i in area.GetChildren()){
+			if(Speed == 0 && ChaseRadius == 0f && EnemyType != "TrainingDummy"){
+				this.QueueFree();
+			}
+		}
+	}
+
+	
+	public void Randomize(int x, int y){
+		var rand = new Random();
+		int roll = rand.Next(x,y);
+		ChangeEnemy(""+roll);
 	}
 
 }

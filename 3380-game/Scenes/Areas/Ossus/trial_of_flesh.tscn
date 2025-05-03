@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://cieqq1nn0tftj"]
+[gd_scene load_steps=7 format=3 uid="uid://cieqq1nn0tftj"]
 
 [ext_resource type="Script" uid="uid://cyb4t8nbhyiih" path="res://Assets/Scripts/World.cs" id="1_24awp"]
 [ext_resource type="Texture2D" uid="uid://bks2qqxvtjsye" path="res://Assets/Images/Maps/Ossus/trial of flesh-skill template.png" id="1_in738"]
+[ext_resource type="PackedScene" uid="uid://8afrp6fcpqwf" path="res://Scenes/enemy.tscn" id="3_belwb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_24awp"]
 size = Vector2(149, 149)
@@ -52,5 +53,73 @@ collision_mask = 15
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Trial/Insight"]
 position = Vector2(-8, -45.5)
 shape = SubResource("RectangleShape2D_in738")
+
+[node name="EnemyPaths" type="Node" parent="."]
+
+[node name="route1" type="Node" parent="EnemyPaths"]
+
+[node name="Node2D" type="Node2D" parent="EnemyPaths/route1"]
+position = Vector2(-6541, -584)
+
+[node name="Node2D2" type="Node2D" parent="EnemyPaths/route1"]
+position = Vector2(-6431, -887)
+
+[node name="Node2D3" type="Node2D" parent="EnemyPaths/route1"]
+position = Vector2(-6806, -832)
+
+[node name="route2" type="Node" parent="EnemyPaths"]
+
+[node name="Node2D" type="Node2D" parent="EnemyPaths/route2"]
+position = Vector2(-6883, -426)
+
+[node name="Node2D2" type="Node2D" parent="EnemyPaths/route2"]
+position = Vector2(-7158, -841)
+
+[node name="Node2D3" type="Node2D" parent="EnemyPaths/route2"]
+position = Vector2(-7405, -688)
+
+[node name="Enemy1" parent="." groups=["Enemy"] instance=ExtResource("3_belwb")]
+position = Vector2(-6789, -17)
+Speed = 200.0
+EnemyType = "DroidSwarm"
+
+[node name="Enemy2" parent="." groups=["Enemy"] instance=ExtResource("3_belwb")]
+position = Vector2(-7168, -437)
+EnemyRandom = true
+RandIndex1 = 3
+RandIndex2 = 4
+PatrolPointsPaths = [NodePath("../EnemyPaths/route2/Node2D"), NodePath("../EnemyPaths/route2/Node2D2"), NodePath("../EnemyPaths/route2/Node2D3")]
+
+[node name="Enemy3" parent="." groups=["Enemy"] instance=ExtResource("3_belwb")]
+position = Vector2(-6974, -648)
+EnemyRandom = true
+RandIndex1 = 3
+RandIndex2 = 4
+PatrolPointsPaths = [NodePath("../EnemyPaths/route2/Node2D2"), NodePath("../EnemyPaths/route2/Node2D3"), NodePath("../EnemyPaths/route2/Node2D")]
+
+[node name="Enemy4" parent="." groups=["Enemy"] instance=ExtResource("3_belwb")]
+position = Vector2(-7325, -755)
+EnemyRandom = true
+RandIndex1 = 3
+RandIndex2 = 4
+PatrolPointsPaths = [NodePath("../EnemyPaths/route1/Node2D3"), NodePath("../EnemyPaths/route2/Node2D"), NodePath("../EnemyPaths/route2/Node2D2")]
+
+[node name="Enemy5" parent="." groups=["Enemy"] instance=ExtResource("3_belwb")]
+position = Vector2(-6723, -865)
+EnemyRandom = true
+RandIndex1 = 3
+RandIndex2 = 4
+PatrolPointsPaths = [NodePath("../EnemyPaths/route1/Node2D3"), NodePath("../EnemyPaths/route1/Node2D"), NodePath("../EnemyPaths/route1/Node2D2")]
+
+[node name="Enemy6" parent="." groups=["Enemy"] instance=ExtResource("3_belwb")]
+position = Vector2(-6511, -697)
+EnemyRandom = true
+RandIndex1 = 3
+RandIndex2 = 4
+PatrolPointsPaths = [NodePath("../EnemyPaths/route1/Node2D2"), NodePath("../EnemyPaths/route1/Node2D3"), NodePath("../EnemyPaths/route1/Node2D")]
+
+[node name="Enemy7" parent="." groups=["Enemy"] instance=ExtResource("3_belwb")]
+position = Vector2(-7601, -41)
+EnemyType = "DroidSwarm"
 
 [connection signal="body_entered" from="Trial/Insight" to="." method="Insight"]
