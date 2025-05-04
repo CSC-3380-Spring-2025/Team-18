@@ -14,7 +14,7 @@ public partial class Trial : Node2D
 		holder += delta;
 		//60 ticks per second
 		//Math.Round(holder, MidpointRounding.AwayFromZero)
-		if( (holder % (delta*60 * 2) ) <= 0.016){
+		if( (holder % (delta*60 * 2) ) <= 0.0166){
 			//GD.Print("Flipped! Holder val: "+holder);
 			WFlip();
 		} else {

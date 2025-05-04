@@ -72,7 +72,6 @@ public partial class Insight : Node
 	}
 	
 	public override void _Process(double delta){
-		time += (float)delta;
 	
 		if(pressed == true){
 			if(SocketName == ExpectedSocket && SocketName != null){
@@ -84,8 +83,8 @@ public partial class Insight : Node
 			
 			if(labelColor.A > 0){
 				labelColor.A -= (float)delta;
-				SocketLabel.SelfModulate = (labelColor);
-			} else{pressed = false;}
+				//SocketLabel.SelfModulate = (labelColor);
+			} else{pressed = false; SocketLabel.Visible = false;}
 			
 			
 		}
