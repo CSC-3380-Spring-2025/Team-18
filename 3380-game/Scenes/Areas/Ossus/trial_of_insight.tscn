@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://di4c03x0tss3l"]
+[gd_scene load_steps=13 format=3 uid="uid://di4c03x0tss3l"]
 
 [ext_resource type="Script" uid="uid://cyb4t8nbhyiih" path="res://Assets/Scripts/World.cs" id="1_ikra6"]
 [ext_resource type="Texture2D" uid="uid://bdj55p0o5njt5" path="res://Assets/Images/Maps/Ossus/trial of insight template.png" id="1_yake7"]
 [ext_resource type="Script" uid="uid://cqorwpehdfmpw" path="res://Assets/Scripts/Area Specifics/Insight.cs" id="3_qbao3"]
+[ext_resource type="Script" uid="uid://b43qa3u1cg0uu" path="res://Assets/Scripts/Interact.cs" id="4_oia2p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ikra6"]
 size = Vector2(68.5, 100)
@@ -10,19 +11,34 @@ size = Vector2(68.5, 100)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qbao3"]
 size = Vector2(49.5, 51)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oia2p"]
+size = Vector2(100.5, 101)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_11t8a"]
 size = Vector2(100, 100)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_oia2p"]
-size = Vector2(100.5, 101)
+[sub_resource type="LabelSettings" id="LabelSettings_oia2p"]
+font_size = 14
+outline_size = 2
+
+[sub_resource type="LabelSettings" id="LabelSettings_11t8a"]
+font_size = 14
+outline_size = 16
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_84leb"]
+size = Vector2(76, 75)
+
+[sub_resource type="LabelSettings" id="LabelSettings_84leb"]
+font_size = 14
 
 [node name="TrialOfInsight" type="Node"]
 script = ExtResource("1_ikra6")
 
-[node name="TrialOfInsightTemplate2" type="Sprite2D" parent="."]
+[node name="TrialOfInsightTemplate2" type="Sprite2D" parent="." node_paths=PackedStringArray("Gate")]
 position = Vector2(-6256, -2629)
 texture = ExtResource("1_yake7")
 script = ExtResource("3_qbao3")
+Gate = NodePath("../Walls/Gate")
 
 [node name="Spirit" type="Area2D" parent="."]
 position = Vector2(-4907, -3863)
@@ -36,7 +52,7 @@ shape = SubResource("RectangleShape2D_ikra6")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Walls"]
 build_mode = 1
-polygon = PackedVector2Array(-7657, -1403, -7682, -1255, -7413, -1254, -7430, -1400, -7405, -1404, -7405, -1426, -7380, -1429, -7379, -1478, -7280, -1475, -7280, -1529, -7257, -1529, -7256, -1601, -7281, -1602, -7281, -1579, -7331, -1579, -7331, -1629, -7281, -1629, -7281, -1605, -7256, -1604, -7256, -1628, -7204, -1628, -7204, -1652, -7079, -1653, -7079, -1677, -7052, -1677, -7054, -1877, -6979, -1879, -6977, -2027, -6932, -2054, -7006, -2054, -7006, -2129, -6802, -2129, -6803, -2176, -6727, -2177, -6728, -2202, -6704, -2203, -6704, -2253, -6677, -2251, -6678, -2452, -6654, -2451, -6654, -2526, -6435, -2527, -6433, -2504, -6383, -2503, -6383, -2477, -6156, -2477, -6153, -2504, -6127, -2503, -6128, -2551, -6079, -2551, -6079, -2603, -6003, -2603, -6003, -2630, -5906, -2628, -5904, -2654, -5577, -2652, -5580, -2675, -5450, -2675, -5452, -2701, -5401, -2701, -5402, -2754, -5379, -2752, -5379, -2802, -5355, -2802, -5353, -2853, -5326, -2853, -5328, -3432, -5355, -3432, -5353, -3455, -5378, -3456, -5378, -3481, -5403, -3480, -5402, -3528, -5451, -3532, -5451, -3632, -5527, -3631, -5526, -3680, -5553, -3682, -5553, -3705, -5603, -3706, -5601, -3752, -5506, -3751, -5504, -3776, -5455, -3777, -5454, -3803, -5205, -3803, -5204, -3829, -5053, -3828, -5053, -3854, -4895, -3852, -4891, -3986, -5332, -3982, -5334, -3969, -5433, -3966, -5433, -3934, -5482, -3932, -5483, -3907, -5534, -3904, -5534, -3883, -5557, -3882, -5558, -3856, -5584, -3856, -5583, -3834, -5633, -3830, -5633, -3805, -5783, -3805, -5782, -3780, -5808, -3781, -5808, -3757, -6507, -3757, -6507, -3730, -6583, -3730, -6583, -3705, -6657, -3706, -6657, -3682, -6783, -3681, -6784, -3657, -6860, -3657, -6858, -3632, -6983, -3632, -6984, -3602, -7085, -3604, -7083, -3581, -7107, -3581, -7107, -3481, -7135, -3482, -7133, -3381, -7157, -3380, -7158, -3357, -7182, -3356, -7182, -3331, -7208, -3331, -7208, -3308, -7261, -3308, -7258, -2926, -7183, -2925, -7182, -2824, -7133, -2827, -7133, -2601, -7082, -2601, -7082, -2549, -7058, -2550, -7061, -2406, -7083, -2406, -7083, -2354, -7130, -2354, -7104, -2329, -7057, -2329, -7057, -2279, -7106, -2278, -7105, -2329, -7131, -2354, -7133, -2229, -7183, -2230, -7182, -2107, -7208, -2106, -7209, -1908, -7257, -1908, -7259, -1882, -7381, -1882, -7381, -1854, -7380, -1829, -7331, -1829, -7331, -1779, -7381, -1780, -7381, -1829, -7382, -1854, -7433, -1854, -7433, -1806, -7457.33, -1805.02, -7456, -1654, -7485, -1654, -7483, -1582, -7509, -1581, -7509, -1560, -7540, -1559, -7540, -1530, -7582, -1531, -7582, -1486, -7617, -1484, -7616, -1457, -7634, -1457, -7633, -1405)
+polygon = PackedVector2Array(-7657, -1403, -7682, -1255, -7413, -1254, -7430, -1400, -7405, -1404, -7405, -1426, -7380, -1429, -7379, -1478, -7280, -1475, -7280, -1529, -7257, -1529, -7256, -1601, -7281, -1602, -7281, -1579, -7331, -1579, -7331, -1629, -7281, -1629, -7281, -1605, -7256, -1604, -7256, -1628, -7204, -1628, -7204, -1652, -7079, -1653, -7079, -1677, -7052, -1677, -7054, -1877, -6979, -1879, -6977, -2027, -6905, -2028, -6905, -2128, -6802, -2129, -6803, -2176, -6727, -2177, -6728, -2202, -6704, -2203, -6704, -2253, -6677, -2251, -6678, -2452, -6654, -2451, -6654, -2526, -6435, -2527, -6433, -2504, -6383, -2503, -6383, -2477, -6156, -2477, -6153, -2504, -6127, -2503, -6128, -2551, -6079, -2551, -6079, -2603, -6003, -2603, -6003, -2630, -5906, -2628, -5904, -2654, -5577, -2652, -5580, -2675, -5450, -2675, -5452, -2701, -5401, -2701, -5402, -2754, -5379, -2752, -5379, -2802, -5355, -2802, -5353, -2853, -5326, -2853, -5328, -3432, -5355, -3432, -5353, -3455, -5378, -3456, -5378, -3481, -5403, -3480, -5402, -3528, -5451, -3532, -5451, -3632, -5527, -3631, -5526, -3680, -5553, -3682, -5553, -3705, -5603, -3706, -5601, -3752, -5506, -3751, -5504, -3776, -5455, -3777, -5454, -3803, -5205, -3803, -5204, -3829, -5053, -3828, -5053, -3854, -4895, -3852, -4891, -3986, -5332, -3982, -5334, -3969, -5433, -3966, -5433, -3934, -5482, -3932, -5483, -3907, -5534, -3904, -5534, -3883, -5557, -3882, -5558, -3856, -5584, -3856, -5583, -3834, -5633, -3830, -5633, -3805, -5783, -3805, -5782, -3780, -5808, -3781, -5808, -3757, -6507, -3757, -6507, -3730, -6583, -3730, -6583, -3705, -6657, -3706, -6657, -3682, -6783, -3681, -6784, -3657, -6860, -3657, -6858, -3632, -6983, -3632, -6984, -3602, -7085, -3604, -7083, -3581, -7107, -3581, -7107, -3481, -7135, -3482, -7133, -3381, -7157, -3380, -7158, -3357, -7182, -3356, -7182, -3331, -7208, -3331, -7208, -3308, -7261, -3308, -7258, -2926, -7183, -2925, -7182, -2824, -7133, -2827, -7133, -2601, -7082, -2601, -7082, -2549, -7058, -2550, -7061, -2406, -7083, -2406, -7083, -2354, -7130, -2354, -7104, -2329, -7057, -2329, -7057, -2279, -7106, -2278, -7105, -2329, -7131, -2354, -7133, -2229, -7183, -2230, -7182, -2107, -7208, -2106, -7209, -1908, -7257, -1908, -7259, -1882, -7381, -1882, -7381, -1854, -7380, -1829, -7331, -1829, -7331, -1779, -7381, -1780, -7381, -1829, -7382, -1854, -7433, -1854, -7433, -1806, -7457.33, -1805.02, -7456, -1654, -7485, -1654, -7483, -1582, -7509, -1581, -7509, -1560, -7540, -1559, -7540, -1530, -7582, -1531, -7582, -1486, -7617, -1484, -7616, -1457, -7634, -1457, -7633, -1405)
 
 [node name="CollisionPolygon2D2" type="Polygon2D" parent="Walls"]
 color = Color(0, 0, 0, 1)
@@ -44,60 +60,702 @@ invert_enabled = true
 invert_border = 300.0
 polygon = PackedVector2Array(-7657, -1403, -7658, -1344, -7552, -1281, -7425, -1348, -7430, -1400, -7405, -1404, -7405, -1426, -7380, -1429, -7379, -1478, -7280, -1475, -7280, -1529, -7257, -1529, -7256, -1626, -7204, -1625, -7204, -1652, -7079, -1653, -7079, -1677, -7052, -1677, -7054, -1877, -6979, -1879, -6977, -2027, -6903, -2026, -6903, -2124, -6802, -2129, -6803, -2176, -6727, -2177, -6728, -2202, -6704, -2203, -6704, -2253, -6677, -2251, -6678, -2452, -6654, -2451, -6654, -2526, -6435, -2527, -6433, -2504, -6383, -2503, -6383, -2477, -6156, -2477, -6153, -2504, -6127, -2503, -6128, -2551, -6079, -2551, -6079, -2603, -6003, -2603, -6003, -2630, -5906, -2628, -5904, -2654, -5577, -2652, -5580, -2675, -5450, -2675, -5452, -2701, -5401, -2701, -5402, -2754, -5379, -2752, -5379, -2802, -5355, -2802, -5353, -2853, -5326, -2853, -5328, -3432, -5355, -3432, -5353, -3455, -5378, -3456, -5378, -3481, -5403, -3480, -5402, -3528, -5451, -3532, -5451, -3632, -5527, -3631, -5526, -3680, -5553, -3682, -5553, -3705, -5603, -3706, -5601, -3752, -5506, -3751, -5504, -3776, -5455, -3777, -5454, -3803, -5205, -3803, -5204, -3829, -5053, -3828, -5053, -3854, -4904, -3853, -4904, -3982, -5332, -3982, -5334, -3969, -5433, -3966, -5433, -3934, -5482, -3932, -5483, -3907, -5534, -3904, -5534, -3883, -5557, -3882, -5558, -3856, -5584, -3856, -5583, -3834, -5633, -3830, -5633, -3805, -5783, -3805, -5782, -3780, -5808, -3781, -5808, -3757, -6507, -3757, -6507, -3730, -6583, -3730, -6583, -3705, -6657, -3706, -6657, -3682, -6783, -3681, -6784, -3657, -6860, -3657, -6858, -3632, -6983, -3632, -6984, -3602, -7085, -3604, -7083, -3581, -7107, -3581, -7107, -3481, -7135, -3482, -7133, -3381, -7157, -3380, -7158, -3357, -7182, -3356, -7182, -3331, -7208, -3331, -7208, -3308, -7261, -3308, -7258, -2926, -7183, -2925, -7182, -2824, -7133, -2827, -7133, -2601, -7082, -2601, -7082, -2549, -7058, -2550, -7061, -2406, -7083, -2406, -7083, -2354, -7134, -2354, -7133, -2229, -7183, -2230, -7182, -2107, -7208, -2106, -7209, -1908, -7257, -1908, -7259, -1882, -7381, -1882, -7381, -1854, -7433, -1854, -7433, -1806, -7457.33, -1805.02, -7456, -1654, -7485, -1654, -7483, -1582, -7509, -1581, -7509, -1560, -7540, -1559, -7540, -1530, -7582, -1531, -7582, -1486, -7617, -1484, -7616, -1457, -7634, -1457, -7633, -1405)
 
-[node name="CollisionShape2D" type="CollisionPolygon2D" parent="Walls"]
+[node name="Gate" type="CollisionPolygon2D" parent="Walls"]
 position = Vector2(-5699, -3713)
 rotation = 3.14159
 polygon = PackedVector2Array(-94, 15.5, -20, 40.5, 80, 65.5, 105, 64.5, 104, 41, 32, 41, 32, 16, -67, 16, -68, -9, -93, -9)
-one_way_collision = true
 
 [node name="Hint" type="CollisionShape2D" parent="Walls"]
 position = Vector2(-6980.75, -2502.5)
 shape = SubResource("RectangleShape2D_qbao3")
 
-[node name="Instructions" type="CollisionShape2D" parent="Walls"]
-position = Vector2(-6231, -3229)
-shape = SubResource("RectangleShape2D_11t8a")
+[node name="Interactables" type="Node2D" parent="."]
 
-[node name="Sockets" type="StaticBody2D" parent="."]
+[node name="Emotion" type="StaticBody2D" parent="Interactables" groups=["Interactable"]]
+collision_mask = 2
 
-[node name="Emotion" type="CollisionShape2D" parent="Sockets"]
+[node name="Emotion" type="CollisionShape2D" parent="Interactables/Emotion"]
 position = Vector2(-6730.25, -3203.5)
 shape = SubResource("RectangleShape2D_oia2p")
 
-[node name="Peace" type="CollisionShape2D" parent="Sockets"]
+[node name="Label" type="Label" parent="Interactables/Emotion"]
+visible = false
+z_index = 3
+offset_left = -6816.0
+offset_top = -3218.0
+offset_right = -6648.0
+offset_bottom = -3195.0
+text = "You Enter the tablet..."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="MenuButton" type="Button" parent="Interactables/Emotion/Label"]
+z_as_relative = false
+layout_mode = 0
+offset_left = 41.0
+offset_top = -29.0
+offset_right = 129.0
+offset_bottom = 57.0
+
+[node name="Peace" type="StaticBody2D" parent="Interactables" groups=["Interactable"]]
+
+[node name="Peace" type="CollisionShape2D" parent="Interactables/Peace"]
 position = Vector2(-6608, -3480)
 shape = SubResource("RectangleShape2D_oia2p")
 
-[node name="Ignorance" type="CollisionShape2D" parent="Sockets"]
+[node name="Label" type="Label" parent="Interactables/Peace"]
+visible = false
+z_index = 3
+z_as_relative = false
+offset_left = -6689.0
+offset_top = -3496.0
+offset_right = -6521.0
+offset_bottom = -3473.0
+text = "You Enter the tablet..."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="MenuButton" type="Button" parent="Interactables/Peace/Label"]
+z_as_relative = false
+layout_mode = 0
+offset_left = 40.0
+offset_top = -27.0
+offset_right = 128.0
+offset_bottom = 59.0
+
+[node name="Ignorance" type="StaticBody2D" parent="Interactables" groups=["Interactable"]]
+
+[node name="Ignorance" type="CollisionShape2D" parent="Interactables/Ignorance"]
 position = Vector2(-6355, -3580)
 shape = SubResource("RectangleShape2D_oia2p")
 
-[node name="Knowledge" type="CollisionShape2D" parent="Sockets"]
+[node name="Label" type="Label" parent="Interactables/Ignorance"]
+visible = false
+z_index = 3
+z_as_relative = false
+offset_left = -6441.0
+offset_top = -3598.0
+offset_right = -6273.0
+offset_bottom = -3575.0
+text = "You Enter the tablet..."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="MenuButton" type="Button" parent="Interactables/Ignorance/Label"]
+z_as_relative = false
+layout_mode = 0
+offset_left = 39.0
+offset_top = -25.0
+offset_right = 127.0
+offset_bottom = 61.0
+
+[node name="Knowledge" type="StaticBody2D" parent="Interactables" groups=["Interactable"]]
+
+[node name="Knowledge" type="CollisionShape2D" parent="Interactables/Knowledge"]
 position = Vector2(-6081, -3579)
 shape = SubResource("RectangleShape2D_oia2p")
 
-[node name="Passion" type="CollisionShape2D" parent="Sockets"]
+[node name="Label" type="Label" parent="Interactables/Knowledge"]
+visible = false
+z_index = 3
+z_as_relative = false
+offset_left = -6165.0
+offset_top = -3599.0
+offset_right = -5997.0
+offset_bottom = -3576.0
+text = "You Enter the tablet..."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="MenuButton" type="Button" parent="Interactables/Knowledge/Label"]
+z_as_relative = false
+layout_mode = 0
+offset_left = 41.0
+offset_top = -24.0
+offset_right = 129.0
+offset_bottom = 62.0
+
+[node name="Passion" type="StaticBody2D" parent="Interactables" groups=["Interactable"]]
+
+[node name="Passion" type="CollisionShape2D" parent="Interactables/Passion"]
 position = Vector2(-5831, -3354)
 shape = SubResource("RectangleShape2D_oia2p")
 
-[node name="Serenity" type="CollisionShape2D" parent="Sockets"]
+[node name="Label" type="Label" parent="Interactables/Passion"]
+visible = false
+offset_left = -5914.0
+offset_top = -3370.0
+offset_right = -5746.0
+offset_bottom = -3347.0
+text = "You Enter the tablet..."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="MenuButton" type="Button" parent="Interactables/Passion/Label"]
+layout_mode = 0
+offset_left = 39.0
+offset_top = -25.0
+offset_right = 127.0
+offset_bottom = 61.0
+
+[node name="Serenity" type="StaticBody2D" parent="Interactables" groups=["Interactable"]]
+
+[node name="Serenity" type="CollisionShape2D" parent="Interactables/Serenity"]
 position = Vector2(-5832, -3027)
 shape = SubResource("RectangleShape2D_oia2p")
 
-[node name="Chaos" type="CollisionShape2D" parent="Sockets"]
+[node name="Label" type="Label" parent="Interactables/Serenity"]
+visible = false
+z_index = 4
+z_as_relative = false
+offset_left = -5913.0
+offset_top = -3045.0
+offset_right = -5745.0
+offset_bottom = -3022.0
+text = "You Enter the tablet..."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="MenuButton" type="Button" parent="Interactables/Serenity/Label"]
+z_as_relative = false
+layout_mode = 0
+offset_left = 38.0
+offset_top = -26.0
+offset_right = 126.0
+offset_bottom = 60.0
+
+[node name="Chaos" type="StaticBody2D" parent="Interactables" groups=["Interactable"]]
+
+[node name="Chaos" type="CollisionShape2D" parent="Interactables/Chaos"]
 position = Vector2(-5980, -2829)
 shape = SubResource("RectangleShape2D_oia2p")
 
-[node name="Harmony" type="CollisionShape2D" parent="Sockets"]
+[node name="Label" type="Label" parent="Interactables/Chaos"]
+visible = false
+z_index = 4
+z_as_relative = false
+offset_left = -6064.0
+offset_top = -2849.0
+offset_right = -5896.0
+offset_bottom = -2826.0
+text = "You Enter the tablet..."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="MenuButton" type="Button" parent="Interactables/Chaos/Label"]
+z_as_relative = false
+layout_mode = 0
+offset_left = 39.0
+offset_top = -27.0
+offset_right = 127.0
+offset_bottom = 59.0
+
+[node name="Harmony" type="StaticBody2D" parent="Interactables" groups=["Interactable"]]
+
+[node name="Harmony" type="CollisionShape2D" parent="Interactables/Harmony"]
 position = Vector2(-6281, -2729)
 shape = SubResource("RectangleShape2D_oia2p")
 
-[node name="Death" type="CollisionShape2D" parent="Sockets"]
+[node name="Label" type="Label" parent="Interactables/Harmony"]
+visible = false
+z_index = 4
+z_as_relative = false
+offset_left = -6366.0
+offset_top = -2743.0
+offset_right = -6198.0
+offset_bottom = -2720.0
+text = "You Enter the tablet..."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="MenuButton" type="Button" parent="Interactables/Harmony/Label"]
+z_as_relative = false
+layout_mode = 0
+offset_left = 40.0
+offset_top = -27.0
+offset_right = 128.0
+offset_bottom = 59.0
+
+[node name="Death" type="StaticBody2D" parent="Interactables" groups=["Interactable"]]
+
+[node name="Death" type="CollisionShape2D" parent="Interactables/Death"]
 position = Vector2(-6530, -2826)
 shape = SubResource("RectangleShape2D_oia2p")
 
-[node name="The Force" type="CollisionShape2D" parent="Sockets"]
+[node name="Label" type="Label" parent="Interactables/Death"]
+visible = false
+offset_left = -6611.0
+offset_top = -2842.0
+offset_right = -6443.0
+offset_bottom = -2819.0
+text = "You Enter the tablet..."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="MenuButton" type="Button" parent="Interactables/Death/Label"]
+layout_mode = 0
+offset_left = 36.0
+offset_top = -32.0
+offset_right = 124.0
+offset_bottom = 54.0
+
+[node name="The Force" type="StaticBody2D" parent="Interactables" groups=["Interactable"]]
+
+[node name="The Force" type="CollisionShape2D" parent="Interactables/The Force"]
 position = Vector2(-6706, -3003)
 shape = SubResource("RectangleShape2D_oia2p")
 
+[node name="Label" type="Label" parent="Interactables/The Force"]
+visible = false
+offset_left = -6790.0
+offset_top = -3017.0
+offset_right = -6622.0
+offset_bottom = -2994.0
+text = "You Enter the tablet..."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="MenuButton" type="Button" parent="Interactables/The Force/Label"]
+layout_mode = 0
+offset_left = 38.0
+offset_top = -25.0
+offset_right = 126.0
+offset_bottom = 61.0
+
+[node name="Instructions" type="StaticBody2D" parent="Interactables" groups=["Interactable"]]
+
+[node name="Instructions" type="CollisionShape2D" parent="Interactables/Instructions"]
+position = Vector2(-6231, -3229)
+shape = SubResource("RectangleShape2D_11t8a")
+
+[node name="Label" type="Label" parent="Interactables/Instructions"]
+visible = false
+self_modulate = Color(0, 0, 0, 1)
+z_index = 4
+z_as_relative = false
+offset_left = -6339.0
+offset_top = -3300.0
+offset_right = -6105.0
+offset_bottom = -3142.0
+text = "There are tablets strewn about the area. Each one depicts a scene that can be tied a piece of the Jedi Code. 
+
+Only one tablet may be held at a time."
+label_settings = SubResource("LabelSettings_oia2p")
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Label2" type="Label" parent="Interactables/Instructions/Label"]
+show_behind_parent = true
+offset_right = 234.0
+offset_bottom = 179.0
+text = "There are tablets strewn about the area. Each one depicts a scene that can be tied a piece of the Jedi Code. 
+
+Only one tablet may be held at a time."
+label_settings = SubResource("LabelSettings_11t8a")
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Hint" type="StaticBody2D" parent="Interactables" groups=["Interactable"]]
+
+[node name="Hint" type="CollisionShape2D" parent="Interactables/Hint"]
+position = Vector2(-6968, -2091.5)
+shape = SubResource("RectangleShape2D_84leb")
+
+[node name="Label" type="Label" parent="Interactables/Hint"]
+visible = false
+offset_left = -6896.0
+offset_top = -2119.5
+offset_right = -6592.0
+offset_bottom = -1961.5
+text = "There is no emotion, there is peace.
+There is no ignorance, there is knowledge.
+There is no passion, there is serenity.
+There is no chaos, there is harmony.
+There is no death, there is the Force."
+label_settings = SubResource("LabelSettings_84leb")
+autowrap_mode = 2
+
+[node name="Tablets" type="Node" parent="."]
+
+[node name="Emotion" type="Area2D" parent="Tablets" node_paths=PackedStringArray("ObjectText") groups=["Pickup"]]
+position = Vector2(-344, 354)
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("4_oia2p")
+ObjectText = NodePath("Label")
+timer = 2
+pickup = true
+ItemName = "Emotion"
+ItemDescription = "A young knight screams, the ground cracking beneath their feet. "
+textColor = Color(1, 1, 1, 1)
+
+[node name="Emotion" type="CollisionPolygon2D" parent="Tablets/Emotion"]
+polygon = PackedVector2Array(-6828, -3635, -6847, -3581, -6785, -3558, -6766, -3599)
+
+[node name="Label" type="Label" parent="Tablets/Emotion"]
+visible = false
+self_modulate = Color(0.979405, 0.979405, 0.979405, 1)
+top_level = true
+z_index = 4
+z_as_relative = false
+offset_left = -7460.0
+offset_top = -3300.0
+offset_right = -7266.0
+offset_bottom = -3251.0
+text = "Emotion
+"
+autowrap_mode = 2
+
+[node name="Peace" type="Area2D" parent="Tablets" node_paths=PackedStringArray("ObjectText") groups=["Pickup"]]
+position = Vector2(1206, 765)
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("4_oia2p")
+ObjectText = NodePath("Label")
+timer = 2
+pickup = true
+ItemName = "Peace"
+ItemDescription = "A young knight meditating in the gardens. A small bird rests on their knee."
+textColor = Color(1, 1, 1, 1)
+
+[node name="Peace" type="CollisionPolygon2D" parent="Tablets/Peace"]
+polygon = PackedVector2Array(-6827, -3626, -6840, -3569, -6807, -3566, -6782, -3557, -6765, -3611, -6795, -3624)
+
+[node name="Label" type="Label" parent="Tablets/Peace"]
+visible = false
+self_modulate = Color(0.979405, 0.979405, 0.979405, 1)
+top_level = true
+z_index = 6
+z_as_relative = false
+offset_left = -5676.0
+offset_top = -2977.0
+offset_right = -5482.0
+offset_bottom = -2928.0
+text = "Peace
+
+"
+autowrap_mode = 2
+
+[node name="Ignorance" type="Area2D" parent="Tablets" node_paths=PackedStringArray("ObjectText") groups=["Pickup"]]
+position = Vector2(976, 682)
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("4_oia2p")
+ObjectText = NodePath("Label")
+timer = 2
+pickup = true
+ItemName = "Ignorance"
+ItemDescription = "A galactic senator shouting and raving, even as his aide tugs at his sleeves."
+textColor = Color(1, 1, 1, 1)
+
+[node name="Ignorance" type="CollisionPolygon2D" parent="Tablets/Ignorance"]
+position = Vector2(-1252, -400)
+polygon = PackedVector2Array(-6790, -3650, -6842, -3590, -6813, -3556, -6762, -3585)
+
+[node name="Label" type="Label" parent="Tablets/Ignorance"]
+visible = false
+self_modulate = Color(0.979405, 0.979405, 0.979405, 1)
+top_level = true
+z_index = 6
+z_as_relative = false
+offset_left = -7327.0
+offset_top = -3475.0
+offset_right = -7133.0
+offset_bottom = -3400.0
+text = "Ignorance
+
+"
+autowrap_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Knowledge" type="Area2D" parent="Tablets" node_paths=PackedStringArray("ObjectText") groups=["Pickup"]]
+position = Vector2(976, 682)
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("4_oia2p")
+ObjectText = NodePath("Label")
+timer = 2
+pickup = true
+ItemName = "Knowledge"
+ItemDescription = "A bundle of curious initiates wandering around the archives."
+textColor = Color(1, 1, 1, 1)
+
+[node name="Knowledge" type="CollisionPolygon2D" parent="Tablets/Knowledge"]
+position = Vector2(315, 125)
+polygon = PackedVector2Array(-6797, -3640, -6847, -3596, -6808, -3551, -6767, -3597)
+
+[node name="Label" type="Label" parent="Tablets/Knowledge"]
+visible = false
+self_modulate = Color(0.979405, 0.979405, 0.979405, 1)
+top_level = true
+z_index = 6
+z_as_relative = false
+offset_left = -5493.0
+offset_top = -2932.0
+offset_right = -5299.0
+offset_bottom = -2831.0
+text = "Knowledge
+
+
+"
+autowrap_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Passion" type="Area2D" parent="Tablets" node_paths=PackedStringArray("ObjectText") groups=["Pickup"]]
+position = Vector2(976, 682)
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("4_oia2p")
+ObjectText = NodePath("Label")
+timer = 2
+pickup = true
+ItemName = "Passion"
+ItemDescription = "A pair of lovers deep in conversation. One holds onto the other, gripping tight enough to leave marks."
+textColor = Color(1, 1, 1, 1)
+
+[node name="Passion2" type="Polygon2D" parent="Tablets/Passion"]
+position = Vector2(446, -408)
+polygon = PackedVector2Array(-6797, -3640, -6847, -3596, -6808, -3551, -6767, -3597)
+
+[node name="Passion" type="CollisionPolygon2D" parent="Tablets/Passion"]
+position = Vector2(446, -408)
+polygon = PackedVector2Array(-6797, -3640, -6847, -3596, -6808, -3551, -6767, -3597)
+
+[node name="Label" type="Label" parent="Tablets/Passion"]
+visible = false
+self_modulate = Color(0.979405, 0.979405, 0.979405, 1)
+top_level = true
+z_index = 6
+z_as_relative = false
+offset_left = -5319.0
+offset_top = -3465.0
+offset_right = -5125.0
+offset_bottom = -3364.0
+text = "Passion
+
+
+"
+autowrap_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Serenity" type="Area2D" parent="Tablets" node_paths=PackedStringArray("ObjectText") groups=["Pickup"]]
+position = Vector2(976, 682)
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("4_oia2p")
+ObjectText = NodePath("Label")
+timer = 2
+pickup = true
+ItemName = "Serenity"
+ItemDescription = "Two lovers, laying side by side in a meadow. One points to a cloud high above, smiling."
+textColor = Color(1, 1, 1, 1)
+
+[node name="Serenity" type="CollisionPolygon2D" parent="Tablets/Serenity"]
+position = Vector2(-1080, -627)
+polygon = PackedVector2Array(-6806, -3626, -6839, -3585, -6790, -3554, -6760, -3588, -6783, -3616)
+
+[node name="Label" type="Label" parent="Tablets/Serenity"]
+visible = false
+self_modulate = Color(0.979405, 0.979405, 0.979405, 1)
+top_level = true
+z_index = 6
+z_as_relative = false
+offset_left = -7174.0
+offset_top = -3706.0
+offset_right = -6980.0
+offset_bottom = -3605.0
+text = "Serenity
+
+
+"
+autowrap_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Chaos" type="Area2D" parent="Tablets" node_paths=PackedStringArray("ObjectText") groups=["Pickup"]]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("4_oia2p")
+ObjectText = NodePath("Label")
+timer = 2
+pickup = true
+ItemName = "Chaos"
+ItemDescription = "A massive battle, drawn in jagged, hurried lines. No two sides seem to be present."
+textColor = Color(1, 1, 1, 1)
+
+[node name="Chaos" type="CollisionPolygon2D" parent="Tablets/Chaos"]
+polygon = PackedVector2Array(-6851, -3603, -6841, -3561, -6770, -3586, -6791, -3645)
+
+[node name="Label" type="Label" parent="Tablets/Chaos"]
+visible = false
+self_modulate = Color(0.979405, 0.979405, 0.979405, 1)
+z_index = 4
+z_as_relative = false
+offset_left = -6860.0
+offset_top = -3788.0
+offset_right = -6666.0
+offset_bottom = -3765.0
+text = "Chaos"
+autowrap_mode = 2
+
+[node name="Harmony" type="Area2D" parent="Tablets" node_paths=PackedStringArray("ObjectText") groups=["Pickup"]]
+position = Vector2(976, 682)
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("4_oia2p")
+ObjectText = NodePath("Label")
+timer = 2
+pickup = true
+ItemName = "Harmony"
+ItemDescription = "Two dinstinct groups living side by side. Children play in the foreground."
+textColor = Color(1, 1, 1, 1)
+
+[node name="Harmony" type="CollisionPolygon2D" parent="Tablets/Harmony"]
+position = Vector2(303, -491)
+polygon = PackedVector2Array(-6848, -3615, -6828, -3543, -6751, -3570, -6771, -3640)
+
+[node name="Label" type="Label" parent="Tablets/Harmony"]
+visible = false
+self_modulate = Color(0.979405, 0.979405, 0.979405, 1)
+top_level = true
+z_index = 6
+z_as_relative = false
+offset_left = -5449.0
+offset_top = -3611.0
+offset_right = -5255.0
+offset_bottom = -3510.0
+text = "Harmony
+
+
+"
+autowrap_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Death" type="Area2D" parent="Tablets" node_paths=PackedStringArray("ObjectText") groups=["Pickup"]]
+position = Vector2(976, 682)
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("4_oia2p")
+ObjectText = NodePath("Label")
+timer = 2
+pickup = true
+ItemName = "Death"
+ItemDescription = "A battle rages in the background. A master grips the body of a fallen padawan too tight, eyes wide and furious."
+textColor = Color(1, 1, 1, 1)
+
+[node name="Death" type="CollisionPolygon2D" parent="Tablets/Death"]
+position = Vector2(222, 170)
+polygon = PackedVector2Array(-6819, -3616, -6825, -3562, -6751, -3568, -6758, -3616)
+
+[node name="Label" type="Label" parent="Tablets/Death"]
+visible = false
+self_modulate = Color(0.979405, 0.979405, 0.979405, 1)
+top_level = true
+z_index = 6
+z_as_relative = false
+offset_left = -5800.0
+offset_top = -2647.0
+offset_right = -5606.0
+offset_bottom = -2546.0
+text = "Death
+
+
+
+"
+autowrap_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="The Force" type="Area2D" parent="Tablets" node_paths=PackedStringArray("ObjectText") groups=["Pickup"]]
+position = Vector2(976, 682)
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("4_oia2p")
+ObjectText = NodePath("Label")
+timer = 2
+pickup = true
+ItemName = "The Force"
+ItemDescription = "A master stood before a funeral pyre, eyes shut, head bowed. Another jedi stands at their side, a comfort."
+textColor = Color(1, 1, 1, 1)
+
+[node name="The Force" type="CollisionPolygon2D" parent="Tablets/The Force"]
+position = Vector2(295, -306.8)
+polygon = PackedVector2Array(-6800, -3640.2, -6839, -3545.2, -6758, -3528.2, -6741, -3621.2)
+
+[node name="Label" type="Label" parent="Tablets/The Force"]
+visible = false
+self_modulate = Color(0.979405, 0.979405, 0.979405, 1)
+top_level = true
+z_index = 6
+z_as_relative = false
+offset_left = -5315.0
+offset_top = -3230.0
+offset_right = -5121.0
+offset_bottom = -3103.0
+text = "The Force
+
+
+
+"
+autowrap_mode = 2
+metadata/_edit_use_anchors_ = true
+
 [connection signal="body_entered" from="Spirit" to="." method="Spirit"]
+[connection signal="editor_description_changed" from="Interactables/Emotion" to="TrialOfInsightTemplate2" method="SocketFinder"]
+[connection signal="pressed" from="Interactables/Emotion/Label/MenuButton" to="TrialOfInsightTemplate2" method="MenuPressed"]
+[connection signal="editor_description_changed" from="Interactables/Peace" to="TrialOfInsightTemplate2" method="SocketFinder"]
+[connection signal="pressed" from="Interactables/Peace/Label/MenuButton" to="TrialOfInsightTemplate2" method="MenuPressed"]
+[connection signal="editor_description_changed" from="Interactables/Ignorance" to="TrialOfInsightTemplate2" method="SocketFinder"]
+[connection signal="pressed" from="Interactables/Ignorance/Label/MenuButton" to="TrialOfInsightTemplate2" method="MenuPressed"]
+[connection signal="editor_description_changed" from="Interactables/Knowledge" to="TrialOfInsightTemplate2" method="SocketFinder"]
+[connection signal="pressed" from="Interactables/Knowledge/Label/MenuButton" to="TrialOfInsightTemplate2" method="MenuPressed"]
+[connection signal="editor_description_changed" from="Interactables/Passion" to="TrialOfInsightTemplate2" method="SocketFinder"]
+[connection signal="pressed" from="Interactables/Passion/Label/MenuButton" to="TrialOfInsightTemplate2" method="MenuPressed"]
+[connection signal="editor_description_changed" from="Interactables/Serenity" to="TrialOfInsightTemplate2" method="SocketFinder"]
+[connection signal="pressed" from="Interactables/Serenity/Label/MenuButton" to="TrialOfInsightTemplate2" method="MenuPressed"]
+[connection signal="editor_description_changed" from="Interactables/Chaos" to="TrialOfInsightTemplate2" method="SocketFinder"]
+[connection signal="pressed" from="Interactables/Chaos/Label/MenuButton" to="TrialOfInsightTemplate2" method="MenuPressed"]
+[connection signal="editor_description_changed" from="Interactables/Harmony" to="TrialOfInsightTemplate2" method="SocketFinder"]
+[connection signal="pressed" from="Interactables/Harmony/Label/MenuButton" to="TrialOfInsightTemplate2" method="MenuPressed"]
+[connection signal="editor_description_changed" from="Interactables/Death" to="TrialOfInsightTemplate2" method="SocketFinder"]
+[connection signal="pressed" from="Interactables/Death/Label/MenuButton" to="TrialOfInsightTemplate2" method="MenuPressed"]
+[connection signal="editor_description_changed" from="Interactables/The Force" to="TrialOfInsightTemplate2" method="SocketFinder"]
+[connection signal="pressed" from="Interactables/The Force/Label/MenuButton" to="TrialOfInsightTemplate2" method="MenuPressed"]
+[connection signal="Pickup" from="Tablets/Emotion" to="TrialOfInsightTemplate2" method="ItemTaker"]
+[connection signal="SendNode" from="Tablets/Emotion" to="TrialOfInsightTemplate2" method="NodeTaker"]
+[connection signal="body_entered" from="Tablets/Emotion" to="Tablets/Emotion" method="InReach"]
+[connection signal="Pickup" from="Tablets/Peace" to="TrialOfInsightTemplate2" method="ItemTaker"]
+[connection signal="SendNode" from="Tablets/Peace" to="TrialOfInsightTemplate2" method="NodeTaker"]
+[connection signal="body_entered" from="Tablets/Peace" to="Tablets/Peace" method="InReach"]
+[connection signal="Pickup" from="Tablets/Ignorance" to="TrialOfInsightTemplate2" method="ItemTaker"]
+[connection signal="SendNode" from="Tablets/Ignorance" to="TrialOfInsightTemplate2" method="NodeTaker"]
+[connection signal="body_entered" from="Tablets/Ignorance" to="Tablets/Ignorance" method="InReach"]
+[connection signal="Pickup" from="Tablets/Knowledge" to="TrialOfInsightTemplate2" method="ItemTaker"]
+[connection signal="SendNode" from="Tablets/Knowledge" to="TrialOfInsightTemplate2" method="NodeTaker"]
+[connection signal="body_entered" from="Tablets/Knowledge" to="Tablets/Knowledge" method="InReach"]
+[connection signal="Pickup" from="Tablets/Passion" to="TrialOfInsightTemplate2" method="ItemTaker"]
+[connection signal="SendNode" from="Tablets/Passion" to="TrialOfInsightTemplate2" method="NodeTaker"]
+[connection signal="body_entered" from="Tablets/Passion" to="Tablets/Passion" method="InReach"]
+[connection signal="Pickup" from="Tablets/Serenity" to="TrialOfInsightTemplate2" method="ItemTaker"]
+[connection signal="SendNode" from="Tablets/Serenity" to="TrialOfInsightTemplate2" method="NodeTaker"]
+[connection signal="body_entered" from="Tablets/Serenity" to="Tablets/Serenity" method="InReach"]
+[connection signal="Pickup" from="Tablets/Chaos" to="TrialOfInsightTemplate2" method="ItemTaker"]
+[connection signal="SendNode" from="Tablets/Chaos" to="TrialOfInsightTemplate2" method="NodeTaker"]
+[connection signal="body_entered" from="Tablets/Chaos" to="Tablets/Chaos" method="InReach"]
+[connection signal="Pickup" from="Tablets/Harmony" to="TrialOfInsightTemplate2" method="ItemTaker"]
+[connection signal="SendNode" from="Tablets/Harmony" to="TrialOfInsightTemplate2" method="NodeTaker"]
+[connection signal="body_entered" from="Tablets/Harmony" to="Tablets/Harmony" method="InReach"]
+[connection signal="Pickup" from="Tablets/Death" to="TrialOfInsightTemplate2" method="ItemTaker"]
+[connection signal="SendNode" from="Tablets/Death" to="TrialOfInsightTemplate2" method="NodeTaker"]
+[connection signal="body_entered" from="Tablets/Death" to="Tablets/Death" method="InReach"]
+[connection signal="Pickup" from="Tablets/The Force" to="TrialOfInsightTemplate2" method="ItemTaker"]
+[connection signal="SendNode" from="Tablets/The Force" to="TrialOfInsightTemplate2" method="NodeTaker"]
+[connection signal="body_entered" from="Tablets/The Force" to="Tablets/The Force" method="InReach"]
