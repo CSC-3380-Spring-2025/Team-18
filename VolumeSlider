@@ -1,0 +1,65 @@
+using Godot;
+
+public partial class OptionsMenu : Control
+{
+    // Must match your project’s AudioBus paths (check Project Settings → Audio → Buses)
+    private const string MusicBus = "Master/Music";
+    private const string SfxBus   = "Master/Sfx";
+
+    private HSlider _musicSlider;
+    private HSlider _sfxSlider;
+
+    public override void _Ready()
+    {
+        _musicSlider = GetNode<HSlider>("MarginContainer/MusicBox/MusicSlider");
+        _sfxSlider   = GetNode<HSlider>("MarginContainer/SfxBox/SfxSlider");
+
+        // Load previously saved values (or default to 100)
+        LoadSettings();
+    }
+
+    private void OnMusicSliderValueChanged(long value)
+    {
+        SetBusVolume(MusicBus, value);
+        SaveSettings();
+    }
+
+    private void OnSfxSliderValueChanged(long value)
+    {
+        SetBusVolume(SfxBus, value);
+        SaveSettings();
+    }
+
+    private void SetBusVolume(string busPath, float sliderValue)
+    {
+        // Map 0–100 slider to –80 dB … 0 dB
+        float db = Mathf.Lerp(-80f, 0f, sliderValue / 100f);
+        int idx = AudioServer.GetBusIndex(busPath);
+        AudioServer.SetBusVolumeDb(idx, db);
+    }
+
+    private void LoadSettings()
+    {
+        var cfg = new ConfigFile();
+        if (cfg.Load("user://settings.cfg") == Error.Ok)
+        {
+            float musicVal = (float)cfg.GetValue("audio", "music_volume", 100f);
+            float sfxVal   = (float)cfg.GetValue("audio", "sfx_volume",   100f);
+            _musicSlider.Value = musicVal;
+            _sfxSlider.Value   = sfxVal;
+
+            // apply to buses immediately
+            SetBusVolume(MusicBus, musicVal);
+            SetBusVolume(SfxBus,   sfxVal);
+        }
+    }
+
+    private void SaveSettings()
+    {
+        var cfg = new ConfigFile();
+        cfg.Load("user://settings.cfg");  // ignore missing-file errors
+        cfg.SetValue("audio", "music_volume", _musicSlider.Value);
+        cfg.SetValue("audio", "sfx_volume",   _sfxSlider.Value);
+        cfg.Save("user://settings.cfg");
+    }
+}
