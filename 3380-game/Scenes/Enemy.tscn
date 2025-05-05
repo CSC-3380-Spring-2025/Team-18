@@ -101,7 +101,7 @@ shape = SubResource("RectangleShape2D_1f0kj")
 [node name="Appearance" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -50)
 sprite_frames = SubResource("SpriteFrames_1f0kj")
-animation = &"DroidSwarm"
+animation = &"Default"
 
 [connection signal="Telephone" from="." to="." method="Sender"]
 [connection signal="body_entered" from="." to="." method="SpawnCombat"]

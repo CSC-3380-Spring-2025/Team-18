@@ -92,9 +92,10 @@ public partial class Player : CharacterBody2D, Savable, Loadable
 			*/
 			if( ((Node)collision.GetCollider()).IsInGroup("Interactable")){
 				//GD.Print(((Node)collision.GetCollider()).Name);
+				var collided = ((Node)collision.GetCollider());
+				
 				if(Input.IsActionPressed("interact"))
 				{
-					var collided = ((Node)collision.GetCollider());
 					objLabel = (Label)collided.FindChild("Label");
 					labelColor = objLabel.GetSelfModulate();
 					objLabel.Visible = true;
@@ -102,6 +103,9 @@ public partial class Player : CharacterBody2D, Savable, Loadable
 					objLabel.Modulate = (labelColor);
 					check = true;
 					holder = 0;
+					//this is here to enable a signal
+					collided.SetEditorDescription(""+collided.Name);
+					//GD.Print(""+collided.Name);
 				}
 			}
 			
