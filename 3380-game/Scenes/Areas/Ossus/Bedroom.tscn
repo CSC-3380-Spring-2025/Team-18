@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://rbpl4w2tdyw8"]
+[gd_scene load_steps=13 format=3 uid="uid://rbpl4w2tdyw8"]
 
 [ext_resource type="Script" uid="uid://cyb4t8nbhyiih" path="res://Assets/Scripts/World.cs" id="1_7k0p0"]
 [ext_resource type="Texture2D" uid="uid://cdqysvhcsdb1l" path="res://Assets/Images/Maps/Ossus/bedroom template.png" id="2_7k0p0"]
+[ext_resource type="Texture2D" path="res://Assets/Images/Maps/Ossus/bedroom Objs.png" id="3_7k0p0"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_o07qx"]
 
@@ -13,27 +14,48 @@ font_size = 12
 outline_size = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7k0p0"]
-size = Vector2(252.5, 102)
+size = Vector2(251, 102)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o07qx"]
 size = Vector2(34, 34.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0634s"]
-size = Vector2(50.5, 149)
+size = Vector2(50.5, 111)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v7w10"]
 size = Vector2(151, 52)
 
-[node name="Bedroom" type="Node"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_7k0p0"]
+atlas = ExtResource("3_7k0p0")
+region = Rect2(0, 375, 127, 125)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o07qx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7k0p0")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Bedroom" type="Node2D"]
+z_as_relative = false
+y_sort_enabled = true
 script = ExtResource("1_7k0p0")
 
 [node name="BedroomTemplate" type="Sprite2D" parent="."]
-position = Vector2(33, 125)
+show_behind_parent = true
+z_index = -1
+z_as_relative = false
+y_sort_enabled = true
+position = Vector2(33, 196)
 texture = ExtResource("2_7k0p0")
 
-[node name="Polygon2D" type="Polygon2D" parent="BedroomTemplate"]
-color = Color(0, 0, 0, 1)
-polygon = PackedVector2Array(-75, -154, -279, -152, -277, -102, -327, -102, -328, 202, -280, 202, -279, 303, 226, 304, 228, 254, 279, 254, 279, 200, 328, 203, 329, -151, 22, -154, 17, -245, -67, -245, -80, -791, 1159, -801, 1168, 757, -833, 740, -900, -787, -86, -796, -55, -236)
+[node name="BedroomObjs" type="Sprite2D" parent="BedroomTemplate"]
+z_as_relative = false
+texture = ExtResource("3_7k0p0")
 
 [node name="Walls" type="StaticBody2D" parent="BedroomTemplate" groups=["Interactable"]]
 position = Vector2(-75, -100)
@@ -41,12 +63,15 @@ disable_mode = 1
 physics_material_override = SubResource("PhysicsMaterial_o07qx")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="BedroomTemplate/Walls"]
-position = Vector2(76, 101)
+position = Vector2(77, 29)
 build_mode = 1
-polygon = PackedVector2Array(-278, -151, -326, -101, -326, 200, -226, 200, -225, 250, -125, 250, -125, 299, 225, 299, 224, 249, 274, 249, 274, 99, 326, 98.8875, 326, -151, 31, -151, 30, -252, 381, -241, 350, 66, 378, 312, 67, 338, -348, 324, -362, 66, -427, -231, -224, -295, 12, -314, 18, -257, -81, -257, -81, -151)
+polygon = PackedVector2Array(-278, -151, -326, -101, -326, 200, -226, 200, -225, 250, -125, 250, -125, 299, 225, 299, 224, 249, 274, 249, 274, 99, 326, 98.8875, 326, -151, 26, -151, 26, -251, 381, -241, 350, 66, 378, 312, 67, 338, -348, 324, -362, 66, -427, -231, -224, -295, 12, -314, 18, -257, -81, -257, -81, -151)
 
-[node name="Polygon2D2" type="Polygon2D" parent="BedroomTemplate"]
-polygon = PackedVector2Array(-75, -251, -75, -157, 25, -156, 27, -251)
+[node name="Polygon2D" type="Polygon2D" parent="BedroomTemplate"]
+show_behind_parent = true
+position = Vector2(-33, -196)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-529, -297, -534, 659, 597, 668, 592, -319)
 
 [node name="MoveArea" type="Area2D" parent="."]
 position = Vector2(-1, 2)
@@ -57,14 +82,13 @@ position = Vector2(10, -80)
 shape = SubResource("RectangleShape2D_nvpa3")
 
 [node name="Interactions" type="Node2D" parent="."]
-visibility_layer = 13
+visibility_layer = 8
 
 [node name="Bed" type="StaticBody2D" parent="Interactions" groups=["Interactable"]]
 
 [node name="Label" type="Label" parent="Interactions/Bed"]
 visible = false
-modulate = Color(0, 0, 0, 1)
-top_level = true
+self_modulate = Color(0, 0, 0, 1)
 visibility_layer = 512
 offset_left = 24.0
 offset_top = 296.0
@@ -76,14 +100,16 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Interactions/Bed"]
-position = Vector2(82.75, 374)
+position = Vector2(83.5, 374)
 shape = SubResource("RectangleShape2D_7k0p0")
 
 [node name="Plant" type="StaticBody2D" parent="Interactions" groups=["Interactable"]]
 
 [node name="Label" type="Label" parent="Interactions/Plant"]
 visible = false
-z_index = 1
+self_modulate = Color(0.90939, 0.90939, 0.90939, 1)
+z_index = 2
+z_as_relative = false
 offset_left = -335.0
 offset_top = 277.0
 offset_right = -66.0
@@ -105,7 +131,9 @@ shape = SubResource("RectangleShape2D_o07qx")
 
 [node name="Label" type="Label" parent="Interactions/Shelf"]
 visible = false
-z_index = 1
+self_modulate = Color(0.897813, 0.897813, 0.897813, 1)
+z_index = 2
+z_as_relative = false
 offset_left = -338.0
 offset_top = 33.0
 offset_right = -69.0
@@ -123,14 +151,15 @@ autowrap_mode = 3
 metadata/_edit_use_anchors_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Interactions/Shelf"]
-position = Vector2(-267, 100)
+position = Vector2(-267, 74.5)
 shape = SubResource("RectangleShape2D_0634s")
 
 [node name="Drawers" type="StaticBody2D" parent="Interactions" groups=["Interactable"]]
 
 [node name="Label" type="Label" parent="Interactions/Drawers"]
 visible = false
-z_index = 1
+z_index = 3
+z_as_relative = false
 offset_left = -345.0
 offset_top = -80.0
 offset_right = -76.0
@@ -143,15 +172,16 @@ autowrap_mode = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Interactions/Drawers"]
-position = Vector2(-166.5, 0)
+position = Vector2(-166, -13)
 shape = SubResource("RectangleShape2D_v7w10")
 
 [node name="Desk" type="StaticBody2D" parent="Interactions" groups=["Interactable"]]
 
 [node name="Label" type="Label" parent="Interactions/Desk"]
 visible = false
-top_level = true
-z_index = 1
+self_modulate = Color(0.897813, 0.897813, 0.897813, 1)
+z_index = 3
+z_as_relative = false
 offset_left = 98.0
 offset_top = -83.0
 offset_right = 393.0
@@ -166,5 +196,11 @@ autowrap_mode = 2
 position = Vector2(258, 25.5)
 build_mode = 1
 polygon = PackedVector2Array(-100, -50.5, -100, 49.5, -50, 49.5, -50, 21.5, -41, 21.5, -41, 40.5, -9, 40.5, -9, 8.5, -41, 8.5, -41, 21.5, -50, 21.5, -50, -0.5, 50, -0.5, 50, 26.5539, 50, 49.5, 100, 49.5, 99, -50.5)
+
+[node name="plant" type="AnimatedSprite2D" parent="."]
+z_index = 1
+z_as_relative = false
+position = Vector2(-285, 256)
+sprite_frames = SubResource("SpriteFrames_o07qx")
 
 [connection signal="body_entered" from="MoveArea" to="." method="LeaveHouse"]

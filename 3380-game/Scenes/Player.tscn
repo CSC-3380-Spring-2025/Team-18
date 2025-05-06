@@ -1435,13 +1435,13 @@ sprite_frames = SubResource("SpriteFrames_g5nao")
 animation = &"body_1_front"
 
 [node name="Head" type="AnimatedSprite2D" parent="."]
-clip_children = 2
 material = SubResource("ShaderMaterial_lg7rt")
 position = Vector2(0, -51)
 sprite_frames = SubResource("SpriteFrames_bfpao")
 animation = &"Human_front"
 
 [node name="Pattern" type="AnimatedSprite2D" parent="Head"]
+self_modulate = Color(0.209908, 0.209908, 0.209908, 1)
 material = SubResource("ShaderMaterial_sanbu")
 sprite_frames = SubResource("SpriteFrames_bi2j6")
 animation = &"0"
