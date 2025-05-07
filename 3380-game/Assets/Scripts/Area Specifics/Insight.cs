@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class Insight : Sprite2D
+public partial class Insight : Node
 {
 	public struct PlateHolder{
 		public String itemName;
@@ -85,11 +85,11 @@ public partial class Insight : Sprite2D
 	public override void _Process(double delta){
 	
 		if(pressed == true){
-			
-			
+
 			if(labelColor.A > 0){
 				labelColor.A -= (float)delta;
 				SocketLabel.SelfModulate = (labelColor);
+
 			} else{pressed = false; SocketLabel.Visible = false;}
 			
 			
