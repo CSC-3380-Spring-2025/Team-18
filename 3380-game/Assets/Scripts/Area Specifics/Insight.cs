@@ -7,7 +7,7 @@ public partial class Insight : Node
 		public String itemName;
 		public String itemDesc;
 	};
-	
+
 	[Export] public CollisionPolygon2D Gate;
 	public Godot.Collections.Array array = new Godot.Collections.Array();
 	public PlateHolder holder = new PlateHolder();
@@ -56,8 +56,19 @@ public partial class Insight : Node
 		if(SocketName == ExpectedSocket && SocketName != null){
 				array.Add(SocketName);
 				GD.Print("array: "+array);
+				ExpectedSocket = null;
 			} else {
 				GD.Print("ExpectedSocket: "+ExpectedSocket+", SocketName: "+SocketName);
+			}
+			if(array.Contains(SocketName)){
+				SocketLabel.SetText("You have already placed this tablet.");
+			} else if(SocketName == null){
+				SocketLabel.SetText("You do not have a tablet to place.");
+			} else if(SocketName == ExpectedSocket && SocketName != null){
+				SocketLabel.SetText("The socket gives off a faint, almost pleased, glow.");
+				tablet.Disabled = true;
+			} else {
+				SocketLabel.SetText("The socket seems to shudder, before ejecting the tablet.");
 			}
 			
 	}
@@ -74,16 +85,11 @@ public partial class Insight : Node
 	public override void _Process(double delta){
 	
 		if(pressed == true){
-			if(SocketName == ExpectedSocket && SocketName != null){
-				SocketLabel.SetText("The socket gives off a faint, almost pleased, glow.");
-				tablet.Disabled = true;
-			} else {
-				SocketLabel.SetText("The socket seems to shudder, before ejecting the tablet.");
-			}
-			
+
 			if(labelColor.A > 0){
 				labelColor.A -= (float)delta;
-				//SocketLabel.SelfModulate = (labelColor);
+				SocketLabel.SelfModulate = (labelColor);
+
 			} else{pressed = false; SocketLabel.Visible = false;}
 			
 			
@@ -95,5 +101,6 @@ public partial class Insight : Node
 
 	//end process
 	}
+
 	
 }

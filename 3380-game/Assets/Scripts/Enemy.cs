@@ -133,7 +133,6 @@ public partial class Enemy : Area2D
 			PackedScene scene = GD.Load<PackedScene>("res://Scenes/Combat.tscn");
 			currentMenu = scene.Instantiate();
 			screens.CallDeferred(Node.MethodName.AddChild, currentMenu);
-			//screens.AddChild(currentMenu);
 			counter = screens.FindChild("Combat");
 			EmitSignal(SignalName.Telephone, this.Name);
 		}
@@ -178,6 +177,14 @@ public partial class Enemy : Area2D
 				AttackRange = 20f;
 				enemy.Animation = ("DroidSwarm");
 				break;
+			case String n when(enemyType == "Spirit" || enemyType == "5"):
+				MaxHealth = 30;
+				Damage = 5;
+				Speed = 70;
+				ChaseRadius = 300f;
+				AttackRange = 20f;
+				enemy.Animation = ("Default");
+				break;
 		}
 		
 		
@@ -192,9 +199,9 @@ public void Sender(String enemyPath){
 	public void Death(String enemyPath){
 		GD.Print("Killing "+enemyPath);
 		
-		area = GetTree().Root.FindChild("Main").FindChild("World").GetChild(-1);
-		specificGuy = area.FindChild(enemyPath);
-		specificGuy.QueueFree();
+		//area = GetTree().Root.FindChild("Main").FindChild("World").GetChild(-1);
+		//specificGuy = area.FindChild(enemyPath);
+		//specificGuy.QueueFree();
 		
 		foreach(Enemy i in area.GetChildren()){
 			if(Speed == 0 && ChaseRadius == 0f && EnemyType != "TrainingDummy"){

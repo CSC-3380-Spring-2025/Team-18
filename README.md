@@ -1,55 +1,34 @@
-# [Name of the Project] : [Team Number]
+# Shatterpoint: First Contact : Team 18
 # Members
-Project Manager: [Name] ([GitHub Name])\
-Communications Lead: [Name] ([GitHub Name])\
-Git Master: [Name] ([GitHub Name])\
-Design Lead: [Name] ([GitHub Name])\
-Quality Assurance Tester: [Name] ([GitHub Name])
+Project Manager: Zahir Giwa (Zgiwa178)\
+Communications Lead: Aiden Kirk (BananaJoe1984)\
+Git Master: Jeremiah McKeey (Noxileus)\
+Design Lead: Jessica Smith (ArkHavens)\
+Quality Assurance Tester: Mason Khonsari (rash)
 
 # About Our Software
 
-Describe a little about what the project is about here.
 ## Platforms Tested on
-- MacOS
-- Android
-- iOS
-- Linux
 - Windows
 # Important Links
-Kanban Board: [link]\
-Designs: [link]\
+Kanban Board: https://www.notion.so/CSC-3380-Group-Project-Planner-1842114dd19d806fbdd1c10749ce91f9 \
+Designs: https://drive.google.com/drive/u/1/folders/1U4_L15s-zmQOKaHM5lzBM04IRODwEgxk \
 Styles Guide(s): [link]
 
 # How to Run Dev and Test Environment
 
 ## Dependencies
-- List all dependencies here
-- Don't forget to include versions
+- Godot 4.4 (.NET version)
+- .NET SDK 
 ### Downloading Dependencies
-Describe where to download the dependencies here. Some will likely require a web download. Provide links here. For IDE extensions, make sure your project works with the free version of them, and detail which IDE(s) these are available in. 
+Godot Download (Be absolutely certain you download the one marked "Godot Engine - .NET" ) -> https://godotengine.org/download/windows/ 
+.NET SDK -> https://dotnet.microsoft.com/en-us/download
+A warning taken from the Godot download page: 
+Note: The .NET binaries run only on Windows systems with the matching architecture, running under emulation is not supported at the time being. Make sure to export .NET binaries for all target platforms (x86_64, x86_32, and arm64).
 
-## Commands
-Describe how the commands and process to launch the project on the main branch in such a way that anyone working on the project knows how to check the affects of any code they add.
+## Running the project
 
-```sh
-Example terminal command syntax
-```
+Once Godot and the .NET SDK are installed, download the project .ZIP file. Open Godot, and you'll be taken to a screen titled "Project manager". Click the import button, then, within the menu that pops up, find the .zip in your downloads, and open. From there, you can Edit or Run the project. 
 
-It is very common in these sections to see code in peculiar boxes to help them stand out. Check the markdown section of the Project Specifications to see how to add more / customize these.
+Edit mode lets you access the Debug menus, the console, change project settings, and generally do whatever else you want to the code in the process. 
 
-```python
-def code_highlight_example(m: int, m: float, s: str) -> str:
-	return s + str(n*m)
-```
-
-```java
-public static void main(String[] args){
-	System.out.println("Hello, World!");
-}
-```
-
-```c#
-static void Main(){
-	Console.WriteLine("Hello, World!");
-}
-```
