@@ -13,7 +13,7 @@ Quality Assurance Tester: Mason Khonsari (rash)
 # Important Links
 Kanban Board: https://www.notion.so/CSC-3380-Group-Project-Planner-1842114dd19d806fbdd1c10749ce91f9 \
 Designs: https://drive.google.com/drive/u/1/folders/1U4_L15s-zmQOKaHM5lzBM04IRODwEgxk \
-Styles Guide(s): [link]
+Styles Guide(s): https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/coding-style/identifier-names and https://google.github.io/styleguide/csharp-style.html
 
 # How to Run Dev and Test Environment
 
