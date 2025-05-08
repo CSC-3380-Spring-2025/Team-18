@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://cge1k6us2x3si"]
+
+[ext_resource type="Texture2D" uid="uid://orpovkd8fac8" path="res://Assets/Images/3380 Abilities.png" id="1_3okr5"]
+[ext_resource type="PackedScene" uid="uid://dycymydk1237u" path="res://Scenes/HUD.tscn" id="2_1km4f"]
+
+[node name="Abilities" type="CanvasLayer"]
+metadata/_edit_lock_ = true
+
+[node name="3380Abilities" type="Sprite2D" parent="."]
+top_level = true
+texture_filter = 5
+position = Vector2(800, 450)
+texture = ExtResource("1_3okr5")
+metadata/_edit_lock_ = true
+
+[node name="HUD" parent="." instance=ExtResource("2_1km4f")]

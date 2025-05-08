@@ -1,0 +1,255 @@
+[gd_scene load_steps=11 format=3 uid="uid://bd0n83opf2vke"]
+
+[ext_resource type="Texture2D" uid="uid://bt25i3viqls2e" path="res://Assets/Images/Maps/Ossus/commons template.png" id="1_e1d5e"]
+[ext_resource type="Script" uid="uid://cyb4t8nbhyiih" path="res://Assets/Scripts/World.cs" id="1_ub7o3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ub7o3"]
+size = Vector2(64, 108)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mhdtg"]
+size = Vector2(99, 98)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ypxya"]
+size = Vector2(74, 75)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ves1f"]
+size = Vector2(100, 76)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aphdx"]
+size = Vector2(125, 124)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2kw1y"]
+size = Vector2(116, 27.5)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ub7o3"]
+font_size = 12
+outline_size = 2
+
+[sub_resource type="LabelSettings" id="LabelSettings_mhdtg"]
+font_size = 12
+outline_size = 12
+
+[node name="Commons" type="Node"]
+script = ExtResource("1_ub7o3")
+
+[node name="CommonsTemplate" type="Sprite2D" parent="."]
+position = Vector2(-1867, -1163)
+texture = ExtResource("1_e1d5e")
+
+[node name="Housing" type="Area2D" parent="."]
+position = Vector2(-1306, -508)
+collision_mask = 15
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Housing"]
+position = Vector2(82, 13)
+shape = SubResource("RectangleShape2D_ub7o3")
+
+[node name="TrainingArea" type="Area2D" parent="."]
+position = Vector2(-2545, -594)
+collision_mask = 15
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TrainingArea"]
+position = Vector2(-63, 7)
+shape = SubResource("RectangleShape2D_ub7o3")
+
+[node name="TrainingArea2" type="Area2D" parent="."]
+position = Vector2(-2766, -1124)
+collision_mask = 15
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TrainingArea2"]
+position = Vector2(-63, 7)
+shape = SubResource("RectangleShape2D_ub7o3")
+
+[node name="Walls" type="StaticBody2D" parent="."]
+position = Vector2(-75, -100)
+disable_mode = 1
+
+[node name="outside" type="CollisionPolygon2D" parent="Walls"]
+position = Vector2(-1690, -1047)
+build_mode = 1
+polygon = PackedVector2Array(564, 586, 564, 461, 611, 462, 614, 386, 814, 388, 815, 336, 1240, 338, 1239, 235, 1290, 238, 1288, -193, 1263, -193, 1264, -443, 1238, -442, 1240, -618, 1112, -618, 1112, -694, 988, -692, 989, -717, 961, -716, 963, -770, 737, -771, 738, -789, 715, -795, 714, -848, 655, -847, 656, -793, 282, -795, 283, -721, 6, -719, 7, -644, -266, -646, -269, -569, -418, -571, -417, -544, -514, -545, -511, -568, -563, -570, -561, -591, -612, -594, -613, -694, -637, -693, -636, -723, -810, -744, -816, -654, -767, -665, -766, -563, -740, -563, -742, -440, -718, -436, -717, -413, -666, -412, -666, -318, -715, -318, -717, -219, -792, -220, -793, -169, -792, -169, -789, -117, -764, -116, -763, -67, -740, -67, -739, -41, -839, -42, -839, -67, -864, -67, -863, -116, -890, -116, -890, -64, -1039, -64, -1039, -26, -1106, -27, -1105, 96, -1040, 86, -1041, 111, -839, 110, -839, 59, -789, 59, -789, 33, -813, 33, -814, 9, -714, 9, -714, 58, -740, 59, -740, 108, -815, 109, -814, 135, -740, 135, -740, 234, -684, 235, -687, 160, -540, 163, -542, 236, -442, 237, -440, 257, -468, 258, -468, 281, -490, 283, -490, 332, -716, 331, -716, 385, -616, 386, -615, 405, -667, 408, -667, 455, -741, 459, -742, 482, -817, 481, -814, 498, -904, 497, -888, 631, -784, 624, -784, 610, -665, 612, -666, 637, -591, 636, -591, 687, -541, 687, -540, 736, -518, 737, -517, 760, -466, 762, -465, 786, -386, 786, -386, 759, -211, 762, -212, 661, -185, 661, -186, 611, -86, 611, -87, 536, 134, 537, 134, 588, 183, 587, 183, 712, 580, 712, 625, 646, 1283, 1038, -1751, 1053, -1589, -1308, 1401, -1219, 1401, 638, 1327, 1067, 624, 646, 617, 584)
+
+[node name="house" type="CollisionShape2D" parent="Walls"]
+position = Vector2(-2079.5, -388)
+shape = SubResource("RectangleShape2D_mhdtg")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Walls"]
+position = Vector2(-830, -889)
+shape = SubResource("RectangleShape2D_mhdtg")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Walls"]
+position = Vector2(-892, -1151.5)
+shape = SubResource("RectangleShape2D_ypxya")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Walls"]
+position = Vector2(-754, -1201)
+shape = SubResource("RectangleShape2D_ves1f")
+
+[node name="Tree" type="CollisionShape2D" parent="Walls"]
+position = Vector2(-1556, -614)
+scale = Vector2(0.8, 0.8)
+shape = SubResource("RectangleShape2D_aphdx")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="Walls"]
+position = Vector2(-927, -1050)
+shape = SubResource("RectangleShape2D_ves1f")
+
+[node name="outside2" type="Polygon2D" parent="."]
+position = Vector2(-1765, -1147)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(514, 596, 514, 587, 564, 586, 564, 461, 611, 462, 614, 386, 814, 388, 815, 336, 1240, 338, 1239, 235, 1290, 238, 1288, -193, 1263, -193, 1264, -443, 1238, -442, 1240, -618, 1111, -616, 1112, -694, 988, -692, 989, -717, 961, -716, 963, -770, 737, -771, 738, -789, 715, -795, 714, -848, 655, -847, 656, -793, 282, -795, 283, -718, 6, -719, 7, -644, -266, -646, -267, -567, -418, -571, -417, -544, -514, -545, -511, -568, -563, -570, -561, -591, -612, -594, -613, -694, -637, -693, -639, -716, -767, -665, -766, -563, -740, -563, -742, -440, -718, -436, -717, -413, -666, -412, -666, -318, -715, -318, -717, -219, -792, -220, -793, -169, -792, -169, -892, -169, -890, -116, -890, -64, -1039, -64, -1041, -20, -1088, -15, -1090, 87, -1040, 86, -1041, 111, -839, 110, -815, 109, -814, 135, -740, 135, -740, 234, -684, 235, -687, 160, -540, 163, -542, 236, -442, 237, -440, 257, -468, 258, -468, 281, -490, 283, -490, 332, -716, 331, -716, 385, -616, 386, -615, 405, -667, 408, -667, 455, -741, 459, -742, 482, -817, 481, -816, 502, -829, 537, -820, 607, -784, 610, -665, 612, -666, 637, -591, 636, -591, 687, -541, 687, -540, 736, -518, 737, -517, 760, -466, 762, -465, 786, -386, 786, -386, 759, -211, 762, -212, 661, -185, 661, -186, 611, -86, 611, -87, 536, 134, 537, 134, 588, 183, 587, 183, 712, 558, 712, 537, 608, 512, 606, 583, 596, 1339, 1045, -1751, 1053, -1589, -1308, 1401, -1219, 1401, 638, 1327, 1067, 583, 596, 515, 606)
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-1257, -549, -1257, -441, -1206, -441, -1206, -549)
+
+[node name="Polygon2D2" type="Polygon2D" parent="."]
+position = Vector2(26, 2)
+polygon = PackedVector2Array(-2578, -643, -2648, -644, -2647, -539, -2578, -539, -2823.28, -1174.01, -2818.67, -1058.94, -2883.12, -1063.54, -2887.72, -1174.01, -2432.02, -1815.97, -2432.02, -1862, -2556.3, -1862, -2556.3, -1815.97)
+uv = PackedVector2Array(-3269.77, -1110.06, -3278.98, -1018, -3223.74, -1027.2, -3214.53, -1169.9, -2441.23, -1355.67, -1746.17, -1779.15, -1750.77, -1852.8, -1852.04, -1857.4)
+polygons = [PackedInt32Array(4, 5, 6, 7), PackedInt32Array(1, 0, 3, 2), PackedInt32Array(10, 11, 8, 9)]
+internal_vertex_count = 8
+
+[node name="CouncilArea" type="Area2D" parent="."]
+position = Vector2(-1306, -508)
+collision_mask = 15
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CouncilArea"]
+position = Vector2(-1163, -1338)
+shape = SubResource("RectangleShape2D_2kw1y")
+
+[node name="Interactions" type="Node2D" parent="."]
+
+[node name="Library" type="StaticBody2D" parent="Interactions" groups=["Interactable"]]
+
+[node name="Library" type="CollisionPolygon2D" parent="Interactions/Library"]
+position = Vector2(-75, -100)
+build_mode = 1
+polygon = PackedVector2Array(-1954, -1113, -1954, -988, -1904, -988, -1904, -938, -1879, -938, -1879, -863, -1829, -863, -1829, -813, -1779, -813, -1779, -788, -1704, -788, -1704, -813, -1654, -813, -1654, -863, -1629, -863, -1629, -1114, -1704, -1114, -1704, -1163, -1729, -1163, -1729, -1188, -1829, -1188, -1829, -1163, -1879, -1163, -1879, -1138, -1904, -1138, -1904, -1113)
+
+[node name="Label" type="Label" parent="Interactions/Library"]
+visible = false
+self_modulate = Color(0, 0, 0, 1)
+z_index = 1
+offset_left = -1948.0
+offset_top = -1039.0
+offset_right = -1704.0
+offset_bottom = -965.0
+text = "You recall a datapad you've yet to return.
+Best not to enter..."
+label_settings = SubResource("LabelSettings_ub7o3")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Fountain" type="StaticBody2D" parent="Interactions" groups=["Interactable"]]
+
+[node name="fountain" type="CollisionPolygon2D" parent="Interactions/Fountain"]
+position = Vector2(-1446, -1323)
+build_mode = 1
+polygon = PackedVector2Array(-83, 61, -57, 61, -58, 85, -33, 85, -33, 110, 167, 110, 167, 85, 192, 85, 192, 60, 218, 60, 217, -139, 192, -139, 192, -165, 167, -165, 167, -190, -33, -191, -34, -165, -58, -165, -58, -140, -83, -140)
+
+[node name="Label" type="Label" parent="Interactions/Fountain"]
+visible = false
+self_modulate = Color(0, 0, 0, 1)
+z_index = 1
+offset_left = -1493.0
+offset_top = -1282.0
+offset_right = -1249.0
+offset_bottom = -1208.0
+text = "A few credits glint at the bottom of the pool."
+label_settings = SubResource("LabelSettings_ub7o3")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Canteen" type="StaticBody2D" parent="Interactions" groups=["Interactable"]]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Interactions/Canteen"]
+polygon = PackedVector2Array(-1629, -1788, -1629, -1687, -1229, -1688, -1229, -1813, -1279, -1813, -1279, -1838, -1554, -1838, -1554, -1788)
+
+[node name="Label" type="Label" parent="Interactions/Canteen"]
+visible = false
+self_modulate = Color(0, 0, 0, 1)
+z_index = 1
+offset_left = -1494.0
+offset_top = -1816.0
+offset_right = -1231.0
+offset_bottom = -1742.0
+text = "It's too late for a hot meal, but there's a large bowl of ration bars for anyone to take."
+label_settings = SubResource("LabelSettings_ub7o3")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="News" type="StaticBody2D" parent="Interactions" groups=["Interactable"]]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Interactions/News"]
+polygon = PackedVector2Array(-2004, -1689, -2004, -1638, -2080, -1639, -2079, -1488, -2004, -1488, -2004, -1463, -1904, -1463, -1904, -1563, -1929, -1563, -1929, -1588, -1780, -1588, -1780, -1689)
+
+[node name="Label" type="Label" parent="Interactions/News"]
+visible = false
+self_modulate = Color(0, 0, 0, 1)
+z_index = 6
+offset_left = -1963.0
+offset_top = -1603.0
+offset_right = -1794.0
+offset_bottom = -1526.0
+text = "The stand is empty at this hour, but the news board has a handful of requests stapled to it."
+label_settings = SubResource("LabelSettings_ub7o3")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="School" type="StaticBody2D" parent="Interactions" groups=["Interactable"]]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Interactions/School"]
+polygon = PackedVector2Array(-1004, -1763, -1004, -1663, -954, -1663, -954, -1613, -804, -1613, -804, -1563, -754, -1563, -754, -1513, -654, -1513, -654, -1538, -604, -1538, -604, -1713, -654, -1713, -654, -1763, -729, -1763, -729, -1788, -954, -1788, -954, -1763)
+
+[node name="Label" type="Label" parent="Interactions/School"]
+visible = false
+self_modulate = Color(0, 0, 0, 1)
+z_index = 6
+offset_left = -1027.0
+offset_top = -1698.0
+offset_right = -858.0
+offset_bottom = -1621.0
+text = "It's quiet, the handful of younglings still sleeping within their creche."
+label_settings = SubResource("LabelSettings_ub7o3")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Market" type="StaticBody2D" parent="Interactions" groups=["Interactable"]]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Interactions/Market"]
+polygon = PackedVector2Array(-704, -1338, -704, -1263, -654, -1263, -654, -1238, -629, -1238, -629, -1088, -654, -1088, -654, -988, -554, -988, -554, -1038, -529, -1038, -529, -1338, -554, -1338, -554, -1388, -654, -1388, -654, -1338)
+
+[node name="Label" type="Label" parent="Interactions/Market"]
+visible = false
+self_modulate = Color(0, 0, 0, 1)
+z_index = 6
+offset_left = -753.0
+offset_top = -1222.0
+offset_right = -584.0
+offset_bottom = -1145.0
+text = "The market - a place for padawans to set up small stands and barter between themselves."
+label_settings = SubResource("LabelSettings_ub7o3")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Label2" type="Label" parent="Interactions/Market/Label"]
+show_behind_parent = true
+layout_mode = 0
+offset_right = 169.0
+offset_bottom = 77.0
+text = "The market - a place for padawans to set up small stands and barter between themselves."
+label_settings = SubResource("LabelSettings_mhdtg")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[connection signal="body_entered" from="Housing" to="." method="LeaveHouse"]
+[connection signal="body_entered" from="TrainingArea" to="." method="TrainingArea"]
+[connection signal="body_entered" from="TrainingArea2" to="." method="TrainingArea"]
+[connection signal="body_entered" from="CouncilArea" to="." method="CouncilArea"]

@@ -1,0 +1,129 @@
+[gd_scene load_steps=8 format=3 uid="uid://bomh5cdpqnhdp"]
+
+[ext_resource type="Script" uid="uid://cyb4t8nbhyiih" path="res://Assets/Scripts/World.cs" id="1_37qrq"]
+[ext_resource type="Texture2D" uid="uid://b23w5ov1uh4h5" path="res://Assets/Images/Maps/Ossus/housing area template.png" id="2_khy1m"]
+[ext_resource type="PackedScene" uid="uid://dxqvokmgmpgds" path="res://Scenes/npc.tscn" id="3_khy1m"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ymkvi"]
+size = Vector2(125.5, 100)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3a2nx"]
+size = Vector2(125, 124)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ymkvi"]
+font_size = 12
+outline_size = 2
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_37qrq"]
+size = Vector2(69, 69)
+
+[node name="Housing" type="Node2D"]
+z_as_relative = false
+y_sort_enabled = true
+script = ExtResource("1_37qrq")
+
+[node name="HousingAreaTemplate" type="Sprite2D" parent="."]
+show_behind_parent = true
+z_as_relative = false
+position = Vector2(-616, -332)
+texture = ExtResource("2_khy1m")
+
+[node name="StaticBodies" type="Node2D" parent="HousingAreaTemplate"]
+position = Vector2(-75, -100)
+
+[node name="Walls" type="StaticBody2D" parent="HousingAreaTemplate/StaticBodies"]
+
+[node name="outside" type="CollisionPolygon2D" parent="HousingAreaTemplate/StaticBodies/Walls"]
+position = Vector2(76, 101)
+build_mode = 1
+polygon = PackedVector2Array(428, 352, 428, 402, 49, 400, 49, 324, -51, 324, -51, 402, -327, 401, -327, 350, -351, 350, -351, 249, -451, 250, -450, 349, -527, 349, -528, 300, -579, 301, -577, 202, -665, 202, -676, 199, -678, 150, -602, 150, -601, 23, -728, 22, -728, -126, -809, -123, -804, -203, -728, -201, -728, -256, -678, -254, -676, -354, -577, -354, -578, -404, 527, -403, 527, -354, 677, -353, 676, -303, 726, -303, 728, -255, 777, -254, 777, 302, 727, 302, 727, 349, 672, 351, 675, 421, 574, 426, 575, 350, 435, 352, 481, 628, 959, 450, 914, -629, -965, -614, -848, 433, 414, 478, 438, 380, 435, 352)
+
+[node name="Houses" type="StaticBody2D" parent="HousingAreaTemplate/StaticBodies" groups=["Interactable"]]
+
+[node name="house" type="CollisionShape2D" parent="HousingAreaTemplate/StaticBodies/Houses"]
+position = Vector2(-387.75, -226)
+shape = SubResource("RectangleShape2D_ymkvi")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="HousingAreaTemplate/StaticBodies/Houses"]
+position = Vector2(500, -225)
+scale = Vector2(0.8, 0.8)
+shape = SubResource("RectangleShape2D_3a2nx")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="HousingAreaTemplate/StaticBodies/Houses"]
+position = Vector2(-137, -200)
+shape = SubResource("RectangleShape2D_ymkvi")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="HousingAreaTemplate/StaticBodies/Houses"]
+position = Vector2(813, 226)
+shape = SubResource("RectangleShape2D_ymkvi")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="HousingAreaTemplate/StaticBodies/Houses"]
+position = Vector2(712.5, -88)
+shape = SubResource("RectangleShape2D_3a2nx")
+
+[node name="Fountain" type="StaticBody2D" parent="HousingAreaTemplate/StaticBodies" groups=["Interactable"]]
+
+[node name="Label" type="Label" parent="HousingAreaTemplate/StaticBodies/Fountain"]
+visible = false
+modulate = Color(0, 0, 0, 1)
+top_level = true
+visibility_layer = 512
+z_index = 1
+offset_left = -684.0
+offset_top = -341.0
+offset_right = -419.0
+offset_bottom = -304.0
+text = "Water bubbles happily in the fountain, 
+splashing against cool stone"
+label_settings = SubResource("LabelSettings_ymkvi")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="fountain" type="CollisionPolygon2D" parent="HousingAreaTemplate/StaticBodies/Fountain"]
+position = Vector2(75, 100)
+build_mode = 1
+polygon = PackedVector2Array(-50, 25, -25, 25, -25, 50, 0, 50, 0, 75, 125, 75, 125, 50, 150, 50, 150, 25, 175, 25, 175, -101, 150, -100, 150, -125, 125, -125, 125, -150, 0, -150, 0, -125, -25, -125, -25, -100, -50, -100)
+
+[node name="home" type="Area2D" parent="HousingAreaTemplate"]
+collision_mask = 15
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HousingAreaTemplate/home"]
+position = Vector2(619, 386)
+shape = SubResource("RectangleShape2D_37qrq")
+
+[node name="Commons" type="Area2D" parent="HousingAreaTemplate"]
+position = Vector2(-1387, -547)
+collision_mask = 15
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HousingAreaTemplate/Commons"]
+position = Vector2(628, 387)
+shape = SubResource("RectangleShape2D_37qrq")
+
+[node name="outside" type="Polygon2D" parent="HousingAreaTemplate"]
+position = Vector2(1, 1)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(426, 350, 428, 402, 51, 400, 53, 426, -55, 428, -55, 402, -327, 401, -327, 350, -450, 349, -527, 349, -528, 300, -579, 301, -577, 202, -678, 201, -678, 150, -728, 152, -728, 32, -728, 22, -727, -253, -678, -254, -676, -354, -577, -354, -578, -404, 527, -403, 527, -354, 677, -353, 676, -303, 726, -303, 728, -255, 777, -254, 777, 302, 727, 302, 727, 349, 427, 350, 682, 766, 1437, 761, 1483, -982, -1459, -967, -1319, 792, 694, 749, 457, 375)
+metadata/_edit_lock_ = true
+
+[node name="Polygon2D" type="Polygon2D" parent="HousingAreaTemplate"]
+polygon = PackedVector2Array(-761, -193, -728, -193, -728.721, -126.11, -763, -127, 581.309, 356.403, 581.309, 413.465, 653.588, 413.465, 649.784, 356.403)
+uv = PackedVector2Array(-45.0244, 169.21, -56.9634, 312.479, 134.062, 276.661, 122.123, 133.393)
+polygons = [PackedInt32Array(4, 5, 6, 7), PackedInt32Array(3, 2, 1, 0)]
+internal_vertex_count = 4
+
+[node name="NPC" parent="." instance=ExtResource("3_khy1m")]
+y_sort_enabled = true
+position = Vector2(-408, -340)
+name = "Testerr"
+Body = "1"
+Head = "Twilek"
+Pattern = "2"
+Eyes = "4"
+Hair = "0"
+BodyColor = Color(0.278574, 0.439723, 0.214752, 1)
+MarkColor = Color(0.74902, 0.866667, 0.407843, 1)
+EyeColor = Color(1, 1, 0.392157, 1)
+direction = "front"
+
+[connection signal="body_entered" from="HousingAreaTemplate/home" to="." method="GoHomeP"]
+[connection signal="body_entered" from="HousingAreaTemplate/Commons" to="." method="Commons"]

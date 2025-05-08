@@ -1,0 +1,132 @@
+[gd_scene load_steps=5 format=3 uid="uid://cfit1uvhucaei"]
+
+[ext_resource type="Texture2D" uid="uid://bq761okmjj805" path="res://Assets/Images/Stats-QT.png" id="1_an3q6"]
+[ext_resource type="PackedScene" uid="uid://m81cq124ltn8" path="res://Scenes/Player.tscn" id="2_i6gfd"]
+[ext_resource type="PackedScene" uid="uid://dycymydk1237u" path="res://Scenes/HUD.tscn" id="2_xtw31"]
+[ext_resource type="Script" uid="uid://cdgc5t6vsuj72" path="res://Assets/Scripts/StatScreen.cs" id="3_lwp2e"]
+
+[node name="Stats" type="CanvasLayer"]
+process_mode = 3
+
+[node name="Stat" type="Control" parent="." node_paths=PackedStringArray("ClassDescription", "MaxHP", "CurrentHP", "AC", "Level", "Str", "Dex", "Con", "Int", "Wis", "Cha")]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("3_lwp2e")
+ClassDescription = NodePath("Class")
+MaxHP = NodePath("Max HP")
+CurrentHP = NodePath("CurrentHP")
+AC = NodePath("Armor")
+Level = NodePath("Level")
+Str = NodePath("Strength")
+Dex = NodePath("Dexterity")
+Con = NodePath("Con")
+Int = NodePath("Intelligence")
+Wis = NodePath("Wisdom")
+Cha = NodePath("Charisma")
+
+[node name="Stats-qt" type="Sprite2D" parent="Stat"]
+texture_filter = 1
+position = Vector2(800, 450)
+texture = ExtResource("1_an3q6")
+
+[node name="Polygon2D" type="Polygon2D" parent="Stat/Stats-qt"]
+color = Color(0, 0.0156863, 0.0941176, 1)
+polygon = PackedVector2Array(-308, -222, -580, -222, -587, 183, 500, 200, 465, -262)
+
+[node name="Player" parent="Stat/Stats-qt" instance=ExtResource("2_i6gfd")]
+position = Vector2(0, 55)
+scale = Vector2(2, 2)
+
+[node name="HUD" parent="Stat" instance=ExtResource("2_xtw31")]
+layout_mode = 1
+
+[node name="Class" type="Label" parent="Stat"]
+layout_mode = 0
+offset_left = 266.0
+offset_top = 186.0
+offset_right = 342.0
+offset_bottom = 217.0
+text = "Class :"
+horizontal_alignment = 2
+autowrap_mode = 2
+
+[node name="Strength" type="Label" parent="Stat"]
+layout_mode = 0
+offset_left = 266.0
+offset_top = 288.0
+offset_right = 397.0
+offset_bottom = 319.0
+text = "Strength : 20(+ 5)"
+
+[node name="Dexterity" type="Label" parent="Stat"]
+layout_mode = 0
+offset_left = 261.0
+offset_top = 309.0
+offset_right = 392.0
+offset_bottom = 340.0
+text = "Dexterity : 20(+5)"
+
+[node name="Con" type="Label" parent="Stat"]
+layout_mode = 0
+offset_left = 235.0
+offset_top = 328.0
+offset_right = 340.0
+offset_bottom = 359.0
+text = "Constitution :"
+
+[node name="Intelligence" type="Label" parent="Stat"]
+layout_mode = 0
+offset_left = 242.0
+offset_top = 351.0
+offset_right = 340.0
+offset_bottom = 382.0
+text = "Intelligence :"
+
+[node name="Wisdom" type="Label" parent="Stat"]
+layout_mode = 0
+offset_left = 269.0
+offset_top = 375.0
+offset_right = 363.0
+offset_bottom = 406.0
+text = "Wisdom : 20"
+
+[node name="Charisma" type="Label" parent="Stat"]
+layout_mode = 0
+offset_left = 259.0
+offset_top = 400.0
+offset_right = 341.0
+offset_bottom = 431.0
+text = "Charisma : 20(+5)"
+
+[node name="Max HP" type="Label" parent="Stat"]
+layout_mode = 0
+offset_left = 266.0
+offset_top = 444.0
+offset_right = 342.0
+offset_bottom = 475.0
+text = "Max HP :"
+
+[node name="CurrentHP" type="Label" parent="Stat"]
+layout_mode = 0
+offset_left = 238.0
+offset_top = 474.0
+offset_right = 333.0
+offset_bottom = 505.0
+text = "Current HP :"
+
+[node name="Armor" type="Label" parent="Stat"]
+layout_mode = 0
+offset_left = 274.0
+offset_top = 502.0
+offset_right = 350.0
+offset_bottom = 533.0
+text = "Armor :"
+
+[node name="Level" type="Label" parent="Stat"]
+layout_mode = 0
+offset_left = 283.0
+offset_top = 530.0
+offset_right = 359.0
+offset_bottom = 561.0
+text = "Level :"

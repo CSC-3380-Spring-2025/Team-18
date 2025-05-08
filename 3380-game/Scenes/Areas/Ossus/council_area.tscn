@@ -1,0 +1,76 @@
+[gd_scene load_steps=5 format=3 uid="uid://cfnybs5yrdnp5"]
+
+[ext_resource type="Texture2D" uid="uid://uv86e4l8cnpn" path="res://Assets/Images/Maps/Ossus/Council area outside.png" id="1_cr351"]
+[ext_resource type="Script" uid="uid://cyb4t8nbhyiih" path="res://Assets/Scripts/World.cs" id="1_ddyej"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ddyej"]
+size = Vector2(94.6666, 27)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i6f8p"]
+size = Vector2(100, 8)
+
+[node name="Council Area" type="Node"]
+script = ExtResource("1_ddyej")
+
+[node name="CouncilAreaOutside" type="Sprite2D" parent="."]
+position = Vector2(-2158, -2451)
+texture = ExtResource("1_cr351")
+
+[node name="Commons" type="Area2D" parent="."]
+position = Vector2(-2467, -1762)
+collision_mask = 15
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Commons"]
+position = Vector2(-5, -16.5)
+shape = SubResource("RectangleShape2D_ddyej")
+
+[node name="Walls" type="Polygon2D" parent="."]
+color = Color(0, 0, 0, 1)
+invert_enabled = true
+invert_border = 200.0
+polygon = PackedVector2Array(-2532, -1809, -2531, -1761, -2411, -1764, -2410, -1805, -2385, -1808, -2387, -1834, -1955, -1834, -1956, -1855, -1907, -1858, -1907, -1909, -1805, -1908, -1805, -1934, -1683, -1934, -1681, -1957, -1630, -1959, -1630, -2009, -1455, -2008, -1457, -2058, -1433, -2059, -1431, -2088, -1458, -2088, -1455, -2911, -1505, -2913, -1506, -2986, -1558, -2987, -1555, -3014, -1633, -3016, -1630, -3064, -1906, -3063, -1904, -3139, -2560, -3137, -2560, -3061, -2808, -3063, -2810, -2937, -2835, -2939, -2836, -2893, -2859, -2894, -2861, -2865, -2887, -2862, -2884, -2084, -2837, -2084, -2833, -1935, -2787, -1934, -2786, -1909, -2736, -1908, -2736, -1885, -2660, -1884, -2660, -1858, -2548, -1858, -2548, -1810)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="Polygon2D2" type="CollisionPolygon2D" parent="StaticBody2D"]
+build_mode = 1
+polygon = PackedVector2Array(-2532, -1809, -2531, -1761, -2411, -1764, -2410, -1805, -2385, -1808, -2387, -1834, -1955, -1834, -1956, -1855, -1907, -1858, -1907, -1909, -1805, -1908, -1805, -1934, -1683, -1934, -1681, -1957, -1630, -1959, -1630, -2009, -1455, -2008, -1457, -2058, -1433, -2059, -1431, -2088, -1458, -2088, -1456.01, -2635.17, -1633, -2634, -1633, -2737, -1557, -2737, -1557, -2687, -1455.82, -2686.4, -1455, -2911, -1505, -2913, -1506, -2986, -1558, -2987, -1555, -3014, -1633, -3016, -1630, -3064, -1616, -3146, -1742, -3146, -1732.6, -3063.63, -1906, -3063, -1907.39, -2835.63, -1783, -2836, -1783, -2785, -1708, -2785, -1708, -2761, -1722, -2760, -1726, -2702, -1733, -2663, -1732, -2686, -1782, -2686, -1783, -2711, -1807, -2710, -1807, -2736, -1832, -2736, -1832, -2761, -1857, -2761, -1857, -2786, -1907.69, -2785.51, -1908, -2735, -1933, -2736, -1933, -2711, -1958, -2711, -1958, -2686, -1983, -2686, -1983, -2661, -2008, -2661, -2008, -2636, -2133, -2636, -2158, -2661, -2158, -2759, -2307, -2759, -2308, -2661, -2334, -2636, -2458, -2636, -2458, -2661, -2482, -2661, -2482, -2686, -2508, -2686, -2508, -2712, -2533, -2712, -2533, -2736, -2558, -2736, -2560, -3061, -2594, -3062, -2590, -3143, -2721, -3146, -2716, -3062, -2808, -3063, -2810, -2937, -2835, -2939, -2836, -2893, -2859, -2894, -2861, -2865, -2887, -2862, -2884, -2084, -2837, -2084, -2833, -1935, -2787, -1934, -2786, -1909, -2736, -1908, -2736, -1885, -2660, -1884, -2660, -1858, -2548, -1858, -2548, -1810)
+
+[node name="Statue" type="CollisionPolygon2D" parent="StaticBody2D"]
+build_mode = 1
+polygon = PackedVector2Array(-1858, -2387, -1858, -2236, -1833, -2236, -1833, -2211, -1808, -2211, -1808, -2186, -1658, -2186, -1658, -2211, -1633.08, -2210.92, -1633, -2236, -1608, -2236, -1608, -2386, -1633, -2386, -1633, -2411, -1658, -2411, -1658, -2436, -1808, -2435, -1808, -2411, -1833.68, -2411.32, -1833, -2386)
+
+[node name="Gate" type="CollisionShape2D" parent="StaticBody2D"]
+visibility_layer = 3
+position = Vector2(-1683, -2665)
+rotation = 3.14159
+shape = SubResource("RectangleShape2D_i6f8p")
+one_way_collision = true
+one_way_collision_margin = 12.0
+
+[node name="Polygon2D2" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-2708, -3063, -2709, -3136, -2608, -3136, -2607, -3062, -1730.59, -3136, -1730.59, -3063.25, -1633.59, -3063.25, -1627.53, -3136, -2523.78, -1809.25, -2523.78, -1766.36, -2409.42, -1766.36, -2409.42, -1809.25)
+uv = PackedVector2Array(-2015.52, -3160.25, -2021.58, -3081.44, -1918.52, -3087.5, -1906.4, -3166.31, -2285.93, -2552.59, -2285.93, -2395.35, -2114.39, -2381.05, -2114.39, -2524)
+polygons = [PackedInt32Array(1, 0, 3, 2), PackedInt32Array(4, 5, 6, 7), PackedInt32Array(8, 9, 10, 11)]
+internal_vertex_count = 8
+
+[node name="CouncilChambers" type="Area2D" parent="."]
+position = Vector2(-2229, -2656)
+collision_mask = 15
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CouncilChambers"]
+position = Vector2(-4, -38)
+scale = Vector2(1.5, 1.5)
+shape = SubResource("RectangleShape2D_ddyej")
+
+[node name="TrialStart" type="Area2D" parent="."]
+position = Vector2(-2651, -3070)
+collision_mask = 15
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TrialStart"]
+position = Vector2(-5, -26)
+shape = SubResource("RectangleShape2D_ddyej")
+
+[connection signal="body_entered" from="Commons" to="." method="Commons"]
+[connection signal="body_entered" from="CouncilChambers" to="." method="CouncilChambers"]
+[connection signal="body_entered" from="TrialStart" to="." method="TrialStart"]

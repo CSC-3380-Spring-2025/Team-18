@@ -1,0 +1,85 @@
+[gd_scene load_steps=2 format=3 uid="uid://dycymydk1237u"]
+
+[ext_resource type="Script" uid="uid://c68kncolxnkyf" path="res://Assets/Scripts/Hud.cs" id="1_bjag5"]
+
+[node name="HUD" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_bjag5")
+
+[node name="Resume" type="Button" parent="."]
+top_level = true
+layout_mode = 0
+offset_left = 789.0
+offset_top = 117.0
+offset_right = 806.0
+offset_bottom = 148.0
+scale = Vector2(1.25, 1.25)
+text = "ll"
+flat = true
+
+[node name="Equipment" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 166.0
+offset_top = 79.0
+offset_right = 259.0
+offset_bottom = 151.0
+
+[node name="Inventory" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 311.0
+offset_top = 79.0
+offset_right = 404.0
+offset_bottom = 150.0
+
+[node name="Stats" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 455.0
+offset_top = 79.0
+offset_right = 548.0
+offset_bottom = 151.0
+
+[node name="Abilities" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 598.0
+offset_top = 80.0
+offset_right = 691.0
+offset_bottom = 151.0
+
+[node name="Dialogue" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 910.0
+offset_top = 80.0
+offset_right = 1002.0
+offset_bottom = 150.0
+
+[node name="Quest book" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 1053.0
+offset_top = 81.0
+offset_right = 1144.0
+offset_bottom = 150.0
+
+[node name="Map" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 1196.0
+offset_top = 79.0
+offset_right = 1290.0
+offset_bottom = 151.0
+
+[node name="Settings" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 1341.0
+offset_top = 78.0
+offset_right = 1435.0
+offset_bottom = 151.0
+
+[connection signal="pressed" from="Resume" to="." method="OnResumePressed"]
+[connection signal="pressed" from="Equipment" to="." method="OnEquipPressed"]
+[connection signal="pressed" from="Inventory" to="." method="OnInvenPressed"]
+[connection signal="pressed" from="Stats" to="." method="OnStatsPressed"]
+[connection signal="pressed" from="Abilities" to="." method="OnAbilPressed"]
+[connection signal="pressed" from="Dialogue" to="." method="OnDialogPressed"]
+[connection signal="pressed" from="Quest book" to="." method="OnQuestPressed"]
+[connection signal="pressed" from="Map" to="." method="OnMapPressed"]
+[connection signal="pressed" from="Settings" to="." method="OnSettingsPressed"]
