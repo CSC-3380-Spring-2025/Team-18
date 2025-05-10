@@ -1,0 +1,46 @@
+using System;
+
+public static class DiceRoller
+{
+    private static Random rng = new Random();
+
+    // Rolls one die with a given number of sides.
+    public static int RollDie(int sides)
+    {
+        if (sides <= 0)
+            throw new ArgumentException("Sides must be > 0.");
+        return rng.Next(1, sides + 1);
+    }
+
+    // Rolls a specified number of dice and adds a modifier.
+    public static int RollDice(int numberOfDice, int sides, int modifier = 0)
+    {
+        if (numberOfDice <= 0)
+            throw new ArgumentException("Must roll at least one die.");
+        int total = 0;
+        for (int i = 0; i < numberOfDice; i++)
+        {
+            total += RollDie(sides);
+        }
+        return total + modifier;
+    }
+
+    // Rolls a d20.
+    public static int RollD20()
+    {
+        return RollDie(20);
+    }
+
+    // Rolls two d20s and returns the higher result (advantage).
+    public static int RollD20Advantage()
+    {
+        return Math.Max(RollD20(), RollD20());
+    }
+
+    // Rolls two d20s and returns the lower result (disadvantage).
+    public static int RollD20Disadvantage()
+    {
+        return Math.Min(RollD20(), RollD20());
+    }
+}
+
